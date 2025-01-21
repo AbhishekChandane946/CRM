@@ -19,6 +19,8 @@
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+
+    <!-- <link href="./dist/css/morden_design.css" rel="stylesheet"> -->
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -33,6 +35,114 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Edited : Abhishek Chandane -->
+
+        <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+        
+
+      <style>
+        /* Edited : Abhishek Chandane  */ 
+      .quick-action-btn {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: #fff;
+        border: none;
+        font-weight: 100;
+        border-radius: 5px; 
+        transition: all 0.3s ease;
+      }
+
+      .quick-action-btn:hover {
+        background: linear-gradient(90deg, #0056b3, #004080);
+        color: #fff;
+      }
+
+      /* Dropdown menu styling */
+      .quick-action-dropdown {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .quick-action-dropdown .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .quick-action-dropdown .dropdown-item:hover {
+        background-color: #f0f0f0;
+      }
+
+      .quick-action-dropdown .dropdown-item i {
+        font-size: 16px;
+        color: #007bff;
+      }
+
+
+
+
+
+        .tooltip {
+        background-color: #333333 !important;                 
+        color: #fff !important;                 
+        border-radius: 8px !important;                 
+                      
+        font-size: 14px;                 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);                 
+        max-width: 250px;                 
+      }
+
+      .tooltip .tooltip-inner {
+        background: linear-gradient(90deg, #007bff, #0056b3) !important;
+        color: #fff !important;
+        text-align: left !important;  
+        font-family: Arial, sans-serif;
+      }
+
+      .tooltip-arrow {
+        border-top-color: #333 !important;  
+      }
+      .tooltip.fade {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .tooltip.show {
+        opacity: 1;
+  }
+
+  
+
+      /* Call Now Modal */
+        .call-now-modal {
+          background-color: #f8fef8; /* Light green background */
+          border-radius: 12px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          position: relative;
+        }
+
+
+        .call-icon {
+          font-size: 50px;
+          color: #007bff; 
+        }
+
+        .modal-title {
+          font-size: 20px;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .modal-description {
+          font-size: 16px;
+          color: #666;
+        }
+       /* Call Now Modal */ 
+      /* Edited : Abhishek Chandane  */
+    </style>
+
+
   </head>
   <body >
     <script src="./dist/js/demo-theme.min.js?1692870487"></script>
@@ -655,473 +765,1226 @@
                     <h3 class="card-title">Leads List</h3>
                   </div>
                   <div class="card-body border-bottom py-3">
-                    <div class="d-flex">
-                      <div class="text-secondary">
-                        Show
-                        <div class="mx-2 d-inline-block">
-                          <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
-                        </div>
-                        entries
-                      </div>
-                      <div class="ms-auto text-secondary">
-                        Search:
-                        <div class="ms-2 d-inline-block">
-                          <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
-                        </div>
-                      </div>
+                                          <!-- Edited : Abhishek Chandane -->
+
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                      <thead>
+                        <tr>
+                          <th class="w-1">View Lead</th>
+                          <th class="w-1">Sr.No</th>
+                          <th>LAST MODIFIED</th>
+                          <th>CREATED AT</th>
+                          <th>LEAD NAME</th>
+                          <th>LEAD OWNER</th>
+                          <th>QUICK ACTION</th>
+                          <th>SALES PERSON</th>
+                          <th>EMPLOYEE ID</th>
+                          <th>SUBJECT</th>
+                          <th>LEAD SOURCE</th>
+                          <th>LEAD VALUE</th>
+                          <th>LEAD TYPE</th>
+                          <th>CONTACT PERSON</th>
+                          <th>STAGE</th>
+                          <th>ACTIONS</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Table rows here -->
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary"> 1 </span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                              data-srno="1" >
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+
+
+
+
+
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">2</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                              data-srno="2">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">3</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                              data-srno="3">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                                                
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">4</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">5</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                                                
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">6</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">1</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+
+                                                
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">1</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">1</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+
+                                                
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">1</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="text-center">
+                            <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                          <td><span class="text-secondary">1</span></td>
+                      
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                          <td>
+                            <span>17-01-2025</span><br>
+                            <span>05:33:43 PM</span>
+                          </td>
+                      
+                          <td>
+                            <!-- Lead Name with Detailed Tooltip -->
+                            <span 
+                              data-bs-toggle="tooltip" 
+                              data-bs-html="true" 
+                              title="
+                                <b>Lead Name:</b> Lead Name<br>
+                                <b>Contact:</b> +91-9876543210<br>
+                                <b>Owner:</b> Abhishek Chandane<br>
+                                <b>Source:</b> Email<br>
+                                <b>Value:</b> ₹2.00
+                              ">
+                              Lead Name
+                            </span>
+                          </td>
+                          <td>Abhishek Chandane</td>
+                          <td>
+                      
+                            <div class="dropdown">
+                              <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bolt"></i>
+                              </button>
+                              <ul class="dropdown-menu quick-action-dropdown">
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#callNowModal">
+                                    <i class="fas fa-phone"></i> Call Now
+                                  </a>
+                                </li>
+                              
+                                <li>
+                                  <a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                                    <i class="fas fa-sms"></i> Send SMS
+                                    
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#meetingModal">
+                                    <i class="fas fa-calendar-alt"></i> Meeting
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
+                                    <i class="fas fa-edit"></i> 
+                                    Edit
+                                  </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
+                          <td>SEC2PAY-1</td>
+                          <td>Subject Name</td>
+                          <td>
+                            <i class="fas fa-envelope"></i> Email
+                          </td>
+                          <td>₹2.00</td>
+                          <td>New Business</td>
+                          <td>Abhishek Chandane</td>
+                          <td>New Lead</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+
+
+
+                        
+
+
+
+
+                      <tbody>
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+                        
+                        </tbody>
+                      </tbody>
+                    </table>
+                  </div>
+           
+
+
+
+
+
+
+    
+    
+
+   
+  <!-- Call Now Modal --> 
+    <div class="modal fade" id="callNowModal" tabindex="-1" aria-labelledby="callNowModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4 call-now-modal">
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-body">
+            <div class="call-icon mb-3">
+              <i class="fas fa-phone-alt"></i>
+              <p><strong>Lead Sr. No:</strong> <span id="leadSrNo"></span></p>
+            </div>
+            <h5 class="modal-title mb-2">9960929067</h5>
+            <p><strong>Lead Sr. No:</strong> <span id="leadSrNo"></span></p>
+            <p class="modal-description mb-4">We’re here to help you with your experience.</p>
+            <button type="button" class="btn quick-action-btn">CALL NOW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Call Now Modal -->
+
+  <!-- Send SMS Modal -->
+  <!-- <div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-4 send-sms-modal">
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-body">
+          <div class="sms-icon mb-3">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h5 class="modal-title mb-3">Select Template</h5>
+          <div class="template-select-group">
+            <label class="template-item">
+              <input type="radio" name="template" value="template1" class="template-input">
+              <div class="template-content">
+                <div class="template-check"></div>
+                <div class="template-text">
+                  <strong>
+                    "Thank you for reaching out! We've received your inquiry and will be contacting you shortly to discuss your needs."
+                  </strong>
+                </div>
+              </div>
+            </label>
+            <label class="template-item">
+              <input type="radio" name="template" value="template2" class="template-input">
+              <div class="template-content">
+                <div class="template-check"></div>
+                <div class="template-text">
+                  <strong>
+                    "We appreciate your interest. One of our team members will reach out to you soon to assist with your query."
+                  </strong>
+                </div>
+              </div>
+            </label>
+            <label class="template-item">
+              <input type="radio" name="template" value="template3" class="template-input">
+              <div class="template-content">
+                <div class="template-check"></div>
+                <div class="template-text">
+                  <strong>
+                    "Your message has been received. Please expect a call or email from us shortly!"
+                  </strong>
+                </div>
+              </div>
+            </label>
+          </div>
+          <p class="modal-description mt-4">We’re here to help you with your experience.</p>
+          <button type="button" class="btn quick-action-btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+ 
+    <div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4 call-now-modal">
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-body">
+            <div class="call-icon mb-3">
+              <i class="fas fa-sms"></i>
+            </div>
+            <div class="mb-3">
+              <label>Select Template</label>
+              <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+                <label class="form-selectgroup-item flex-fill">
+                  <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
+                  <div class="form-selectgroup-label d-flex align-items-center p-3">
+                    <div class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </div>
+                    <div>
+                        <strong>
+                          "Thank you for reaching out! We've received your inquiry and 
+                          will be contacting you shortly to discuss your needs."
+                        </strong>
                     </div>
                   </div>
-                  <div class="table-responsive">
-
-
-    <style>
-        /* Edited : Abhishek Chandane  */ 
-      .quick-action-btn {
-        background: linear-gradient(90deg, #007bff, #0056b3);
-        color: #fff;
-        border: none;
-        font-weight: 100;
-        border-radius: 5px; 
-        transition: all 0.3s ease;
-      }
-
-      .quick-action-btn:hover {
-        background: linear-gradient(90deg, #0056b3, #004080);
-        color: #fff;
-      }
-
-      /* Dropdown menu styling */
-      .quick-action-dropdown {
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-
-      .quick-action-dropdown .dropdown-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 15px;
-        font-size: 14px;
-        transition: background 0.3s ease;
-      }
-
-      .quick-action-dropdown .dropdown-item:hover {
-        background-color: #f0f0f0;
-      }
-
-      .quick-action-dropdown .dropdown-item i {
-        font-size: 16px;
-        color: #007bff;
-      }
-
-
-
-
-
-        .tooltip {
-        background-color: #333333 !important;                 
-        color: #fff !important;                 
-        border-radius: 8px !important;                 
-                      
-        font-size: 14px;                 
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);                 
-        max-width: 250px;                 
-      }
-
-      .tooltip .tooltip-inner {
-        background: linear-gradient(90deg, #007bff, #0056b3) !important;
-        color: #fff !important;
-        text-align: left !important;  
-        font-family: Arial, sans-serif;
-      }
-
-      .tooltip-arrow {
-        border-top-color: #333 !important;  
-      }
-      .tooltip.fade {
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-      .tooltip.show {
-        opacity: 1;
-  }
-
-
-      /* Edited : Abhishek Chandane  */
-    </style>
-
- 
-
-    <!-- Edited : Abhishek Chandane -->
-
-    <table class="table card-table table-vcenter text-nowrap datatable">
-            <thead>
-              <tr>
-                <th class="w-1">View Lead</th>
-                <th class="w-1">Sr.No</th>
-                <th>LAST MODIFIED</th>
-                <th>CREATED AT</th>
-                <th>LEAD NAME</th>
-                <th>LEAD OWNER</th>
-                <th>QUICK ACTION</th>
-                <th>SALES PERSON</th>
-                <th>EMPLOYEE ID</th>
-                <th>SUBJECT</th>
-                <th>LEAD SOURCE</th>
-                <th>LEAD VALUE</th>
-                <th>LEAD TYPE</th>
-                <th>CONTACT PERSON</th>
-                <th>STAGE</th>
-                <th>ACTIONS</th>
-              </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">
-                <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
-                  <i class="fas fa-eye"></i>
-                </a>
-              </td>
-              <td><span class="text-secondary">1</span></td>
-
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-
-              <td>
-                <!-- Lead Name with Detailed Tooltip -->
-                <span 
-                  data-bs-toggle="tooltip" 
-                  data-bs-html="true" 
-                  title="
-                    <b>Lead Name:</b> Lead Name<br>
-                    <b>Contact:</b> +91-9876543210<br>
-                    <b>Owner:</b> Abhishek Chandane<br>
-                    <b>Source:</b> Email<br>
-                    <b>Value:</b> ₹2.00
-                  ">
-                  Lead Name
-                </span>
-              </td>
-              <td>Abhishek Chandane</td>
-              <td>
- 
-                <div class="dropdown">
-                  <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bolt"></i>
-                  </button>
-                  <ul class="dropdown-menu quick-action-dropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-phone"></i> Call Now</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-sms"></i> Send SMS</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> Meeting</a></li>
-                    <li>
-                      <a class="dropdown-item "  data-bs-toggle="modal" data-bs-target="#modal-full-width">
-                        <i class="fas fa-edit"></i> 
-                        Edit
-                      </a>
-                    </li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
-                  </ul>
-                </div>
-              </td>
-              <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
-              <td>SEC2PAY-1</td>
-              <td>Subject Name</td>
-              <td>
-                <i class="fas fa-envelope"></i> Email
-              </td>
-              <td>₹2.00</td>
-              <td>New Business</td>
-              <td>Abhishek Chandane</td>
-              <td>New Lead</td>
-              <td class="text-end">
-                <span class="dropdown">
-                  <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                </label>
+                <label class="form-selectgroup-item flex-fill">
+                  <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
+                  <div class="form-selectgroup-label d-flex align-items-center p-3">
+                    <div class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </div>
+                    <div>
+                        <strong>
+                          "Thank you for reaching out! We've received your inquiry and 
+                          will be contacting you shortly to discuss your needs."
+                        </strong>
+                    </div>
                   </div>
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="text-center">
-                <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
-                  <i class="fas fa-eye"></i>
-                </a>
-              </td>
-              <td><span class="text-secondary">1</span></td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td> 
-                <span 
-                  data-bs-toggle="tooltip" 
-                  data-bs-html="true" 
-                  title="
-                    <b>Lead Name:</b> Lead Name<br>
-                    <b>Contact:</b> +91-9876543210<br>
-                    <b>Owner:</b> Abhishek Chandane<br>
-                    <b>Source:</b> Email<br>
-                    <b>Value:</b> ₹2.00
-                  ">
-                  Lead Name
-                </span>
-              </td>
-              <td>Abhishek Chandane</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bolt"></i>
-                  </button>
-                  <ul class="dropdown-menu quick-action-dropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-phone"></i> Call Now</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-sms"></i> Send SMS</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> Meeting</a></li>
-                    <li>
-                      <a class="dropdown-item btn"  data-bs-toggle="modal" data-bs-target="#modal-full-width">
-                        <i class="fas fa-edit"></i> 
-                        Edit
-                      </a>
-                    </li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
-                  </ul>
-                </div>
-              </td>
-              <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
-              <td>SEC2PAY-1</td>
-              <td>Subject Name</td>
-              <td>
-                <i class="fas fa-envelope"></i> Email
-              </td>
-              <td>₹2.00</td>
-              <td>New Business</td>
-              <td>Abhishek Chandane</td>
-              <td>New Lead</td>
-              <td class="text-end">
-                <span class="dropdown">
-                  <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                </label>
+                <label class="form-selectgroup-item flex-fill">
+                  <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
+                  <div class="form-selectgroup-label d-flex align-items-center p-3">
+                    <div class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </div>
+                    <div>
+                        <strong>
+                          "Thank you for reaching out! We've received your inquiry and 
+                          will be contacting you shortly to discuss your needs."
+                        </strong>
+                    </div>
                   </div>
-                </span>
-              </td>
-            </tr>
+                </label>
+              </div>
+            </div>
+            <p class="modal-description mb-4"> SMS Will Send To : +91 123456789</p>
+            <button type="button" class="btn quick-action-btn">Send</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  <!-- Send SMS Modal -->
 
-            <tr>
-              <td class="text-center">
-                <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
-                  <i class="fas fa-eye"></i>
-                </a>
-              </td>
-              <td><span class="text-secondary">1</span></td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
+  <!-- Meeting Modal --> 
+    <div class="modal fade" id="meetingModal" tabindex="-1" aria-labelledby="meetingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4 call-now-modal">
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-body">
+            <div class="call-icon mb-3">
+              <i class="fas fa-calendar"></i>
+            </div>
+            <h6 class="modal-title mb-2">Meeting With  : <span>Abhishek Chandane</span> </h6>
+            <h6 class="modal-title mb-2">Meeting Date : <span> 17-01-2025 </span></h6>
+            <h6 class="modal-title mb-2">Meeting Time : 05:33:43 PM</h6>
+            <h6 class="modal-title mb-2">Meeting Type : Interview, Discussion, Presentation</h6>
+            <p class="modal-description mb-4">We’re here to help you with your experience.</p>
+            <button type="button" class="btn quick-action-btn">Meeting</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Meeting Modal -->
 
-              <td>
-                <!-- Lead Name with Detailed Tooltip -->
-                <span 
-                  data-bs-toggle="tooltip" 
-                  data-bs-html="true" 
-                  title="
-                    <b>Lead Name:</b> Lead Name<br>
-                    <b>Contact:</b> +91-9876543210<br>
-                    <b>Owner:</b> Abhishek Chandane<br>
-                    <b>Source:</b> Email<br>
-                    <b>Value:</b> ₹2.00
-                  ">
-                  Lead Name
-                </span>
-              </td>
-
-              <td>Abhishek Chandane</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bolt"></i>
-                  </button>
-                  <ul class="dropdown-menu quick-action-dropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-phone"></i> Call Now</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-sms"></i> Send SMS</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> Meeting</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
-                  </ul>
-                </div>
-              </td>
-              <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
-              <td>SEC2PAY-1</td>
-              <td>Subject Name</td>
-              <td>
-                <i class="fas fa-envelope"></i> Email
-              </td>
-              <td>₹2.00</td>
-              <td>New Business</td>
-              <td>Abhishek Chandane</td>
-              <td>New Lead</td>
-              <td class="text-end">
-                <span class="dropdown">
-                  <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                  </div>
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="text-center">
-                <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
-                  <i class="fas fa-eye"></i>
-                </a>
-              </td>
-              <td><span class="text-secondary">1</span></td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <!-- Lead Name with Detailed Tooltip -->
-                <span 
-                  data-bs-toggle="tooltip" 
-                  data-bs-html="true" 
-                  title="
-                    <b>Lead Name:</b> Lead Name<br>
-                    <b>Contact:</b> +91-9876543210<br>
-                    <b>Owner:</b> Abhishek Chandane<br>
-                    <b>Source:</b> Email<br>
-                    <b>Value:</b> ₹2.00
-                  ">
-                  Lead Name
-                </span>
-              </td>
-              <td>Abhishek Chandane</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bolt"></i>
-                  </button>
-                  <ul class="dropdown-menu quick-action-dropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-phone"></i> Call Now</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-sms"></i> Send SMS</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> Meeting</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
-                  </ul>
-                </div>
-              </td>
-              <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
-              <td>SEC2PAY-1</td>
-              <td>Subject Name</td>
-              <td>
-                <i class="fas fa-phone"></i> Email
-              </td>
-              <td>₹2.00</td>
-              <td>New Business</td>
-              <td>Abhishek Chandane</td>
-              <td>New Lead</td>
-              <td class="text-end">
-                <span class="dropdown">
-                  <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                  </div>
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="text-center">
-                <a href="sec2pay_view_lead.html" class="text-primary" title="View Lead">
-                  <i class="fas fa-eye"></i>
-                </a>
-              </td>
-              <td><span class="text-secondary">1</span></td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <span>17-01-2025</span><br>
-                <span>05:33:43 PM</span>
-              </td>
-              <td>
-                <!-- Lead Name with Detailed Tooltip -->
-                <span 
-                  data-bs-toggle="tooltip" 
-                  data-bs-html="true" 
-                  title="
-                    <b>Lead Name:</b> Lead Name<br>
-                    <b>Contact:</b> +91-9876543210<br>
-                    <b>Owner:</b> Abhishek Chandane<br>
-                    <b>Source:</b> Email<br>
-                    <b>Value:</b> ₹2.00
-                  ">
-                  Lead Name
-                </span>
-              </td>
-              <td>Abhishek Chandane</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bolt"></i>
-                  </button>
-                  <ul class="dropdown-menu quick-action-dropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-phone"></i> Call Now</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-sms"></i> Send SMS</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> Meeting</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete</a></li>
-                  </ul>
-                </div>
-              </td>
-              <td><a href="invoice.html" class="text-reset" tabindex="-1">Sales Person 1</a></td>
-              <td>SEC2PAY-1</td>
-              <td>Subject Name</td>
-              <td>
-                <i class="fas fa-envelope"></i> Email
-              </td>
-              <td>₹2.00</td>
-              <td>New Business</td>
-              <td>Abhishek Chandane</td>
-              <td>New Lead</td>
-              <td class="text-end">
-                <span class="dropdown">
-                  <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                  </div>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-</table>
-
+  <!-- Edit Modal -->
       <div class="modal modal-blur fade" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog  modal-xl modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -1358,7 +2221,7 @@
           </div>
         </div>
       </div>
-
+  <!-- Edit Modal -->
 
 <script> 
   document.addEventListener('DOMContentLoaded', function () {
@@ -1370,34 +2233,7 @@
 </script>
 
     <!-- Edited : Abhishek Chandane -->
-
-
-                    
-                    
-                  </div>
-                  <div class="card-footer d-flex align-items-center">
-                    <p class="m-0 text-secondary">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
-                    <ul class="pagination m-0 ms-auto">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                          <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
-                          prev
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#">5</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+ 
                 </div>
               </div>
 
@@ -1451,10 +2287,47 @@
     </div>
     <!-- Libs JS -->
     <!-- Tabler Core --> 
- 
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
+    <script>
+    $(document).ready(function () {
+            $('.datatable').DataTable({
+                  scrollX: true,
+                  paging: true,  
+                  searching: true,  
+                  ordering: true,  
+                  lengthChange: true,  
+                  pageLength: 10,  
+                  language: {
+                    search: "_INPUT_",  
+                    searchPlaceholder: "Search leads...",  
+                  },
+                  columnDefs: [
+                    { orderable: false, targets: [0, 6, 15] },  
+                  ],
+            });
+
+            $('.quick-action-btn').on('click', function () { 
+              var srNo = $(this).data('srno'); 
+              console.log(srNo);
+              $('#leadSrNo').text(srNo); 
+              $('#quickActionModal').modal('show');
+            });
+
+      });
+    </script>
 
     <script src="./dist/js/tabler.min.js?1692870487" defer></script>
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
   </body>
 </html>
+
+
+
+
+
+ 
+
+
