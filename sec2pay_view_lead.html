@@ -27,40 +27,39 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
-    </style>
 
-    <style>
-        .fixed-height {
-            height: 80vh; /* Adjust this value as needed */
-            overflow-y: auto; /* Enable scrolling if content exceeds the height */
-        } 
-         
-        .custom-modal .modal-dialog {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            margin: 0;
-            width: 500px;  
-            max-width: 100%;
-        }
-        .custom-modal .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Tooltip CSS */
+        .tooltip {
+          background-color: #333333 !important;                 
+          color: #fff !important;                 
+          border-radius: 8px !important;                  
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);                 
+          max-width: 250px;                 
         }
 
+        .tooltip .tooltip-inner {
+          background: linear-gradient(90deg, #007bff, #0056b3) !important;
+          color: #fff !important;
+          text-align: left !important;  
+          font-family: Arial, sans-serif;
+        }
 
-
-
-
-
-
-
-        
-
-
-
+        .tooltip-arrow {
+          border-top-color: #333 !important;  
+        }
+        .tooltip.fade {
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+        }
+        .tooltip.show {
+          opacity: 1;
+        }
+      /* Tooltip CSS */
     </style>
 
+
+    
+    <!-- Progress Bar CSS -->
     <style>
       .step-bar {
         position: relative;
@@ -254,7 +253,7 @@
  
 
     </style>
-
+    <!-- Progress Bar CSS -->
 
 
 
@@ -1137,6 +1136,84 @@
                             border-color: #0056b3;
                           }
                           /* Note List Modal CSS */ 
+                          
+                          /* Create Note Modal */ 
+                            .modal-dialog-top-right {
+                              position: absolute;
+                              top: 10px;
+                              right: 10px;
+                              margin: 0;
+                              max-width: 300px; /* Adjust width */
+                            }
+
+                            .modal-content {
+                              border-radius: 8px;
+                              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            }
+
+                            .modal-header {
+                              padding: 0.5rem 1rem;
+                              border-bottom: 1px solid #dee2e6;
+                            }
+
+                            .modal-body {
+                              padding: 0.5rem 1rem;
+                            }
+
+                            .modal-header h6 {
+                              font-size: 14px;
+                              margin: 0;
+                            }
+
+                            .modal-body input {
+                              font-size: 14px;
+                            }
+
+                            .btn-sm {
+                              font-size: 12px;
+                              padding: 0.25rem 0.5rem;
+                            }
+                          /* Create Note Modal */
+
+
+                            /* Small Modal Styling */
+                          .small-note-modal {
+                            position: absolute;
+                            top: 35px; /* Position below the SVG */
+                            right: 0;
+                            width: 300px;
+                            background: #fff;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            z-index: 1055; /* Ensure it stays above the parent modal */
+                          }
+
+                          .small-note-modal .modal-content {
+                            border: none;
+                            border-radius: 8px;
+                          }
+
+                          .small-note-modal h6 {
+                            font-size: 14px;
+                            margin: 0 0 10px;
+                          }
+
+                          .small-note-modal input {
+                            font-size: 14px;
+                          }
+
+                          .small-note-modal button {
+                            font-size: 12px;
+                            padding: 0.25rem 0.5rem;
+                          }
+
+                          /* Hide modal by default */
+                          .d-none {
+                            display: none !important;
+                          }
+
+
         
                          </style>
                         <!-- Mail Modal -->
@@ -1194,7 +1271,7 @@
                           </div>
                         </div>
         
-                        <!-- Note List Modal -->
+                        <!-- Full Note Modal List and Create -->
                         <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content note-modal">
@@ -1204,12 +1281,39 @@
                               </div>
                               <div class="modal-body">
                                 <!-- Create Note Button -->
-                                <div class="d-flex justify-content-end mb-3">
-                                  <button class="btn btn-primary btn-sm d-flex align-items-center">
-                                    <i class="bi bi-pencil-fill me-2"></i> Create Note
-                                  </button>
+                                <div class="d-flex justify-content-end mb-3 position-relative">
+                                  <!-- SVG Trigger -->
+                                  <svg 
+                                    id="createNoteSvg" 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    title="Create Note" 
+                                    class="mail-icon" 
+                                    width="25" 
+                                    height="25" 
+                                    viewBox="0 0 24 24" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    stroke-width="2" 
+                                    stroke-linecap="round" 
+                                    stroke-linejoin="round" 
+                                    style="cursor: pointer;">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                    <path d="M13.5 6.5l4 4" />
+                                  </svg>
+                                  <!-- Small Create Note Modal -->
+                                  <div id="smallNoteModal" class="small-note-modal d-none">
+                                    <div class="modal-content p-3"> 
+                                      <form id="smallNoteForm">
+                                        <div class="mb-2">
+                                          <label for="noteInput" class="form-label">Create Note</label>
+                                          <textarea class="form-control" id="noteInput" placeholder="Enter note" rows="3" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-sm w-100">Save</button>
+                                      </form>
+                                    </div>
+                                  </div>
                                 </div>
-
                                 <!-- Note List -->
                                 <div class="note-list">
                                   <!-- Example Note Item -->
@@ -1240,8 +1344,9 @@
                             </div>
                           </div>
                         </div>
+                        <!-- Full Note Modal List and Create -->
 
-
+                 
         
                         <!-- Activity Modal -->
                         <!-- <div class="modal fade " id="activityModal" tabindex="-1" aria-labelledby="activityModalLabel" aria-hidden="true">
@@ -1314,10 +1419,52 @@
     </div>
     <!-- Libs JS -->
     <!-- Tabler Core --> 
- 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        const $svgTrigger = $("#createNoteSvg");
+        const $smallModal = $("#smallNoteModal"); 
 
+        $svgTrigger.on("click", function () {
+          $smallModal.toggleClass("d-none");
+        }); 
+        
+        $(document).on("click", function (e) {
+          if (!$smallModal.is(e.target) && !$smallModal.has(e.target).length && !$svgTrigger.is(e.target)) {
+            $smallModal.addClass("d-none");
+          }
+        });
+      });
+    </script>
+    
 
     <script src="./dist/js/tabler.min.js?1692870487" defer></script>
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
   </body>
 </html>
+
+
+
+<!-- $(document).ready(function () {
+  $('#createNoteForm').on('submit', function (e) {
+    e.preventDefault(); // Prevent default form submission
+    const noteTitle = $('#noteTitle').val();
+    const noteDescription = $('#noteDescription').val();
+
+    // Simulate adding the note to the list
+    const newNote = `
+      <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+        <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+        <div class="flex-grow-1">
+          <h6 class="mb-1">${noteTitle}</h6>
+          <p class="mb-0 text-muted">${noteDescription}</p>
+          <small class="text-muted">${new Date().toLocaleTimeString()}</small>
+        </div>
+      </div>
+    `;
+
+    $('.note-list').append(newNote); // Append the new note
+    $('#createNoteModal').modal('hide'); // Hide the modal
+    $('#createNoteForm')[0].reset(); // Reset the form
+  });
+}); -->
