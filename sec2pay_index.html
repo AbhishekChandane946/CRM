@@ -320,9 +320,7 @@
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
               <a href="#" class="dropdown-item">Status</a>
               
-              <a class="dropdown-item viewProfileModal" data-bs-toggle="modal" data-bs-target="#viewProfileModal" data-lead-id="1">
-                Profile
-              </a>
+              <a href="./sec2pay_profile.html" class="dropdown-item">Profile</a>
 
               <a href="#" class="dropdown-item">Feedback</a>
               <div class="dropdown-divider"></div>
@@ -984,65 +982,7 @@
     </div>
 
 
-    <!-- View Profile Modal -->
-    <div class="modal modal-blur fade" id="viewProfileModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content  p-4 view-profile-modal">
-          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="modal-body">
-            <div class="profile-header">
-              <img src="./dist/img/profiles/ac.jpg" alt="Profile Picture" class="profile-img">
-              <div class="profile-info">
-                <h3>Abhishek Chandane</h3>
-                <p>abhishek.chandane@sec2payindia.com</p>
-              </div>
-            </div>
-            <hr>
-
-            <div class="profile-form">
-              <div class="form-group">
-                <label for="firstName">Name</label>
-                <div class="d-flex gap-3">
-                  <input type="text" id="firstName" class="form-control" placeholder="First Name" value="Abhishek">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last Name" value="Chandane">
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <label for="email">Email address</label>
-                <input type="email" id="email" class="form-control" value="abhishek.chandane@sec2payindia.com">
-              </div>
-              <div class="form-group mt-3">
-                <label for="empId">Employee ID</label>
-                <div class="input-group">
-                  <span class="input-group-text">Sec2Pay-</span>
-                  <input type="text" id="empId" class="form-control" value="000111222">
-                </div>
-              </div>
-              <!-- <div class="form-group mt-3">
-                <label>Profile photo</label>
-                <div class="profile-photo">
-                  <img src="./dist/img/profiles/ac.jpg" alt="Profile Photo">
-                  <button class="btn btn-outline-secondary">Click to replace</button>
-                </div>
-              </div> -->
-            </div>
-
-            <div class="modal-footer mt-4">
-              <button class="button_delete">
-                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                Delete User
-              </button> 
-              <button class="button">
-                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>  
-                Save Changes
-              </button>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- View Profile Modal -->
+ 
 
     </div>
     <!-- Libs JS -->
