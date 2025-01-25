@@ -28,6 +28,12 @@
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
 
+      .modal-body_scrollbar_required {
+        padding: 0.5rem 1rem;
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+      }
+
       /* Tooltip CSS */
         .tooltip {
           background-color: #333333 !important;                 
@@ -1160,7 +1166,7 @@
                             }
 
                             .modal-body {
-                              padding: 0.5rem 1rem;
+                              padding: 0.5rem 1rem; 
                             }
 
                             .modal-header h6 {
@@ -1225,7 +1231,7 @@
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content text-center p-4 mail-modal">
                               <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                              <div class="modal-body">
+                              <div class="modal-body" style="scroll">
                                 <div class="mail-icon mb-3">
                                   <svg xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 7.535v9.465a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9.465l9.445 6.297l.116 .066a1 1 0 0 0 .878 0l.116 -.066l9.445 -6.297z" stroke-width="0" fill="currentColor" /><path d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z" stroke-width="0" fill="currentColor" /></svg>
                                 </div>
@@ -1283,7 +1289,7 @@
                                 <h5 class="modal-title">Notes</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <div class="modal-body">
+                              <div class="modal-body modal-body_scrollbar_required">
                                 <!-- Create Note Button -->
                                 <div class="d-flex justify-content-end mb-3 position-relative">
                                   <!-- SVG Trigger -->
@@ -1335,14 +1341,93 @@
                                   <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
                                     <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
                                     <div class="flex-grow-1">
-                                      <h6 class="mb-1">Jane Smith</h6>
-                                      <p class="mb-0 text-muted">Another note detail...</p>
-                                      <small class="text-muted">11:15 AM</small>
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
                                     </div>
-                                    <button class="btn btn-light btn-sm ms-3">
-                                      <i class="bi bi-eye-fill"></i>
-                                    </button>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
                                   </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
+                                  <div class="note-item d-flex align-items-center mb-3 p-3 rounded shadow-sm">
+                                    <img src="./static/avatars/003m.jpg" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                    <div class="flex-grow-1">
+                                      <h6 class="mb-1">John Doe</h6>
+                                      <p class="mb-0 text-muted">Some details about this note...</p>
+                                      <small class="text-muted">10:30 AM</small>
+                                    </div>
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="25" height="25"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                  </div>
+
                                 </div>
                               </div>
                             </div>
@@ -1420,10 +1505,10 @@
                                 <h5 class="modal-title" id="activityModalLabel">Activity</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <div class="modal-body">
+                              <div class="modal-body modal-body_scrollbar_required">
                                 <div class="activity-timeline">
                                   <!-- Today's Activity -->
-                                  <div class="activity-day">
+                                  <div class="activity-day ">
                                     <h6 class="text-muted">Today</h6>
                                     <div class="activity-item">
                                       <div class="activity-icon bg-primary text-white">
@@ -1448,9 +1533,11 @@
                                           <line x1="15" y1="12" x2="9" y2="12" />
                                         </svg>
                                       </div>
-                                      <div class="activity-content ">
-                                        <p><strong>Added note on</strong>  </p>
-                                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, assumenda.</p>
+                                      <div class="activity-content d-flex justify-content-between">
+                                        <div>
+                                          <p><strong>Added note on</strong>  </p>
+                                          <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, assumenda.</p>  
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                           <circle cx="12" cy="12" r="2" />
@@ -1461,8 +1548,8 @@
                                   </div>
 
                                   <!-- Yesterday's Activity -->
-                                  <div class="activity-day mt-4">
-                                    <h6 class="text-muted">Yesterday</h6>
+                                  <div class="activity-day ">
+                                    <h6 class="text-muted">Today</h6>
                                     <div class="activity-item">
                                       <div class="activity-icon bg-primary text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1472,7 +1559,7 @@
                                         </svg>
                                       </div>
                                       <div class="activity-content">
-                                        <p><strong>LEAD status updated</strong> </p>
+                                        <p><strong>LEAD status updated</strong>  </p>
                                         <p class="text-muted small">From Requirement Closed • by OPS team</p>
                                       </div>
                                     </div>
@@ -1486,9 +1573,11 @@
                                           <line x1="15" y1="12" x2="9" y2="12" />
                                         </svg>
                                       </div>
-                                      <div class="activity-content">
-                                        <p><strong>Added note on</strong></p>
-                                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, assumenda.</p>
+                                      <div class="activity-content d-flex justify-content-between">
+                                        <div>
+                                          <p><strong>Added note on</strong>  </p>
+                                          <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, assumenda.</p>  
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                           <circle cx="12" cy="12" r="2" />
@@ -1497,6 +1586,87 @@
                                       </div>
                                     </div>
                                   </div>
+
+                                  <!-- Today's Activity -->
+                                  <div class="activity-day ">
+                                    <h6 class="text-muted">Today</h6>
+                                    <div class="activity-item">
+                                      <div class="activity-icon bg-primary text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                          <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                                          <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                                        </svg>
+                                      </div>
+                                      <div class="activity-content">
+                                        <p><strong>LEAD status updated</strong>  </p>
+                                        <p class="text-muted small">From Requirement Closed • by OPS team</p>
+                                      </div>
+                                    </div>
+                                    <div class="activity-item">
+                                      <div class="activity-icon bg-warning text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-note" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                          <path d="M13 20h-6a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8l-4 4" />
+                                          <line x1="13" y1="20" x2="20" y2="20" />
+                                          <line x1="15" y1="8" x2="9" y2="8" />
+                                          <line x1="15" y1="12" x2="9" y2="12" />
+                                        </svg>
+                                      </div>
+                                      <div class="activity-content d-flex justify-content-between">
+                                        <div>
+                                          <p><strong>Added note on</strong>  </p>
+                                          <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, assumenda.</p>  
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                          <circle cx="12" cy="12" r="2" />
+                                          <path d="M22 12c0 1.657 -4.03 6 -10 6s-10 -4.343 -10 -6s4.03 -6 10 -6s10 4.343 10 6z" />
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!-- Yesterday's Activity -->
+                                  <div class="activity-day ">
+                                    <h6 class="text-muted">Today</h6>
+                                    <div class="activity-item">
+                                      <div class="activity-icon bg-primary text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                          <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                                          <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                                        </svg>
+                                      </div>
+                                      <div class="activity-content">
+                                        <p><strong>LEAD status updated</strong>  </p>
+                                        <p class="text-muted small">From Requirement Closed • by OPS team</p>
+                                      </div>
+                                    </div>
+                                    <div class="activity-item">
+                                      <div class="activity-icon bg-warning text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-note" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                          <path d="M13 20h-6a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8l-4 4" />
+                                          <line x1="13" y1="20" x2="20" y2="20" />
+                                          <line x1="15" y1="8" x2="9" y2="8" />
+                                          <line x1="15" y1="12" x2="9" y2="12" />
+                                        </svg>
+                                      </div>
+                                      <div class="activity-content d-flex justify-content-between">
+                                        <div>
+                                          <p><strong>Added note on</strong>  </p>
+                                          <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, assumenda.</p>  
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="mail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                          <circle cx="12" cy="12" r="2" />
+                                          <path d="M22 12c0 1.657 -4.03 6 -10 6s-10 -4.343 -10 -6s4.03 -6 10 -6s10 4.343 10 6z" />
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+
                                 </div>
                               </div>
                             </div>
