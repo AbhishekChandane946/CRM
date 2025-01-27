@@ -884,42 +884,44 @@
                                       <div class="card">
                                           <div class="card-body p-5">
                                             <h2>  </h2>
-                                            <table id="leadTable" class="display"  >
+                                            <div class="table-responsive">  
+                                              <table id="leadTable" class="table  display nowrap" style="width:100%">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Lead ID</th>
-                                                        <th>Lead Name</th>
-                                                        <th>Product Name</th>
-                                                        <th>Lead Source</th>
-                                                        <th>Status</th>
-                                                        <th>Revenue</th>
-                                                        <th>Created Date</th>
-                                                        <th>Conversion Date</th>
-                                                    </tr>
+                                                  <tr>
+                                                    <th>Lead ID</th>
+                                                    <th>Lead Name</th>
+                                                    <th>Product Name</th>
+                                                    <th>Lead Source</th>
+                                                    <th>Status</th>
+                                                    <th>Revenue</th>
+                                                    <th>Created Date</th>
+                                                    <th>Conversion Date</th>
+                                                  </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>001</td>
-                                                        <td>Abhishek Chandane </td>
-                                                        <td>Product A</td>
-                                                        <td>Website</td>
-                                                        <td>Converted</td>
-                                                        <td>$5,000</td>
-                                                        <td>2025-01-10</td>
-                                                        <td>2025-01-15</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>002</td>
-                                                        <td>Chandane Abhishek</td>
-                                                        <td>Product B</td>
-                                                        <td>Referral</td>
-                                                        <td>In Progress</td>
-                                                        <td>$2,500</td>
-                                                        <td>2025-01-12</td>
-                                                        <td></td>
-                                                    </tr>
+                                                  <tr>
+                                                    <td>001</td>
+                                                    <td>Abhishek Chandane</td>
+                                                    <td>Product A</td>
+                                                    <td>Website</td>
+                                                    <td>Converted</td>
+                                                    <td>$5,000</td>
+                                                    <td>2025-01-10</td>
+                                                    <td>2025-01-15</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>002</td>
+                                                    <td>Chandane Abhishek</td>
+                                                    <td>Product B</td>
+                                                    <td>Referral</td>
+                                                    <td>In Progress</td>
+                                                    <td>$2,500</td>
+                                                    <td>2025-01-12</td>
+                                                    <td></td>
+                                                  </tr>
                                                 </tbody>
-                                            </table>
+                                              </table>
+                                            </div>
                                           </div>
                                       </div>
                                   </div>
@@ -972,10 +974,12 @@
       <script>
           $(document).ready(function () {
               $('#leadTable').DataTable({
-              responsive: true,   
-              paging: true,      
-              searching: true,   
-              ordering: true,     
+                responsive: true,  
+                autoWidth: false,  
+                paging: true,  
+                searching: true, 
+                ordering: true,  
+                info: true,      
               columnDefs: [
                   { targets: 5, render: $.fn.dataTable.render.number(',', '.', 2, '$') } // Format revenue as currency
               ],
