@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .calendar {
+      max-width: 900px;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: #ddd;
+    }
+    .calendar .day {
+      background: #fff;
+      padding: 10px;
+      min-height: 100px;
+      position: relative;
+    }
+    .calendar .day:hover {
+      background: #f0f0f0;
+    }
+    .calendar .day .date {
+      font-weight: bold;
+    }
+    .event {
+      background: #007BFF;
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+      margin-top: 5px;
+      font-size: 12px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+    .header button {
+      padding: 10px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .header button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <button id="prevMonth">Previous</button>
+  <h2 id="monthYear"></h2>
+  <button id="nextMonth">Next</button>
+</div>
+
+<div class="calendar" id="calendar"></div>
+
+<script>
+  const calendar = document.getElementById('calendar');
+  const monthYear = document.getElementById('monthYear');
+  const prevMonth = document.getElementById('prevMonth');
+  const nextMonth = document.getElementById('nextMonth');
+
+  let currentDate = new Date();
+
+  function renderCalendar(date) {
+    calendar.innerHTML = ''; // Clear existing days
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    monthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Add blank days for the first row
+    for (let i = 0; i < firstDay; i++) {
+      const blankDay = document.createElement('div');
+      blankDay.classList.add('day');
+      calendar.appendChild(blankDay);
+    }
+
+    // Add days
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayElement = document.createElement('div');
+      dayElement.classList.add('day');
+      dayElement.innerHTML = `<div class="date">${day}</div>`;
+      dayElement.addEventListener('click', () => alert(`Clicked on ${day}-${month + 1}-${year}`));
+
+      // Add dummy event
+      if (day === 5) {
+        const event = document.createElement('div');
+        event.classList.add('event');
+        event.textContent = 'Sample Event';
+        dayElement.appendChild(event);
+      }
+
+      calendar.appendChild(dayElement);
+    }
+  }
+
+  // Initialize calendar
+  renderCalendar(currentDate);
+
+  // Navigate months
+  prevMonth.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar(currentDate);
+  });
+
+  nextMonth.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar(currentDate);
+  });
+</script>
+
+</body>
+</html>

@@ -21,7 +21,8 @@
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
 
 
-    
+    <!-- Full Calerndar CSS Link -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
 
     <style>
       @import url('https://rsms.me/inter/inter.css');
@@ -30,33 +31,7 @@
       }
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
-      }
-
-      
-      .main-content { 
-          padding: 20px;
-      }
-
-      .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          background-color: #fff;
-          padding: 20px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .header h2 {
-          margin: 0;
-      }
-
-
-
-      #pieChartCategory {
-        width: 100% !important; 
-        height: 100% !important;  
-      }
-
+      } 
  
 
       .button {
@@ -73,9 +48,60 @@
       .button:hover {
         background: linear-gradient(90deg, #0056b3, #004080);
         color: #fff;
-      } 
+      }
+
+      .button_delete {
+        background: linear-gradient(90deg, #ff004c, #b30000);
+        color: #fff;
+        border: none;
+        width: 150px;
+        font-weight: 500;
+        padding: 8px; 
+        border-radius: 5px; 
+        transition: all 0.3s ease;
+      }
+
+      .button_delete:hover {
+        background: linear-gradient(90deg, #b30000, #800000);
+        color: #fff;
+      }
+
+
+
+      
+
+ 
+
     </style>
-  </head> 
+  </head>
+  <body >
+    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+ 
+
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title> Index.</title>
+  <!-- CSS files -->
+  <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
+  <style>
+    <blade import|%20url(%26%2339%3Bhttps%3A%2F%2Frsms.me%2Finter%2Finter.css%26%2339%3B)%3B%0D> :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+      
+    }
+  </style>
+</head>
 
 <body>
   <script src="./dist/js/demo-theme.min.js?1692870487"></script>
@@ -769,141 +795,23 @@
       </div>
     </header>
     <div class="page-wrapper"> 
-              <!-- Page header -->
-              <div class="page-header d-print-none my-4">
-                <div class="container-xl">
-                  <div class="row g-2 align-items-center">
-                    <div class="col">
-                      <h2 class="page-title">
-                          Product Analytics Dashboard  
-                      </h2>
-                    </div>
-                    <!-- Page title actions -->
-                    <div class="col-auto ms-auto d-print-none">
-                      <div class="btn-list">
-                          <button class="button"> Filter</button>
-                            
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-      <!-- Product Analytics Dashboard -->
+      <!-- Calendar View For Lead Records -->
       <div class="container-xl mt-2">
           <div class="row g-2">
               <div class="col-12">
                   <div class="card card-md p-0">
-                      <div class="card-body"> 
-                          <!-- Summary Cards -->
-                          <div class="row row-cards summary-cards ">
-                              <div class="col-md-4 col-sm-6">
-                                  <div class="card custom-card">
-                                      <div class="card-body">
-                                          <!-- Icon for Total Products -->
-                                          <span class="card-icon">
-                                              <!-- Icon SVG -->
-                                          </span>
-                                          <h3 class="card-title">Total Products</h3>
-                                          <p class="card-text">250</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 col-sm-6">
-                                  <div class="card custom-card">
-                                      <div class="card-body">
-                                          <!-- Icon for Top-Selling Product -->
-                                          <span class="card-icon">
-                                              <!-- Icon SVG -->
-                                          </span>
-                                          <h3 class="card-title">Top-Selling Product</h3>
-                                          <p class="card-text">Product A</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 col-sm-6">
-                                  <div class="card custom-card">
-                                      <div class="card-body">
-                                          <!-- Icon for Revenue -->
-                                          <span class="card-icon">
-                                              <!-- Icon SVG -->
-                                          </span>
-                                          <h3 class="card-title">Average Revenue per Product</h3>
-                                          <p class="card-text">$2,350</p>
-                                      </div>
-                                  </div>
+                      <div class="card-body">
+                          <!-- Header -->
+                          <div class="d-flex justify-content-between align-items-center mb-4">
+                              <h2>Calendar View For Lead Records</h2>
+                              <div>
+                                  <button class="button"> Button 1</button>
+                                  <button class="button">Button 2</button>
                               </div>
                           </div> 
 
-                          <div class="row mt-4">
-                              <!-- Revenue by Category (Pie Chart) -->
-                              <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="card">
-                                    <div class="card-body p-0">
-                                        <h3 class="card-title text-center">Revenue by Category</h3>
-                                        <canvas id="pieChartCategory"></canvas>
-                                    </div>
-                                </div>
-                            </div> 
-                            
-                            <!-- Sales Trend (Line Chart) -->
-                            <div class="col-lg-8 col-md-6 col-sm-12">
-                                <div class="card">
-                                    <div class="card-body p-0">
-                                        <h3 class="card-title text-center">Sales Trend</h3>
-                                        <canvas id="lineChartSales"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+                          <div id="calendar"> 
                           </div>
-                        
-                        <!-- Sales Distribution (new section) -->
-                        <div class="row mt-4">
-                          <!-- Sales Distribution Table -->
-                          <div class="col-12">
-                              <div class="card">
-                                  <div class="card-body p-5">
-                                    <h2>  </h2>
-                                    <table id="leadTable" class="display"  >
-                                        <thead>
-                                            <tr>
-                                                <th>Lead ID</th>
-                                                <th>Lead Name</th>
-                                                <th>Product Name</th>
-                                                <th>Lead Source</th>
-                                                <th>Status</th>
-                                                <th>Revenue</th>
-                                                <th>Created Date</th>
-                                                <th>Conversion Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>Abhishek Chandane </td>
-                                                <td>Product A</td>
-                                                <td>Website</td>
-                                                <td>Converted</td>
-                                                <td>$5,000</td>
-                                                <td>2025-01-10</td>
-                                                <td>2025-01-15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td>Chandane Abhishek</td>
-                                                <td>Product B</td>
-                                                <td>Referral</td>
-                                                <td>In Progress</td>
-                                                <td>$2,500</td>
-                                                <td>2025-01-12</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-
 
                       </div>
                   </div>
@@ -943,100 +851,33 @@
 
       <!-- Tabler Core -->
  
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-      <!-- Include DataTables CSS and JS -->
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-      <!-- DataTable Initialization Script -->
-      <script>
-          $(document).ready(function () {
-              $('#leadTable').DataTable({
-              responsive: true,   
-              paging: true,      
-              searching: true,   
-              ordering: true,     
-              columnDefs: [
-                  { targets: 5, render: $.fn.dataTable.render.number(',', '.', 2, '$') } // Format revenue as currency
-              ],
-           });
-          });
-      </script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+        <!-- FullCalendar -->
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 
+        <script> 
+            $(document).ready(function () {
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-          // Example Pie Chart - Revenue by Category
-          const pieChartCategoryData = {
-              labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'],
-              datasets: [{
-                  data: [10000, 6000, 4000, 8000, 7000], 
-                  backgroundColor: ['#4caf50', '#ff9800', '#9c27b0', '#00bcd4', '#e91e63'],
-              }]
-          };
-      
-          const pieChartCategory = new Chart(document.getElementById('pieChartCategory'), {
-              type: 'pie',
-              data: pieChartCategoryData,
-              options: {
-                  responsive: true,
-                  plugins: {
-                      legend: { position: 'top' },
-                      tooltip: { enabled: true },
-                  },
-              }
-          });
-      
-          // Example Line Chart - Sales Trend
-          const lineChartSalesData = {
-              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-              datasets: [{
-                  label: 'Sales Trend ($)',
-                  data: [0, 4000, 6000, 8000, 10000, 12000, 16000],
-                  fill: false,
-                  borderColor: '#3F51B5',
-                  tension: 0.1,
-              }]
-          };
-      
-          const lineChartSales = new Chart(document.getElementById('lineChartSales'), {
-              type: 'line',
-              data: lineChartSalesData,
-              options: {
-                  responsive: true,
-                  plugins: {
-                      legend: { position: 'top' },
-                      tooltip: { enabled: true },
-                  },
-                  scales: {
-                      x: {
-                          title: {
-                              display: true,
-                              text: 'Months',
-                          },
-                      },
-                      y: {
-                          title: {
-                              display: true,
-                              text: 'Revenue ($)',
-                          },
-                          beginAtZero: true,
-                      },
-                  },
-              }
-          });
-      </script>
-      
- 
+                var calendarEl = $('#calendar')[0];
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth'
+                });
+                calendar.render();
+
+          
+
+            });
+       </script>
+
 
           </div>
         </div>
       </div>
  
     </div>
-  </div> 
-
-
+  </div>  
 
   
   <script src="./dist/js/tabler.min.js?1692870487" defer></script>
