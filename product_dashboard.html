@@ -788,128 +788,209 @@
                   </div>
                 </div>
               </div>
-      <!-- Product Analytics Dashboard -->
-      <div class="container-xl mt-2">
-          <div class="row g-2">
-              <div class="col-12">
-                  <div class="card card-md p-0">
-                      <div class="card-body"> 
-                          <!-- Summary Cards -->
-                          <div class="row row-cards summary-cards ">
-                              <div class="col-md-4 col-sm-6">
-                                  <div class="card custom-card">
-                                      <div class="card-body">
-                                          <!-- Icon for Total Products -->
-                                          <span class="card-icon">
-                                              <!-- Icon SVG -->
-                                          </span>
-                                          <h3 class="card-title">Total Products</h3>
-                                          <p class="card-text">250</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 col-sm-6">
-                                  <div class="card custom-card">
-                                      <div class="card-body">
-                                          <!-- Icon for Top-Selling Product -->
-                                          <span class="card-icon">
-                                              <!-- Icon SVG -->
-                                          </span>
-                                          <h3 class="card-title">Top-Selling Product</h3>
-                                          <p class="card-text">Product A</p>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 col-sm-6">
-                                  <div class="card custom-card">
-                                      <div class="card-body">
-                                          <!-- Icon for Revenue -->
-                                          <span class="card-icon">
-                                              <!-- Icon SVG -->
-                                          </span>
-                                          <h3 class="card-title">Average Revenue per Product</h3>
-                                          <p class="card-text">$2,350</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div> 
+              <!-- Product Analytics Dashboard -->
+              <div class="container-xl mt-2">
+                  <div class="row g-2">
+                      <div class="col-12">
+                          <div class="card card-md p-0">
+                              <div class="card-body"> 
 
-                          <div class="row mt-4">
-                              <!-- Revenue by Category (Pie Chart) -->
-                              <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="card">
-                                    <div class="card-body p-0">
-                                        <h3 class="card-title text-center">Revenue by Category</h3>
-                                        <canvas id="pieChartCategory"></canvas>
+
+                                <style>
+                                  .custom-card {
+                                    background-color: #f8f9fc;
+                                    border-radius: 6px;
+                                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                                    padding: 20px;
+                                    text-align: left;
+                                    transition: transform 0.2s;
+                                  }
+                                
+                                  .custom-card:hover {
+                                    transform: translateY(-5px);
+                                  }
+                                
+                                  .custom-card-body {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                  }
+                                
+                                  .custom-card-title {
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    margin-bottom: 8px;
+                                    color: #333;
+                                  }
+                                
+                                  .custom-card-subtitle {
+                                    font-size: 0.9rem;
+                                    color: #777;
+                                    margin-bottom: 16px;
+                                  }
+                                
+                                  .custom-card-value {
+                                    font-size: 1.5rem ;
+                                    font-weight: bold;
+                                    color: #000;
+                                  }
+                                
+                                  .custom-icon-container {
+                                    margin-top: auto;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    color: #5e72e4;
+                                  }
+                                
+                                  .card-1 {
+                                    background-color: #e9e7fc;
+                                  }
+                                
+                                  .card-2 {
+                                    background-color: #fce7f3;
+                                  }
+                                
+                                  .card-3 {
+                                    background-color: #fff5e4;
+                                  }
+                                </style>
+
+                                  <!-- Summary Cards -->
+                                  <div class="row row-cards summary-cards ">
+                                    <!-- Total Products -->
+                                    <div class="col-md-4 col-sm-6">
+                                      <div class="custom-card card-1">
+                                        <div class="custom-card-body">
+                                          <h3 class="custom-card-title">Total Products</h3>
+                                          <p class="custom-card-subtitle">Summary of Total Product</p>
+                                          <p class="custom-card-value">999</p>
+                                          <div class="custom-icon-container">
+                                            <svg class="icon icon-tabler icon-tabler-package" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                              <path d="M12 3l8 4.5l-8 4.5l-8 -4.5z"></path>
+                                              <path d="M4 10.5v7l8 4.5v-7"></path>
+                                              <path d="M20 10.5v7l-8 4.5"></path>
+                                              <path d="M12 3v9l8 4.5"></path>
+                                              <path d="M4 10.5l8 4.5"></path>
+                                            </svg>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                </div>
-                            </div> 
-                            
-                            <!-- Sales Trend (Line Chart) -->
-                            <div class="col-lg-8 col-md-6 col-sm-12">
-                                <div class="card">
-                                    <div class="card-body p-0">
-                                        <h3 class="card-title text-center">Sales Trend</h3>
-                                        <canvas id="lineChartSales"></canvas>
+
+                                    <!-- Top-Selling Product -->
+                                    <div class="col-md-4 col-sm-6">
+                                      <div class="custom-card card-2">
+                                        <div class="custom-card-body">
+                                          <h3 class="custom-card-title">Top-Selling Product</h3>
+                                          <p class="custom-card-subtitle">Summary of Top-Selling Product</p>
+                                          <p class="custom-card-value">Product A</p>
+                                          <div class="custom-icon-container">
+                                            <svg class="icon icon-tabler icon-tabler-star" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                              <path d="M12 17.75l-6.172 3.897l1.185 -7.084l-5.163 -5.048l7.134 -1.04l3.016 -6.112l3.016 6.112l7.134 1.04l-5.163 5.048l1.185 7.084z"></path>
+                                            </svg>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                </div>
-                            </div>
-                          </div>
-                        
-                        <!-- Sales Distribution (new section) -->
-                        <div class="row mt-4">
-                          <!-- Sales Distribution Table -->
-                          <div class="col-12">
-                              <div class="card">
-                                  <div class="card-body p-5">
-                                    <h2>  </h2>
-                                    <table id="leadTable" class="display"  >
-                                        <thead>
-                                            <tr>
-                                                <th>Lead ID</th>
-                                                <th>Lead Name</th>
-                                                <th>Product Name</th>
-                                                <th>Lead Source</th>
-                                                <th>Status</th>
-                                                <th>Revenue</th>
-                                                <th>Created Date</th>
-                                                <th>Conversion Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>Abhishek Chandane </td>
-                                                <td>Product A</td>
-                                                <td>Website</td>
-                                                <td>Converted</td>
-                                                <td>$5,000</td>
-                                                <td>2025-01-10</td>
-                                                <td>2025-01-15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td>Chandane Abhishek</td>
-                                                <td>Product B</td>
-                                                <td>Referral</td>
-                                                <td>In Progress</td>
-                                                <td>$2,500</td>
-                                                <td>2025-01-12</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
+                                    <!-- Total Revenue This Month -->
+                                    <div class="col-md-4 col-sm-6">
+                                      <div class="custom-card card-3">
+                                        <div class="custom-card-body">
+                                          <h3 class="custom-card-title">Total Revenue This Month</h3>
+                                          <p class="custom-card-subtitle">Summary of Monthly Revenue</p>
+                                          <p class="custom-card-value">$85,625</p>
+                                          <div class="custom-icon-container">
+                                            <svg class="icon icon-tabler icon-tabler-currency-dollar" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                              <path d="M12 8c-4 0 -4 -2.5 -4 -4s4 -2 4 -2s4 0 4 2s-4 4 -4 4"></path>
+                                              <path d="M12 16c4 0 4 2.5 4 4s-4 2 -4 2s-4 0 -4 -2s4 -4 4 -4"></path>
+                                              <path d="M12 4v16"></path>
+                                            </svg>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> 
+
+                                  <div class="row mt-4">
+                                      <!-- Revenue by Category (Pie Chart) -->
+                                      <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-body p-0">
+                                                <h3 class="card-title text-center">Revenue by Category</h3>
+                                                <canvas id="pieChartCategory"></canvas>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    
+                                    <!-- Sales Trend (Line Chart) -->
+                                    <div class="col-lg-8 col-md-6 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-body p-0">
+                                                <h3 class="card-title text-center">Sales Trend</h3>
+                                                <canvas id="lineChartSales"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
                                   </div>
+                                
+                                <!-- Sales Distribution (new section) -->
+                                <div class="row mt-4">
+                                  <!-- Sales Distribution Table -->
+                                  <div class="col-12">
+                                      <div class="card">
+                                          <div class="card-body p-5">
+                                            <h2>  </h2>
+                                            <table id="leadTable" class="display"  >
+                                                <thead>
+                                                    <tr>
+                                                        <th>Lead ID</th>
+                                                        <th>Lead Name</th>
+                                                        <th>Product Name</th>
+                                                        <th>Lead Source</th>
+                                                        <th>Status</th>
+                                                        <th>Revenue</th>
+                                                        <th>Created Date</th>
+                                                        <th>Conversion Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>001</td>
+                                                        <td>Abhishek Chandane </td>
+                                                        <td>Product A</td>
+                                                        <td>Website</td>
+                                                        <td>Converted</td>
+                                                        <td>$5,000</td>
+                                                        <td>2025-01-10</td>
+                                                        <td>2025-01-15</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>002</td>
+                                                        <td>Chandane Abhishek</td>
+                                                        <td>Product B</td>
+                                                        <td>Referral</td>
+                                                        <td>In Progress</td>
+                                                        <td>$2,500</td>
+                                                        <td>2025-01-12</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+
+
                               </div>
                           </div>
-                        </div>
-
-
                       </div>
                   </div>
               </div>
-          </div>
-      </div>
   
       <!-- Footer -->
       <footer class="footer footer-transparent d-print-none">
