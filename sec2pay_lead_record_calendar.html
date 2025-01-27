@@ -23,6 +23,7 @@
 
     <!-- Full Calerndar CSS Link -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+    
 
     <style>
       @import url('https://rsms.me/inter/inter.css');
@@ -48,7 +49,7 @@
       .button:hover {
         background: linear-gradient(90deg, #0056b3, #004080);
         color: #fff;
-      }
+      } 
 
       .button_delete {
         background: linear-gradient(90deg, #ff004c, #b30000);
@@ -66,42 +67,11 @@
         color: #fff;
       }
 
-
-
-      
-
  
-
     </style>
   </head>
   <body >
-    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
- 
-
-
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title> Index.</title>
-  <!-- CSS files -->
-  <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet" />
-  <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet" />
-  <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
-  <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
-  <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
-  <style>
-    <blade import|%20url(%26%2339%3Bhttps%3A%2F%2Frsms.me%2Finter%2Finter.css%26%2339%3B)%3B%0D> :root {
-      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-    }
-
-    body {
-      font-feature-settings: "cv03", "cv04", "cv11";
-      
-    }
-  </style>
-</head>
+    <script src="./dist/js/demo-theme.min.js?1692870487"></script> 
 
 <body>
   <script src="./dist/js/demo-theme.min.js?1692870487"></script>
@@ -796,49 +766,123 @@
     </header>
     <div class="page-wrapper"> 
       <!-- Calendar View For Lead Records -->
-      <div class="container-xl mt-2">
-          <div class="row g-2">
-              <div class="col-12">
-                  <div class="card card-md p-0">
-                      <div class="card-body">
-                          <!-- Header -->
-                          <div class="d-flex justify-content-between align-items-center mb-4">
-                              <h2>Calendar View For Lead Records</h2>
-                              <div>
-                                  <button class="button"> Button 1</button>
-                                  <button class="button">Button 2</button>
+      <!-- Page header -->
+      <div class="page-header d-print-none my-4">
+        <div class="container-xl">
+          <div class="row g-2 align-items-center">
+            <div class="col">
+              <h2 class="page-title">
+                  Calendar For Lead
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                  <button class="button"> Filter</button>
+                    
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-xl mt-2">
+            <div class="row g-2">
+                <div class="col-12">
+                    <div class="card card-md p-0">
+                        <div class="card-body"> 
+                    <div id="calendar"> 
+                    </div>
+                  </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+ 
+          <!-- Create Event Modal for Lead -->  
+            <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" >
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="eventModalLabel">Create Event</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <form id="eventForm">
+                              <!-- Event Name -->
+                              <div class="mb-3">
+                                  <label for="eventTitle" class="form-label">Event Name</label>
+                                  <input type="text" class="form-control" id="eventTitle" placeholder="New Event Title">
                               </div>
-                          </div> 
-
-                          <div id="calendar"> 
-                          </div>
-
+                              <!-- Date -->
+                              <div class="mb-3">
+                                  <label for="eventDate" class="form-label">Date</label>
+                                  <input type="text" class="form-control" id="eventDate" readonly>
+                              </div>
+                              <!-- Time -->
+                              <div class="mb-3 d-flex align-items-center">
+                                  <label for="eventTimeStart" class="form-label me-2">Time</label>
+                                  <input type="time" class="form-control me-2" id="eventTimeStart">
+                                  <span class="me-2">–</span>
+                                  <input type="time" class="form-control" id="eventTimeEnd">
+                              </div>
+                              <!-- Attachment -->
+                              <div class="mb-3">  
+                                    <label for="eventAttachment" class="form-label">Attachment</label>
+                                    <input class="form-control" type="file" id="formFile">  
+                              </div>
+                              <!-- Guests -->
+                              <!-- <div class="mb-3">
+                                  <label for="eventGuests" class="form-label">Add Guest</label>
+                                  <input type="text" class="form-control" id="eventGuests" placeholder="Add Member">
+                              </div> -->
+                              <!-- Tags -->
+                              <!-- <div class="mb-3">
+                                  <label for="eventTags" class="form-label">Tags</label>
+                                  <div class="d-flex align-items-center">
+                                      <button type="button" class="btn btn-sm p-2 rounded-circle me-2" style="background-color: #ff595e;"></button>
+                                      <button type="button" class="btn btn-sm p-2 rounded-circle me-2" style="background-color: #ffca3a;"></button>
+                                      <button type="button" class="btn btn-sm p-2 rounded-circle me-2" style="background-color: #8ac926;"></button>
+                                      <button type="button" class="btn btn-sm p-2 rounded-circle me-2" style="background-color: #1982c4;"></button>
+                                      <button type="button" class="btn btn-sm p-2 rounded-circle" style="background-color: #6a4c93;"></button>
+                                  </div>
+                              </div> -->
+                              <!-- Description -->
+                              <div class="mb-3">
+                                  <label for="eventDescription" class="form-label">Description</label>
+                                  <textarea class="form-control" id="eventDescription" rows="3" placeholder="Add Description"></textarea>
+                              </div>
+                              <!-- Buttons -->
+                              <div class="d-flex justify-content-end">
+                                  <button type="button" class="button_delete" data-bs-dismiss="modal">Cancel</button>
+                                  <button type="submit" class="button mx-2">Save</button>
+                              </div>
+                          </form>
                       </div>
                   </div>
               </div>
-          </div>
-      </div>
-  
-      <!-- Footer -->
-      <footer class="footer footer-transparent d-print-none">
-          <div class="container-xl">
-              <div class="row text-center align-items-center flex-row-reverse">
-                  <div class="col-lg-auto ms-lg-auto">
-                      <ul class="list-inline list-inline-dots mb-0">
-                          <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
-                          <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
-                          <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                      </ul>
-                  </div>
-                  <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                      <ul class="list-inline list-inline-dots mb-0">
-                          <li class="list-inline-item">Copyright &copy; 2023 <a href="." class="link-secondary">Tabler</a>. All rights reserved.</li>
-                          <li class="list-inline-item"><a href="./changelog.html" class="link-secondary" rel="noopener">v1.0.0-beta20</a></li>
-                      </ul>
+            </div> 
+          <!-- Create Event Modal for Lead -->
+
+          <!-- Footer -->
+          <footer class="footer footer-transparent d-print-none">
+              <div class="container-xl">
+                  <div class="row text-center align-items-center flex-row-reverse">
+                      <div class="col-lg-auto ms-lg-auto">
+                          <ul class="list-inline list-inline-dots mb-0">
+                              <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
+                              <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
+                              <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
+                          </ul>
+                      </div>
+                      <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                          <ul class="list-inline list-inline-dots mb-0">
+                              <li class="list-inline-item">Copyright &copy; 2023 <a href="." class="link-secondary">Tabler</a>. All rights reserved.</li>
+                              <li class="list-inline-item"><a href="./changelog.html" class="link-secondary" rel="noopener">v1.0.0-beta20</a></li>
+                          </ul>
+                      </div>
                   </div>
               </div>
-          </div>
-      </footer>
+          </footer>
   </div>
 
  
@@ -858,17 +902,21 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 
         <script> 
-            $(document).ready(function () {
+         $(document).ready(function () {
 
-                var calendarEl = $('#calendar')[0];
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-                });
-                calendar.render();
+          var calendarEl = $('#calendar')[0];
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', // 'dayGridWeek', 'timeGridDay', 'listWeek'
+            dateClick: function (info) {
+              $('#eventDate').val(info.dateStr); 
+              $('#eventModal').modal('show');
+          }
+          });
+          calendar.render();
 
-                
 
-            });
+
+          });
        </script>
 
 
