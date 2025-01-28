@@ -65,8 +65,86 @@
       .button_delete:hover {
         background: linear-gradient(90deg, #b30000, #800000);
         color: #fff;
+        } 
+
+       
+      .custom-modal-meeting {
+        border-radius: 20px;
+        width: 400px;
+        background: linear-gradient(135deg, #f0f4ff, #e6f7ff);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        /* text-align: center; */
+        padding: 20px;
       }
 
+       
+      .profile-container {
+        display: flex;
+        /* justify-content: center; */
+        /* margin-bottom: 10px; */
+      }
+
+      .profile-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+       
+      .meeting-info h5 {
+        font-size: 1.2rem;
+        color: #1a73e8;
+        margin-bottom: 5px;
+      }
+
+      .meeting-info p {
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+       
+      .join-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      .join-btn {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .join-btn i {
+        font-size: 1.3rem;
+      }
+
+      .join-btn:hover {
+        background-color: #155ab6;
+      } 
+
+
+
+
+      .custom-modal-lead {
+        border-radius: 20px;
+        width: 400px;
+        background: linear-gradient(135deg, #f0f4ff, #e6f7ff);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        /* text-align: center; */
+        padding: 20px;
+      }
 
  
     </style>
@@ -865,39 +943,56 @@
           <!-- Create Event Modal for Lead -->
 
           <!-- Meeting Modal -->
-          <div  class="modal fade" id="meetingModal" tabindex="-1">
-            <div  class="modal-dialog modal-dialog-centered">
-                <div class="modal-content" style="border-radius: 30px; width:500px;" >
-                    <div class="modal-header">
-                        <h5 class="modal-title">Meeting Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Title:</strong> <span id="meetingTitle"></span></p>
-                        <p><strong>Date:</strong> <span id="meetingDate"></span></p>
-                        <p><strong>Description:</strong> <span id="meetingDescription"></span></p>
-                        
-                    </div>
+          <div class="modal fade" id="meetingModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content custom-modal-meeting">
+                <div class="modal-body">
+                  <!-- Profile Picture -->
+                  <div class="profile-container">
+                    <img src="./dist/img/profiles/ac.jpg" alt="Client" class="profile-img">
+                  </div>
+
+                  <!-- Meeting Info -->
+                  <div class="meeting-info">
+                    <h5 id="meetingTitle">Project Discussion</h5>
+                    <p id="meetingDescription">Discuss project updates and next steps.</p>
+                  </div>
+
+                  <!-- Join Button -->
+                  <div class="join-container">
+                    <button class="join-btn">
+                      <i class="tabler tabler-video"></i> Join Meeting
+                    </button>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
+
+
+      
 
           <!-- View Lead Details Modal -->
           <div class="modal fade" id="leadModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Lead Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Title:</strong> <span id="leadTitle"></span></p>
-                        <p><strong>Date:</strong> <span id="leadDate"></span></p>
-                        <p><strong>Description:</strong> <span id="leadDescription"></span></p>
-                    </div>
+              <div class="modal-content custom-modal-lead">
+                <div class="modal-header">
+                  <h5 class="modal-title">
+                    <i class="tabler tabler-user"></i> Lead Details
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+                <div class="modal-body">
+                  <div class="lead-info">
+                    <p><i class="tabler tabler-file-text"></i> <strong>Title:</strong> <span id="leadTitle">Business Opportunity</span></p>
+                    <p><i class="tabler tabler-calendar"></i> <strong>Date:</strong> <span id="leadDate">2025-02-10</span></p>
+                    <p><i class="tabler tabler-message"></i> <strong>Description:</strong> <span id="leadDescription">Potential client interested in our services.</span></p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
 
 
           <!-- Footer -->
@@ -943,10 +1038,7 @@
           var calendarEl = $('#calendar')[0];
 
           var calendar = new FullCalendar.Calendar(calendarEl, {
-              initialView: 'dayGridMonth',
-
-              // Load events dynamically from the database
-              //events: "fetch_leads.php", // Update this to your API endpoint
+              initialView: 'dayGridMonth', 
 
               events: [
                         {
@@ -1047,7 +1139,7 @@
                   let eventTitle = arg.event.title;
                   let eventType = arg.event.extendedProps.type;
                   let bgColor = eventType === 'Meeting' ? '#8c31b9' : '#14b1ff';  
-
+                
                   return {
                       html: `
                           <div style="background: ${bgColor}; height:50px; padding: 8px;  text-align: center; font-size: 14px; font-weight: bold; color: white;">
