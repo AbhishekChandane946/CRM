@@ -39,7 +39,7 @@
         background: linear-gradient(90deg, #007bff, #0056b3);
         color: #fff;
         border: none;
-        width: 150px;
+        width: 120px;
         font-weight: 500;
         padding: 8px; 
         border-radius: 5px; 
@@ -112,27 +112,7 @@
         margin-top: 15px;
       }
 
-      .join-btn {
-        background-color: #1a73e8;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 25px;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .join-btn i {
-        font-size: 1.3rem;
-      }
-
-      .join-btn:hover {
-        background-color: #155ab6;
-      } 
+ 
 
 
 
@@ -946,21 +926,24 @@
           <div class="modal fade" id="meetingModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content custom-modal-meeting">
+                <div class="modal-header`">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
                 <div class="modal-body">
                   <!-- Profile Picture -->
                   <div class="profile-container">
-                    <img src="./dist/img/profiles/ac.jpg" alt="Client" class="profile-img">
+                    <img src="./dist/img/profiles/ac.jpg" alt="Client" class="profile-img"> 
                   </div>
-
+                  <input type="text" name="" id="meetingId">
                   <!-- Meeting Info -->
-                  <div class="meeting-info">
+                  <div class="meeting-info my-2">
                     <h5 id="meetingTitle">Project Discussion</h5>
                     <p id="meetingDescription">Discuss project updates and next steps.</p>
                   </div>
 
                   <!-- Join Button -->
-                  <div class="join-container">
-                    <button class="join-btn">
+                  <div class="join-container my-2">
+                    <button class="button p-2" style="border-radius: 25px;">
                       <i class="tabler tabler-video"></i> Join Meeting
                     </button>
                   </div>
@@ -983,7 +966,8 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="lead-info">
+                  <input type="text"  id="leadId"> 
+                  <div class="lead-info"> 
                     <p><i class="tabler tabler-file-text"></i> <strong>Title:</strong> <span id="leadTitle">Business Opportunity</span></p>
                     <p><i class="tabler tabler-calendar"></i> <strong>Date:</strong> <span id="leadDate">2025-02-10</span></p>
                     <p><i class="tabler tabler-message"></i> <strong>Description:</strong> <span id="leadDescription">Potential client interested in our services.</span></p>
@@ -1122,11 +1106,13 @@
                   var eventType = info.event.extendedProps.type; // Fetch event type
 
                   if (eventType === "Meeting") {
+                      $('#meetingId').val(info.event.id);
                       $('#meetingTitle').text(info.event.title);
                       $('#meetingDate').text(info.event.startStr);
                       $('#meetingDescription').text(info.event.extendedProps.description || "No details provided.");
                       $('#meetingModal').modal('show'); // Open Meeting modal
                   } else if (eventType === "Lead") {
+                      $('#leadId').val(info.event.id);
                       $('#leadTitle').text(info.event.title);
                       $('#leadDate').text(info.event.startStr);
                       $('#leadDescription').text(info.event.extendedProps.description || "No details provided.");
@@ -1142,7 +1128,7 @@
                 
                   return {
                       html: `
-                          <div style="background: ${bgColor}; height:50px; padding: 8px;  text-align: center; font-size: 14px; font-weight: bold; color: white;">
+                          <div style="background: ${bgColor};  text-align: center; font-size: 14px; font-weight: bold; color: white;">
                               ${eventTitle}
                           </div>
                       `
