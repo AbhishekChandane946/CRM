@@ -13,11 +13,9 @@
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/js/bootstrap-select.min.js "></script>
-    <link href=" https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css "
-        rel="stylesheet">
     <script>
         window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery.min.js"%3E%3C/script%3E'))
     </script>
@@ -27,9 +25,17 @@
     <link rel="stylesheet" type="text/css" href="kanbanBoard.css" />
 </head>
 <style>
+    ::ng-deep .dx-sortable {
+        display: block
+    }
+
     .highlight-target {
         border: 2px dashed #007bff;
         background-color: #f8f9fa;
+    }
+
+    .dx-theme-material-typography a {
+        color: black;
     }
 
     .font-size-10 {
@@ -791,34 +797,14 @@
                         <div class="page-pretitle">
                             Leads
                         </div>
-                        <h2 class="page-title">
+                        <h4 class="page-title mb-4">
                             Kanban
-                        </h2>
+                        </h4>
                     </div>
                 </div>
                 <div class="demo-container">
                     <div id="kanban"></div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal modal-blur fade" id="" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-1 modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <form id="leadAssignUserForm">
-                    <div class="modal-header">
-                        <h5 class="modal-title"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success btn-sm " data-bs-dismiss="modal">Save
-                            changes</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -828,17 +814,20 @@
                 <form id="leadAssignUserForm">
                     <div class="modal-body">
                         <div class="modal-title">Lead Assign To Users</div>
-                        <div class="mb-3">
-                            <select class="selectpicker">
-                                <option>Mustard</option>
-                                <option>Ketchup</option>
-                                <option>Barbecue</option>
+                        <div class="form-group mb-2">
+                            <select class="selectpicker form-control" data-live-search="true" data-live-search="true"
+                                data-actions-box="true" data-size="5" multiple name="user_id[]" id="user_id"
+                                placeholder="Select Users">
+
                             </select>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer mt-2">
+                            <input type="hidden" name="action" id="action" value="leadsmanager.setLeadAssignToUsers">
+                            <input type="hidden" name="lead_id" id="lead_id" value="">
                             <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-success btn-sm">Submit</button>
+                            <button type="submit" class="btn btn-success btn-sm">Submit</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -850,13 +839,86 @@
 <script src="dist/js/kanban.js"></script>
 <script src="./dist/js/tabler.min.js?1692870487" defer></script>
 <script src="./dist/js/demo.min.js?1692870487" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./dist/libs/nouislider/dist/nouislider.min.js?1692870487" defer></script>
-<script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
-<script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js" defer></script>
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
     $(function () {
-        $('select').selectpicker();
+    $('[data-bs-toggle="tooltip"]').tooltip();
+});
+    $('.selectpicker').selectpicker();
+    loadUsers(selectedUserIds = '');
+
+    function loadUsers(selectedUserIds = '') {
+        $.ajax({
+            type: "POST",
+            url: "api.php",
+            data: {
+                action: "users.getUsers",
+            },
+            dataType: "json",
+            success: function (data) {
+                var users = data.users;
+                var html = '';
+                var selectedIds = selectedUserIds.split(',').map(id => id.trim());
+                $.each(users, function (index, user) {
+                    var selected = selectedIds.includes(user.ID.toString()) ? 'selected' : '';
+                    html += '<option value="' + user.ID + '" ' + selected + '>' + user.USER_NAME +
+                        '</option>';
+                    console.log('selected===>', selected);
+                });
+                $('#user_id').html(html).selectpicker('refresh');
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+    $("#leadAssignUserForm").submit(function (e) {
+        e.preventDefault();
+        var form = $(this).serialize();
+        console.log('form',form);
+        $.ajax({
+            type: "POST",
+            url: "api.php",
+            data: form,
+            dataType: "JSON",
+            success: function (data) {
+                $("#leadAssignUserForm")[0].reset();
+                $('#leadAssignUserModal').modal('hide');
+                refreshKanbanBoard();
+                alert(data.message);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+
     });
+
+    function refreshKanbanBoard() {
+        getLeads(statuses);
+    }
+
+    function setBackgroundColor() {
+        $('.list-title').each(function () {
+            var titleText = $(this).text();
+            var titleText = $(this).text().trim();
+            if (titleText === 'To Do') {
+                $(this).css('background-color', '#f1c40f');
+            } else if (titleText === 'In Progress') {
+                $(this).css('background-color', '#3498db');
+            } else if (titleText === 'Pending') {
+                $(this).css('background-color', '#e67e22');
+            } else if (titleText === 'Hold') {
+                $(this).css('background-color', '#9b59b6');
+            } else if (titleText === 'Done') {
+                $(this).css('background-color', '#2ecc71');
+            } else if (titleText === 'Completed') {
+                $(this).css('background-color', '#27ae60');
+            } else if (titleText === 'Lost') {
+                $(this).css('background-color', '#e74c3c');
+            }
+        });
+    }
 </script>
