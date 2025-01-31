@@ -999,7 +999,7 @@
                 .custom-tab-container {
                   width: 250px;
                   border-radius: 15px;
-                  background: #ffffff;
+                  background: linear-gradient(135deg, #eef1f6, #ffffff);
               
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
               }
@@ -1181,27 +1181,26 @@
                 let isReadonly = followUpDate && followUpRemark;  
 
                 tabContentDiv.innerHTML = `
-                
-                  <div class="col-12">
-                        <div class="bordered-section-title">Follow Up ${i + 1}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="">
-                                <input type="date" id="date${i + 1}" class="form-control mt-3 date${i + 1}" value="${followUpDate || ''}" ${isReadonly ? 'readonly' : ''}>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="mt-1">
-                                <textarea id="notes${i + 1}" class="form-control  mt-3" placeholder="Type something…" rows="2" ${isReadonly ? 'readonly' : ''}>${followUpRemark || ''}</textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 d-flex justify-content-center">
-                            <div class="mt-3">
-                                <button class="btn btn-outline-success btn-pill w-100 submitFollowUp" id="submitBtn${i + 1}" data-index="${i + 1}" ${isReadonly ? 'style="display: none;"' : ''}>Submit</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-12">
+                      <div class="bordered-section-title">Follow Up ${i + 1}</div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="">
+                              <input type="date" id="date${i + 1}" class="form-control mt-3 date${i + 1}" value="${followUpDate || ''}" ${isReadonly ? 'readonly' : ''}>
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="mt-1">
+                              <textarea id="notes${i + 1}" class="form-control  mt-3" placeholder="Type something…" rows="2" ${isReadonly ? 'readonly' : ''}>${followUpRemark || ''}</textarea>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 d-flex justify-content-center">
+                          <div class="mt-3">
+                              <button class="btn btn-outline-success btn-pill w-100 submitFollowUp" id="submitBtn${i + 1}" data-index="${i + 1}" ${isReadonly ? 'style="display: none;"' : ''}>Submit</button>
+                          </div>
+                      </div>
+                  </div> 
                 `;
             });
         },
@@ -1407,30 +1406,74 @@
                    $("#modalTitle").html(modalTitle);
                   let convertedLead = convertKeysToCamelCase(lead); 
                   let leadDetailsHtml = '';
-                    let colClass = 'col-sm-6 col-md-4';  
-                    leadDetailsHtml += `<div class="datagrid" >
-                                        <div class="datagrid-item" >
-                      `;
-                    for (let key in convertedLead) {
-                        if (convertedLead.hasOwnProperty(key) && convertedLead[key] !== null && convertedLead[key] !== "") { 
-                          let badgeHtml = '';
-                          if (key.toLowerCase() === 'source') {
-                              badgeHtml = `<span class="badge bg-primary">${convertedLead[key]}</span>`;
-                          } else if (key.toLowerCase() === 'status') {
-                              badgeHtml = `<span class="badge bg-secondary">${convertedLead[key]}</span>`;
-                          } else if (key.toLowerCase() === 'product') {
-                              badgeHtml = `<span class="badge bg-success">${convertedLead[key]}</span>`;
-                          }
-                          leadDetailsHtml +=`
-                                 <div class="${colClass}">
-                                           <div class="datagrid-title">${formatKey(key)}:</div> 
-                                           <div class="datagrid-content">${convertedLead[key]}</div> 
-                                </div>
-                            `;
-                        }
-                    }
-                    leadDetailsHtml += `</div>  </div>`;
-                  $("#leadDetailsList").html(leadDetailsHtml);
+let colClass = 'col-sm-6 col-md-4';  
+leadDetailsHtml += `<div class="card-body">
+                      <div class="datagrid">`;
+
+for (let key in convertedLead) {
+    if (convertedLead.hasOwnProperty(key) && convertedLead[key] !== null && convertedLead[key] !== "") { 
+        let badgeHtml = '';
+        if (key.toLowerCase() === 'source') {
+            badgeHtml = `<span class="badge bg-primary">${convertedLead[key]}</span>`;
+        } else if (key.toLowerCase() === 'status') {
+            badgeHtml = `<span class="badge bg-secondary">${convertedLead[key]}</span>`;
+        } else if (key.toLowerCase() === 'product') {
+            badgeHtml = `<span class="badge bg-success">${convertedLead[key]}</span>`;
+        }
+
+        let contentHtml = convertedLead[key];
+        if (key.toLowerCase() === 'creator') {
+            // Example of avatar in creator section
+            contentHtml = `
+                <div class="d-flex align-items-center">
+                    <span class="avatar avatar-xs me-2 rounded" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                    ${convertedLead[key]}
+                </div>`;
+        } else if (key.toLowerCase() === 'edge network') {
+            // Example of status
+            contentHtml = `<span class="status status-green">${convertedLead[key]}</span>`;
+        } else if (key.toLowerCase() === 'avatars list') {
+            // Example of avatar list
+            contentHtml = `
+                <div class="avatar-list avatar-list-stacked">
+                    <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                    <span class="avatar avatar-xs rounded">JL</span>
+                    <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/002m.jpg)"></span>
+                    <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/003m.jpg)"></span>
+                    <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/000f.jpg)"></span>
+                    <span class="avatar avatar-xs rounded">+3</span>
+                </div>`;
+        } else if (key.toLowerCase() === 'checkbox') {
+            // Example of checkbox
+            contentHtml = `
+                <label class="form-check">
+                    <input class="form-check-input" type="checkbox" checked="">
+                    <span class="form-check-label">Click me</span>
+                </label>`;
+        } else if (key.toLowerCase() === 'icon') {
+            // Example of an icon
+            contentHtml = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-green icon-2">
+                    <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                ${convertedLead[key]}`;
+        } else if (key.toLowerCase() === 'form control') {
+            // Example of form input
+            contentHtml = `<input type="text" class="form-control form-control-flush" placeholder="Input placeholder">`;
+        }
+
+        leadDetailsHtml += `
+            <div class="datagrid-item">
+                <div class="datagrid-title">${formatKey(key)}:</div> 
+                <div class="datagrid-content">${badgeHtml || contentHtml}</div> 
+            </div>
+        `;
+    }
+}
+
+leadDetailsHtml += `</div></div>`;
+$("#leadDetailsList").html(leadDetailsHtml);
+
                   $("#leadId").val(leadId);
                   $("#editModal").modal("show");
               } else {
