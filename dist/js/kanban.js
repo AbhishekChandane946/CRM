@@ -112,7 +112,7 @@ function renderCards($container, tasks, employees) {
         showScrollbar: 'always',
     });
 
-    $items.addClass('sortable-cards').dxSortable({
+    $items.addClass('sortable-cards ').dxSortable({
         group: 'tasksGroup',
         moveItemOnDrop: true,
     });

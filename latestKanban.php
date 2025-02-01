@@ -29,6 +29,11 @@
         display: block
     }
 
+    .sortable-cards{
+        margin-top: 10px;
+        background-color:rgb(236 223 255 / 87%);
+    }
+
     .highlight-target {
         border: 2px dashed #007bff;
         background-color: #f8f9fa;
@@ -905,19 +910,19 @@
             var titleText = $(this).text();
             var titleText = $(this).text().trim();
             if (titleText === 'To Do') {
-                $(this).css('background-color', '#f1c40f');
+                $(this).css('background-color', 'rgb(255 223 93)');
             } else if (titleText === 'In Progress') {
-                $(this).css('background-color', '#3498db');
+                $(this).css('background-color', 'rgb(101 193 255)');
             } else if (titleText === 'Pending') {
-                $(this).css('background-color', '#e67e22');
+                $(this).css('background-color', 'rgb(255 157 71)');
             } else if (titleText === 'Hold') {
-                $(this).css('background-color', '#9b59b6');
+                $(this).css('background-color', 'rgb(215 117 255)');
             } else if (titleText === 'Done') {
-                $(this).css('background-color', '#2ecc71');
+                $(this).css('background-color', 'rgb(49 255 136)');
             } else if (titleText === 'Completed') {
-                $(this).css('background-color', '#27ae60');
+                $(this).css('background-color', 'rgb(68 223 29)');
             } else if (titleText === 'Lost') {
-                $(this).css('background-color', '#e74c3c');
+                $(this).css('background-color', 'rgb(255 82 64)');
             }
         });
     }
