@@ -179,8 +179,22 @@ function renderCardOld($container, lead) {
     const commentCount = lead.comment_count || 0;
     $('<div>').addClass('small').html(`<i class="fas fa-comments"></i> ${commentCount}`).appendTo($footer);
 }
+
+
 function renderCard($container, lead) {
-    const $item = $('<div>').addClass('card dx-card p-3 mb-3 shadow-sm position-relative').attr('data-lead-id', lead.lead_id).appendTo($container);
+    const $item = $('<div>')
+        .addClass('style="background-color:" card dx-card p-3 mb-3 shadow-lg position-relative')
+        .attr('data-lead-id', lead.lead_id)
+        .css({
+            'border-radius': '12px',
+            'box-shadow': '0 6px 15px rgba(0, 0, 0, 0.15)',
+            'transition': 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+        })
+        .hover(
+            function () { $(this).css({ 'transform': 'translateY(-5px)', 'box-shadow': '0 10px 20px rgba(0, 0, 0, 0.2)' }); },
+            function () { $(this).css({ 'transform': 'translateY(0)', 'box-shadow': '0 6px 15px rgba(0, 0, 0, 0.15)' }); }
+        )
+        .appendTo($container);
 
     // Row 1: Lead Source, Product, and Dropdown
     const $headerRow = $('<div>').addClass('d-flex justify-content-between align-items-center mb-2').appendTo($item);
@@ -189,16 +203,18 @@ function renderCard($container, lead) {
     if (lead.lead_source) {
         $('<span>')
             .addClass('badge bg-primary me-2')
-            .attr('title', `Lead Source: ${lead.lead_source}`) // Tooltip
+            .attr('title', `Lead Source: ${lead.lead_source}`)
             .text(lead.lead_source)
+            .css({ 'border-radius': '8px', 'padding': '6px 10px' })
             .appendTo($badges);
     }
 
     if (lead.lead_product) {
         $('<span>')
             .addClass('badge bg-success')
-            .attr('title', `Lead Product: ${lead.lead_product}`) // Tooltip
+            .attr('title', `Lead Product: ${lead.lead_product}`)
             .text(lead.lead_product)
+            .css({ 'border-radius': '8px', 'padding': '6px 10px' })
             .appendTo($badges);
     }
 
@@ -206,25 +222,27 @@ function renderCard($container, lead) {
     $('<i>')
         .addClass('fas fa-ellipsis-v text-secondary cursor-pointer')
         .attr('data-bs-toggle', 'dropdown')
-        .attr('title', 'Actions') // Tooltip
+        .attr('title', 'Actions')
+        .css({ 'cursor': 'pointer' })
         .appendTo($dropdown);
     $('<ul>')
-        .addClass('dropdown-menu dropdown-menu-end')
+        .addClass('dropdown-menu dropdown-menu-end shadow')
         .html(`
             <li><a class="dropdown-item" href="#"><i class="fas fa-phone-alt me-2"></i>Call Now</a></li>
             <li><a class="dropdown-item" href="#"><i class="fas fa-sms me-2"></i>Sms Now</a></li>
             <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-check me-2"></i>Meeting</a></li>
             <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Edit</a></li>
-            <li><a class="dropdown-item" href="#"><i class="fas fa-trash me-2"></i>Delete</a></li>
+            <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Delete</a></li>
         `)
         .appendTo($dropdown);
 
     // Row 2: Lead Name and Created Date
-    const $nameRow = $('<div>').addClass('d-flex justify-content-between align-items-center mb-1').appendTo($item);
+    const $nameRow = $('<div>').addClass('d-flex justify-content-between align-items-center mb-2').appendTo($item);
     $('<div>')
-        .addClass('fw-bold text-primary')
-        .attr('title', `Lead Name: ${lead.lead_name}`) // Tooltip
+        .addClass('fw-bold text-primary lead-name')
+        .attr('title', `Lead Name: ${lead.lead_name}`)
         .html(`${lead.lead_name} <span class="text-secondary">(#${lead.lead_id})</span>`)
+        .css({ 'cursor': 'pointer', 'font-size': '16px' })
         .appendTo($nameRow)
         .on('click', function (event) {
             event.stopPropagation();
@@ -233,44 +251,37 @@ function renderCard($container, lead) {
 
     $('<div>')
         .addClass('small text-danger')
-        .attr('title', `Created on: ${new Date(lead.created_timestamp).toLocaleString()}`) // Tooltip
+        .attr('title', `Created on: ${new Date(lead.created_timestamp).toLocaleString()}`)
         .text(new Date(lead.created_timestamp).toLocaleDateString())
         .appendTo($nameRow);
 
-    // Row 3: Lead Remark
-    if (lead.lead_remark) {
-        $('<div>')
-            .addClass('text-secondary small mb-1')
-            .attr('title', `Remark: ${lead.lead_remark}`) // Tooltip
-            .text(lead.lead_remark.length > 50 ? `${lead.lead_remark.substring(0, 50)}...` : lead.lead_remark)
-            .appendTo($item)
-            .tooltip({ placement: 'top' });
-    }
-
-    // Row 4: Lead Phone
+    // Row 3: Lead Phone
     const $phoneRow = $('<div>').addClass('d-flex align-items-center mt-2').appendTo($item);
     $('<i>')
-        .addClass('fa fa-phone me-2')
-        .attr('title', 'Phone') // Tooltip
+        .addClass('fa fa-phone me-2 text-success')
+        .attr('title', 'Phone')
         .appendTo($phoneRow);
     $('<div>')
-        .addClass('small')
-        .attr('title', `Phone Number: ${lead.lead_phone}`) // Tooltip
+        .addClass('small text-dark')
+        .attr('title', `Phone Number: ${lead.lead_phone}`)
         .text(lead.lead_phone)
+        .css({ 'font-weight': '500' })
         .appendTo($phoneRow);
 
-    // Row 5: Assigned User
+    // Row 4: Assigned User
     const $userRow = $('<div>').addClass('d-flex justify-content-between align-items-center mt-2').appendTo($item);
     $('<div>')
         .addClass('small')
-        .attr('title', `Assigned to: ${lead.assigned_users || 'Unassigned'}`) // Tooltip
-        .append('<i class="fa fa-users" aria-hidden="true"></i>')
+        .attr('title', `Assigned to: ${lead.assigned_users || 'Unassigned'}`)
+        .append('<i class="fa fa-users me-1"></i>')
         .append(` ${lead.assigned_users || 'Unassigned'}`)
+        .css({ 'font-weight': '500' })
         .appendTo($userRow);
 
     $('<i>')
-        .addClass('fa fa-user-plus')
-        .attr('title', 'Assign User') // Tooltip
+        .addClass('fa fa-user-plus text-primary cursor-pointer')
+        .attr('title', 'Assign User')
+        .css({ 'cursor': 'pointer' })
         .on('click', function () {
             loadUsers(lead.assigned_user_ids);
             $("#leadAssignUserForm")[0].reset();
@@ -279,20 +290,34 @@ function renderCard($container, lead) {
         })
         .appendTo($userRow);
 
-    // Footer
+    // ❌ COMMENTED OUT: Lead Remark
+    /*
+    if (lead.lead_remark) {
+        $('<div>')
+            .addClass('text-danger small mb-1')
+            .attr('title', `Remark: ${lead.lead_remark}`)
+            .text(lead.lead_remark.length > 50 ? `${lead.lead_remark.substring(0, 50)}...` : lead.lead_remark)
+            .appendTo($item);
+    }
+    */
+
+    // ❌ COMMENTED OUT: Footer (Last Activity & Comments)
+    /*
     const $footer = $('<div>').addClass('d-flex justify-content-between align-items-center mt-3 pt-2 border-top').appendTo($item);
     $('<div>')
         .addClass('small')
-        .attr('title', `Last Activity: ${new Date(lead.last_activity || new Date()).toLocaleString()}`) // Tooltip
+        .attr('title', `Last Activity: ${new Date(lead.last_activity || new Date()).toLocaleString()}`)
         .html(`<i class="fas fa-clock me-1"></i>${new Date(lead.last_activity || new Date()).toLocaleString()}`)
         .appendTo($footer);
 
     $('<div>')
         .addClass('small')
-        .attr('title', `Comments: ${lead.comment_count || 0}`) // Tooltip
+        .attr('title', `Comments: ${lead.comment_count || 0}`)
         .html(`<i class="fas fa-comments me-1"></i>${lead.comment_count || 0}`)
         .appendTo($footer);
+    */
 }
+
 
 
 
