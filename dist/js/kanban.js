@@ -290,7 +290,7 @@ function renderCard($container, lead) {
         })
         .appendTo($userRow);
 
-    // ❌ COMMENTED OUT: Lead Remark
+    // ❌ COMMENTED OUT: Lead Remark Remove Comment After Yow want to display Remark
     /*
     if (lead.lead_remark) {
         $('<div>')
@@ -301,7 +301,8 @@ function renderCard($container, lead) {
     }
     */
 
-    // ❌ COMMENTED OUT: Footer (Last Activity & Comments)
+    // ❌ COMMENTED OUT: Footer (Last Activity & Comments) Remove Comment After Yow want to display Footer
+
     /*
     const $footer = $('<div>').addClass('d-flex justify-content-between align-items-center mt-3 pt-2 border-top').appendTo($item);
     $('<div>')
