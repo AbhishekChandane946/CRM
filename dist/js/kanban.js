@@ -241,8 +241,8 @@ function renderCard($container, lead) {
     $('<div>')
         .addClass('fw-bold text-primary lead-name')
         .attr('title', `Lead Name: ${lead.lead_name}`)
-        .html(`${lead.lead_name} <span class="text-secondary">(#${lead.lead_id})</span>`)
-        .css({ 'cursor': 'pointer', 'font-size': '16px' })
+        .html(`${lead.lead_name} <span class="text-secondary">(${lead.lead_phone})</span>`)
+        .css({ 'cursor': 'pointer', 'font-size': '14px' })
         .appendTo($nameRow)
         .on('click', function (event) {
             event.stopPropagation();
@@ -252,21 +252,23 @@ function renderCard($container, lead) {
     $('<div>')
         .addClass('small text-danger')
         .attr('title', `Created on: ${new Date(lead.created_timestamp).toLocaleString()}`)
+        .css({ 'cursor': 'pointer', 'font-size': '10px' })
         .text(new Date(lead.created_timestamp).toLocaleDateString())
         .appendTo($nameRow);
 
     // Row 3: Lead Phone
-    const $phoneRow = $('<div>').addClass('d-flex align-items-center mt-2').appendTo($item);
-    $('<i>')
-        .addClass('fa fa-phone me-2 text-success')
-        .attr('title', 'Phone')
-        .appendTo($phoneRow);
-    $('<div>')
-        .addClass('small text-dark')
-        .attr('title', `Phone Number: ${lead.lead_phone}`)
-        .text(lead.lead_phone)
-        .css({ 'font-weight': '500' })
-        .appendTo($phoneRow);
+    // const $phoneRow = $('<div>').addClass('d-flex align-items-center mt-2').appendTo($item);
+    // $('<i>')
+    //     .addClass('fa fa-phone me-2 text-success')
+    //     .attr('title', 'Phone')
+    //     .appendTo($phoneRow);
+
+    // $('<div>')
+    //     .addClass('small text-dark')
+    //     .attr('title', `Phone Number: ${lead.lead_phone}`)
+    //     .text(lead.lead_phone)
+    //     .css({ 'font-weight': '500' })
+    //     .appendTo($phoneRow);
 
     // Row 4: Assigned User
     const $userRow = $('<div>').addClass('d-flex justify-content-between align-items-center mt-2').appendTo($item);
