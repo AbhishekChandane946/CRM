@@ -1,32 +1,33 @@
- 
+
 <?php
- 
-require_once 'config-settings/LeadsManager.php';
- 
-$leadId = isset($_GET['lead_id']) ? intval($_GET['lead_id']) : 0;
+  require_once 'config-settings/LeadsManager.php';
 
-if ($leadId <= 0) {
-    echo "<p style='color:red;'>Invalid Lead ID.</p>";
-    exit;  
-}
+  $leadId = isset($_GET['lead_id']) ? intval($_GET['lead_id']) : 0;
 
- 
-$leadManager = new LeadsManager();
+  if ($leadId <= 0) {
+      echo "<p style='color:red;'>Invalid Lead ID.</p>";
+      exit;
+  }
 
- 
-$lead = $leadManager->getLeadById($leadId);
+  $leadManager = new LeadsManager();
+  $lead = $leadManager->getLeadById($leadId);
 
- 
-if ($lead) { 
+
+  if ($lead) { 
     echo "<pre>";
     print_r($lead);
     echo "</pre>";
-} else {
+  } else {
     echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
-}
+  }
+
+
+   
+ $leadDetail = $lead['leadDetail'][0];   
+
+
+
 ?>
-
-
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -813,9 +814,9 @@ if ($lead) {
               <div class="card shadow fixed-height">
                 <!-- Header Section -->
                 <div class="card-header d-flex justify-content-between align-items-center bg-white">
-                  <h3 class="mb-0">Lead Title</h3>
+                  <h3 class="mb-0"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?> </h3>
 
-                  <span class="badge bg-danger text-white">11 Days</span>
+                  <!-- <span class="badge bg-danger text-white">11 Days</span> -->
                 </div>
 
                 <!-- Action Buttons -->
@@ -874,21 +875,21 @@ if ($lead) {
                         <path d="M3 12h4l3 8l4 -16l3 8h4" /></svg><span>Activity</span>
                     </button>
                   </div>
-
+ 
                   <!-- Lead Details Section -->
                   <h6 class="text-muted mb-3">About Lead</h6>
                   <div>
-                      <p class="mb-2"><strong>Lead Name:</strong> <?= htmlspecialchars($lead['LEAD_NAME'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Phone:</strong> <?= htmlspecialchars($lead['LEAD_PHONE'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Source:</strong> <?= htmlspecialchars($lead['LEAD_SOURCE'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Product:</strong> <?= htmlspecialchars($lead['LEAD_PRODUCT'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Remark:</strong> <?= htmlspecialchars($lead['LEAD_REMARK'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Status:</strong> <?= htmlspecialchars($lead['LEAD_STATUS'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Created By:</strong> <?= htmlspecialchars($lead['CREATED_BY'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Updated By:</strong> <?= htmlspecialchars($lead['UPDATED_BY'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Created At:</strong> <?= htmlspecialchars($lead['CREATED_TIMESTAMP'] ?? 'N/A') ?></p>
-                      <p class="mb-0"><strong>Updated At:</strong> <?= htmlspecialchars($lead['UPDATED_TIMESTAMP'] ?? 'N/A') ?></p>
-                  </div> 
+                      <p class="mb-2"><strong>Lead Name:</strong> <?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Phone:</strong> <?= htmlspecialchars($leadDetail['LEAD_PHONE'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Source:</strong> <?= htmlspecialchars($leadDetail['LEAD_SOURCE'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Product:</strong> <?= htmlspecialchars($leadDetail['LEAD_PRODUCT'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Remark:</strong> <?= htmlspecialchars($leadDetail['LEAD_REMARK'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Status:</strong> <?= htmlspecialchars($leadDetail['LEAD_STATUS'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Created By:</strong> <?= htmlspecialchars($leadDetail['CREATED_BY'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Updated By:</strong> <?= htmlspecialchars($leadDetail['UPDATED_BY'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Created At:</strong> <?= htmlspecialchars($leadDetail['CREATED_TIMESTAMP'] ?? 'N/A') ?></p>
+                      <p class="mb-0"><strong>Updated At:</strong> <?= htmlspecialchars($leadDetail['UPDATED_TIMESTAMP'] ?? 'N/A') ?></p>
+                  </div>  
 
                   <hr>
                 </div>
@@ -1550,38 +1551,6 @@ if ($lead) {
           $smallModal.addClass("d-none");
         }
       });
-
-
-      $('.lead-name').on('click', function (event) {
-        event.stopPropagation();
-        const leadId = $(this).data('lead-id'); // Assuming `lead_id` is stored in a data attribute
-        
-        $.ajax({
-            url: 'view_lead.php', // A separate PHP file for fetching details
-            type: 'GET',
-            data: { lead_id: leadId },
-            dataType: 'json',
-            success: function (response) {
-                if (response.success) {
-                    console.log(response.data); // Debugging in console
-                    $('#leadDetails').html(`
-                        <p><strong>Name:</strong> ${response.data.LEAD_NAME}</p>
-                        <p><strong>Phone:</strong> ${response.data.LEAD_PHONE}</p>
-                        <p><strong>Source:</strong> ${response.data.LEAD_SOURCE}</p>
-                        <p><strong>Status:</strong> ${response.data.LEAD_STATUS}</p>
-                    `);
-                } else {
-                    alert('Error fetching lead details');
-                }
-            },
-            error: function () {
-                alert('AJAX request failed');
-            }
-      });
-});
-
-
-
     });
   </script>
 

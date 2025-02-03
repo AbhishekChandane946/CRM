@@ -332,7 +332,7 @@ class LeadsManager
     
         try { 
             $dbX->where('ID', $lead_id);
-            $leadDetail = $dbX->getOne('leads'); 
+            $leadDetail = $dbX->get("leads");
             // $dbX->where('ROLE_ID', 1);
             $dbX->orderBy('ID', 'DESC');
             $users = $dbX->get('users', null, ['ID', 'USER_NAME']);
