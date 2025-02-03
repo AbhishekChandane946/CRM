@@ -357,7 +357,39 @@ class LeadsManager
             ];
         }
     }
-    
 
+
+
+    public function updateLeadStatus($leadId, $status)
+    {
+        global $dbX;
+    
+       
+        if (empty($leadId) || empty($status)) {
+            return ["success" => false, "message" => "Invalid input"];
+        }
+    
+        
+        $data = ["LEAD_STATUS" => $status];
+    
+        
+        if (!$dbX->ping()) {
+            return ["success" => false, "message" => "Database connection error"];
+        }
+    
+      
+        $dbX->where("ID", $leadId);
+    
+        if ($dbX->update("leads", $data)) {
+            return ["success" => true, "message" => "Lead status updated successfully"];
+        } else {
+             
+            $error = $dbX->getLastError();
+            return ["success" => false, "message" => "Failed to update lead status. Error: $error"];
+        }
+    }
+    
+    
+    
 
 }

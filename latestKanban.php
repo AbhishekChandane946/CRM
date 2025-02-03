@@ -846,6 +846,9 @@
 <script src="./dist/js/demo.min.js?1692870487" defer></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+
 <script>
     $(function () {
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -926,4 +929,12 @@
             }
         });
     }
+
+
+
+
+
+
+
+
 </script>

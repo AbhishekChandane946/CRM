@@ -10,17 +10,22 @@
   }
 
   $leadManager = new LeadsManager();
-  $leadDetail = $leadManager->getLeadById($leadId);
+  $lead = $leadManager->getLeadById($leadId);
 
 
-  if ( $leadDetail) { 
-    echo "<pre>";
-    print_r( $leadDetail);
-    echo "</pre>";
-  } else {
-    echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
-  }   
+  // if ($lead) { 
+  //   echo "<pre>";
+  //   print_r($lead);
+  //   echo "</pre>";
+  // } else {
+  //   echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
+  // }
 
+
+   
+ $leadDetail = $lead['leadDetail'][0];   
+
+ 
 
 
 ?>
@@ -870,48 +875,77 @@
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M3 12h4l3 8l4 -16l3 8h4" /></svg><span>Activity</span>
                     </button>
-                  </div>
- 
-                  <!-- Lead Details Section -->
-                  <h6 class="text-muted mb-3">About Lead</h6>
-                  <div>
-                      <p class="mb-2"><strong>Lead Name:</strong> <?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Phone:</strong> <?= htmlspecialchars($leadDetail['LEAD_PHONE'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Source:</strong> <?= htmlspecialchars($leadDetail['LEAD_SOURCE'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Product:</strong> <?= htmlspecialchars($leadDetail['LEAD_PRODUCT'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Remark:</strong> <?= htmlspecialchars($leadDetail['LEAD_REMARK'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Status:</strong> <?= htmlspecialchars($leadDetail['LEAD_STATUS'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Created By:</strong> <?= htmlspecialchars($leadDetail['CREATED_BY'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Updated By:</strong> <?= htmlspecialchars($leadDetail['UPDATED_BY'] ?? 'N/A') ?></p>
-                      <p class="mb-2"><strong>Created At:</strong> <?= htmlspecialchars($leadDetail['CREATED_TIMESTAMP'] ?? 'N/A') ?></p>
-                      <p class="mb-0"><strong>Updated At:</strong> <?= htmlspecialchars($leadDetail['UPDATED_TIMESTAMP'] ?? 'N/A') ?></p>
-                  </div>  
+                  </div> 
 
-                  <hr>
+                  
+                <!-- Lead Details Section -->
+                <h6 class="text-muted mb-3">About Lead</h6>
+                <div class="card-body">
+                    <div class="datagrid">
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Lead Name</div>
+                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?></div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Phone</div>
+                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['LEAD_PHONE'] ?? 'N/A') ?></div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Source</div>
+                            <div class="datagrid-content">
+                                <span class="badge bg-primary text-light"><?= htmlspecialchars($leadDetail['LEAD_SOURCE'] ?? 'N/A') ?></span>
+                            </div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Product</div>
+                            <div class="datagrid-content">
+                                <span class="badge bg-success text-light"><?= htmlspecialchars($leadDetail['LEAD_PRODUCT'] ?? 'N/A') ?></span>
+                            </div>
+                        </div>
+                        <div class="datagrid-item">
+                          <div class="datagrid-title">Remark</div>
+                          <div class="datagrid-content" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" 
+                              title="<?= htmlspecialchars($leadDetail['LEAD_REMARK'] ?? 'N/A') ?>">
+                              <?= htmlspecialchars(strlen($leadDetail['LEAD_REMARK'] ?? '') > 50 ? substr($leadDetail['LEAD_REMARK'], 0, 50) . '...' : $leadDetail['LEAD_REMARK'] ?? 'N/A') ?>
+                          </div>
+                       </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Status</div>
+                            <div class="datagrid-content">
+                                <span class="badge bg-secondary text-light"><?= htmlspecialchars($leadDetail['LEAD_STATUS'] ?? 'N/A') ?></span>
+                            </div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Created At</div>
+                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['CREATED_TIMESTAMP'] ?? 'N/A') ?></div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Updated At</div>
+                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['UPDATED_TIMESTAMP'] ?? 'N/A') ?></div>
+                        </div>
+                    </div>
+                </div>
+ 
+
                 </div>
               </div>
             </div>
 
             <div class="col-md-8 fixed-height">
-              <div class="card fixed-height">
-                <!-- Lead Follow-Up Process Bar -->
+              <div class="card fixed-height"> 
+                <!-- Lead Follow-Up STEP PROGRESS BAR -->
                 <div class="progress-bar-container">
-                  <!-- <div class="progress-badge active">New</div>
-                      <div class="progress-badge active">Follow Up</div>
-                      <div class="progress-badge inactive">Prospect</div>
-                      <div class="progress-badge inactive">Negotiation</div>
-                      <div class="progress-badge inactive">Won/Lost</div> -->
-
                   <ul class="step-bar md">
-                    <li class="complete"><a href="#">New</a></li>
-                    <li class="warning"><a href="#">Follow Up</a></li>
-                    <li class="danger"><a href="#">Prospect</a></li>
-                    <li class="active"><a href="#">Negotiation</a></li>
-                    <li class="disabled"><a href="#">Won/Lost</a></li>
+                    <li class="step" data-status="To Do"><a href="#">To Do</a></li>
+                    <li class="step" data-status="In Progress"><a href="#">In Progress</a></li>
+                    <li class="step" data-status="Pending"><a href="#">Pending</a></li>
+                    <li class="step" data-status="Hold"><a href="#">Hold</a></li>
+                    <li class="step" data-status="Done"><a href="#">Done</a></li>
+                    <li class="step" data-status="Completed"><a href="#">Completed</a></li>
+                    <li class="step" data-status="Lost"><a href="#">Lost</a></li>
                   </ul>
-
-
                 </div>
+
 
 
                 <!-- Tabs Section -->
@@ -1533,6 +1567,114 @@
   <!-- Libs JS -->
   <!-- Tabler Core -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+  <script>
+
+    
+$(document).ready(function () {
+// Define colors for each step
+const stepColors = {
+    "To Do": "rgb(255 223 93)",
+    "In Progress": "rgb(101 193 255)",
+    "Pending": "rgb(255 157 71)",
+    "Hold": "rgb(215 117 255)",
+    "Done": "rgb(49 255 136)",
+    "Completed": "rgb(68 223 29)",
+    "Lost": "rgb(255 82 64)"
+};
+
+// This is where we store the steps for reference
+const stepOrder = [
+    "To Do", "In Progress", "Pending", "Hold", "Done", "Completed", "Lost"
+];
+
+// This function is called to initialize the UI with the current lead status
+function prefillSteps(currentStatus) {
+    let currentStepIndex = stepOrder.indexOf(currentStatus);
+
+    // Loop through the steps and apply color based on the current status
+    $(".step").each(function (index) {
+        let stepName = $(this).text().trim(); // Get the text of the step (e.g., "To Do")
+        
+        // If the current index is greater than or equal to the step index, fill the step
+        if (stepOrder.indexOf(stepName) <= currentStepIndex) {
+            $(this).css("background", stepColors[stepName]); // Fill previous steps
+            $(this).removeClass('disabled'); // Enable previous steps
+        } else {
+            $(this).css("background", "#e0e0e0"); // Reset the background for future steps
+            $(this).addClass('disabled'); // Disable future steps
+        }
+    });
+}
+
+// Trigger when a step is clicked
+$(".step").click(function () {
+    let status = $(this).data("status");
+
+    // Reset all steps and clear colors
+    $(".step").css("background", "#e0e0e0").addClass('disabled').removeClass('active complete warning danger');
+
+    // Fill the current step and all previous steps
+    $(".step").each(function () {
+        let stepName = $(this).text().trim();
+        if (stepOrder.indexOf(stepName) <= stepOrder.indexOf(status)) {
+            $(this).css("background", stepColors[stepName]).removeClass('disabled').addClass('active');
+        }
+    });
+
+    // Save the selected status to Local Storage
+    localStorage.setItem('currentLeadStatus', status);
+
+    // Update the status in DB
+    updateStatusInDB(status);
+});
+
+// This function sends the updated status to the backend via AJAX
+function updateStatusInDB(status) {
+    let leadId = 1;  // Replace with actual lead ID
+
+    $.ajax({
+        url: "update_status.php",  // Your endpoint for updating status
+        type: "POST",
+        data: {
+            lead_id: leadId,
+            status: status
+        },
+        success: function (response) {
+            try {
+                let data = JSON.parse(response);
+                if (data.success) {
+                    console.log("Database Updated:", data.message);
+                } else {
+                    console.error("Error:", data.message);
+                }
+            } catch (error) {
+                console.error("Invalid JSON response:", error);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", error);
+        }
+    });
+}
+
+// Assuming you have the current status of the lead from the backend or Local Storage
+$(document).ready(function () {
+    // Try to get the current lead status from Local Storage, fallback to "To Do"
+    let currentLeadStatus = localStorage.getItem('currentLeadStatus') || "To Do";
+
+    // Prefill steps based on the current status of the lead
+    prefillSteps(currentLeadStatus);
+});
+
+});
+
+
+</script>
+
+
+
   <script>
     $(document).ready(function () {
       const $svgTrigger = $("#createNoteSvg");
