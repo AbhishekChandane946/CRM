@@ -1,4 +1,4 @@
-<?php
+<?php 
 // "test.php";
 require_once 'config-settings/index.php';
 

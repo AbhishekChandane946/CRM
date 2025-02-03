@@ -1,3 +1,32 @@
+ 
+<?php
+ 
+require_once 'config-settings/LeadsManager.php';
+ 
+$leadId = isset($_GET['lead_id']) ? intval($_GET['lead_id']) : 0;
+
+if ($leadId <= 0) {
+    echo "<p style='color:red;'>Invalid Lead ID.</p>";
+    exit;  
+}
+
+ 
+$leadManager = new LeadsManager();
+
+ 
+$lead = $leadManager->getLeadById($leadId);
+
+ 
+if ($lead) { 
+    echo "<pre>";
+    print_r($lead);
+    echo "</pre>";
+} else {
+    echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
+}
+?>
+
+
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -849,12 +878,17 @@
                   <!-- Lead Details Section -->
                   <h6 class="text-muted mb-3">About Lead</h6>
                   <div>
-                    <p class="mb-2"><strong>Lead Value:</strong> 2.0000</p>
-                    <p class="mb-2"><strong>Source:</strong> Web</p>
-                    <p class="mb-2"><strong>Type:</strong> New Business</p>
-                    <p class="mb-2"><strong>Sales Owner:</strong> Mr. A</p>
-                    <p class="mb-0"><strong>Expected Close Date:</strong> 2024-12-07</p>
-                  </div>
+                      <p class="mb-2"><strong>Lead Name:</strong> <?= htmlspecialchars($lead['LEAD_NAME'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Phone:</strong> <?= htmlspecialchars($lead['LEAD_PHONE'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Source:</strong> <?= htmlspecialchars($lead['LEAD_SOURCE'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Product:</strong> <?= htmlspecialchars($lead['LEAD_PRODUCT'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Remark:</strong> <?= htmlspecialchars($lead['LEAD_REMARK'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Status:</strong> <?= htmlspecialchars($lead['LEAD_STATUS'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Created By:</strong> <?= htmlspecialchars($lead['CREATED_BY'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Updated By:</strong> <?= htmlspecialchars($lead['UPDATED_BY'] ?? 'N/A') ?></p>
+                      <p class="mb-2"><strong>Created At:</strong> <?= htmlspecialchars($lead['CREATED_TIMESTAMP'] ?? 'N/A') ?></p>
+                      <p class="mb-0"><strong>Updated At:</strong> <?= htmlspecialchars($lead['UPDATED_TIMESTAMP'] ?? 'N/A') ?></p>
+                  </div> 
 
                   <hr>
                 </div>
@@ -1516,6 +1550,38 @@
           $smallModal.addClass("d-none");
         }
       });
+
+
+      $('.lead-name').on('click', function (event) {
+        event.stopPropagation();
+        const leadId = $(this).data('lead-id'); // Assuming `lead_id` is stored in a data attribute
+        
+        $.ajax({
+            url: 'view_lead.php', // A separate PHP file for fetching details
+            type: 'GET',
+            data: { lead_id: leadId },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    console.log(response.data); // Debugging in console
+                    $('#leadDetails').html(`
+                        <p><strong>Name:</strong> ${response.data.LEAD_NAME}</p>
+                        <p><strong>Phone:</strong> ${response.data.LEAD_PHONE}</p>
+                        <p><strong>Source:</strong> ${response.data.LEAD_SOURCE}</p>
+                        <p><strong>Status:</strong> ${response.data.LEAD_STATUS}</p>
+                    `);
+                } else {
+                    alert('Error fetching lead details');
+                }
+            },
+            error: function () {
+                alert('AJAX request failed');
+            }
+      });
+});
+
+
+
     });
   </script>
 

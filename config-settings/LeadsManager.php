@@ -316,4 +316,48 @@ class LeadsManager
         }
         return $response;
     }
+
+
+
+    // 
+    public function getLeadById($lead_id) {
+        global $dbX;
+    
+        if (empty($lead_id)) {
+            return [
+                'status' => 'error',
+                'message' => 'Missing lead_id parameter.'
+            ];
+        }
+    
+        try { 
+            $dbX->where('ID', $lead_id);
+            $leadDetail = $dbX->getOne('leads'); 
+            // $dbX->where('ROLE_ID', 1);
+            $dbX->orderBy('ID', 'DESC');
+            $users = $dbX->get('users', null, ['ID', 'USER_NAME']);
+    
+            if (!empty($leadDetail)) {
+                return [
+                    'status' => 'success',
+                    'message' => 'Lead details retrieved successfully.',
+                    'leadDetail' => $leadDetail,
+                    'users' => $users
+                ];
+            } else {
+                return [
+                    'status' => 'error',
+                    'message' => 'Lead data not found.'
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+    
+
+
 }

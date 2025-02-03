@@ -8,7 +8,7 @@ function getLeads(statuses){
         data: {action:'leadsmanager.getLeads'},
         dataType: 'json',
         success: function (response) {
-            console.log("response===>",response);
+            console.log("===============================================>",response);
             const tasks = response.tasks;
             const employees = response.employees;
             renderKanban($('#kanban'), statuses, tasks, employees);
@@ -246,7 +246,7 @@ function renderCard($container, lead) {
         .appendTo($nameRow)
         .on('click', function (event) {
             event.stopPropagation();
-            window.location.href = `add-lead.php?lead_id=${lead.lead_id}`;
+            window.location.href = `view_lead.php?lead_id=${lead.lead_id}`;
         });
 
     $('<div>')
