@@ -10,20 +10,16 @@
   }
 
   $leadManager = new LeadsManager();
-  $lead = $leadManager->getLeadById($leadId);
+  $leadDetail = $leadManager->getLeadById($leadId);
 
 
-  if ($lead) { 
+  if ( $leadDetail) { 
     echo "<pre>";
-    print_r($lead);
+    print_r( $leadDetail);
     echo "</pre>";
   } else {
     echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
-  }
-
-
-   
- $leadDetail = $lead['leadDetail'][0];   
+  }   
 
 
 
