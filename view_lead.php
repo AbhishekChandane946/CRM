@@ -13,13 +13,13 @@
   $lead = $leadManager->getLeadById($leadId);
 
 
-  if ($lead) { 
-    echo "<pre>";
-    print_r($lead);
-    echo "</pre>";
-  } else {
-    echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
-  }
+  // if ($lead) { 
+  //   echo "<pre>";
+  //   print_r($lead);
+  //   echo "</pre>";
+  // } else {
+  //   echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
+  // }
 
 
    
