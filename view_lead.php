@@ -23,9 +23,14 @@
 
 
    
- $leadDetail = $lead['leadDetail'][0];   
+  $leadDetail = $lead['leadDetail'][0];   
 
- 
+  
+  $leadStatus = $leadDetail['LEAD_STATUS']; 
+  
+  $statusSteps = ['To Do', 'In Progress', 'Pending', 'Hold', 'Done', 'Completed', 'Lost'];  
+  
+  $currentStep = array_search($leadStatus, $statusSteps);
 
 
 ?>
@@ -948,15 +953,17 @@
                       <div class="progress-badge inactive">Negotiation</div>
                       <div class="progress-badge inactive">Won/Lost</div> -->
 
-                      <ul class="step-bar md">
-                    <li class="complete"> To Do</li>
-                    <li class="warning">Inprogress </li>
-                    <li class="danger"> Pending</li>
-                    <li class="active"> Hold</li>
-                    <li class="disabled"> Done</li>
-                    <li class="disabled"> Completed</li>
-                    <li class="disabled"> Lost</li>
+                      <ul  class="step-bar">
+                      <?php foreach ($statusSteps as $index => $step) : 
+                          // Determine class based on progress
+                          $class = ($index < $currentStep) ? "complete" : (($index == $currentStep) ? "active" : "pending");
+                      ?>
+                          <li style="padding:1px;"  class="<?= $class; ?>">
+                              <a href="javascript:void(0)"><?= $step; ?></a>
+                          </li>
+                      <?php endforeach; ?>
                   </ul>
+
 
 
                 </div>

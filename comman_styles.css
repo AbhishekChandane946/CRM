@@ -367,64 +367,9 @@
         border-left: 4px solid #fff;
         top: 0;
       }
-      .step-bar > li:after {
-        transform: skew(-30deg);
-      }
-        .step-bar > li:before {
-          transform: skew(30deg);
-        }
-        .step-bar > li:first-child:before, .step-bar > li:first-child:after {
-          background: white;
-          content: none;
-        }
-        .step-bar > li.active {
-          background-color: #337ab7;
-        }
-        .step-bar > li.active:before, .step-bar > li.active:after {
-          background-color: #337ab7;
-        }
-        .step-bar > li.active:hover {
-          background-color: #285f8f;
-        }
-        .step-bar > li.active:hover:before, .step-bar > li.active:hover:after {
-          background-color: #285f8f;
-        }
-        .step-bar > li.complete {
-          background-color: #5cb85c;
-        }
-        .step-bar > li.complete:before, .step-bar > li.complete:after {
-          background-color: #5cb85c;
-        }
-        .step-bar > li.complete:hover {
-          background: #449d44;
-        }
-        .step-bar > li.complete:hover:before, .step-bar > li.complete:hover:after {
-          background-color: #449d44;
-        }
-        .step-bar > li.danger {
-          background-color: #d9534f;
-        }
-        .step-bar > li.danger:before, .step-bar > li.danger:after {
-          background-color: #d9534f;
-        }
-        .step-bar > li.danger:hover {
-          background: #c9302c;
-        }
-        .step-bar > li.danger:hover:before, .step-bar > li.danger:hover:after {
-          background-color: #c9302c;
-        }
-        .step-bar > li.warning {
-          background-color: #fd8c4a;
-        }
-        .step-bar > li.warning:before, .step-bar > li.warning:after {
-          background-color: #fd8c4a;
-        }
-        .step-bar > li.disabled {
-          pointer-events: none;
-        }
-        .step-bar > li.disabled > a {
-          color: #a2a2a2;
-        }
+   
+
+
         @media (min-width: 768px) {
           .step-bar > li {
             line-height: 32px;
