@@ -13,13 +13,13 @@
   $lead = $leadManager->getLeadById($leadId);
 
 
-  // if ($lead) { 
-  //   echo "<pre>";
-  //   print_r($lead);
-  //   echo "</pre>";
-  // } else {
-  //   echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
-  // }
+  if ($lead) { 
+    echo "<pre>";
+    print_r($lead);
+    echo "</pre>";
+  } else {
+    echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
+  }
 
 
    
@@ -815,7 +815,7 @@
               <div class="card shadow fixed-height">
                 <!-- Header Section -->
                 <div class="card-header d-flex justify-content-between align-items-center bg-white">
-                  <h3 class="mb-0"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?> </h3>
+                  <h3 id="leadId" class="mb-0"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?> </h3>
 
                   <!-- <span class="badge bg-danger text-white">11 Days</span> -->
                 </div>
@@ -883,6 +883,10 @@
                 <div class="card-body">
                     <div class="datagrid">
                         <div class="datagrid-item">
+                            <div class="datagrid-title">Lead Id</div>
+                            <input id="id" type="text" value="<?= htmlspecialchars($leadDetail['ID'] ?? 'N/A') ?>" >
+                        </div>
+                        <div class="datagrid-item">
                             <div class="datagrid-title">Lead Name</div>
                             <div class="datagrid-content"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?></div>
                         </div>
@@ -934,16 +938,27 @@
             <div class="col-md-8 fixed-height">
               <div class="card fixed-height"> 
                 <!-- Lead Follow-Up STEP PROGRESS BAR -->
+
+                
+                <!-- Lead Follow-Up Process Bar -->
                 <div class="progress-bar-container">
-                  <ul class="step-bar md">
-                    <li class="step" data-status="To Do"><a href="#">To Do</a></li>
-                    <li class="step" data-status="In Progress"><a href="#">In Progress</a></li>
-                    <li class="step" data-status="Pending"><a href="#">Pending</a></li>
-                    <li class="step" data-status="Hold"><a href="#">Hold</a></li>
-                    <li class="step" data-status="Done"><a href="#">Done</a></li>
-                    <li class="step" data-status="Completed"><a href="#">Completed</a></li>
-                    <li class="step" data-status="Lost"><a href="#">Lost</a></li>
+                  <!-- <div class="progress-badge active">New</div>
+                      <div class="progress-badge active">Follow Up</div>
+                      <div class="progress-badge inactive">Prospect</div>
+                      <div class="progress-badge inactive">Negotiation</div>
+                      <div class="progress-badge inactive">Won/Lost</div> -->
+
+                      <ul class="step-bar md">
+                    <li class="complete"> To Do</li>
+                    <li class="warning">Inprogress </li>
+                    <li class="danger"> Pending</li>
+                    <li class="active"> Hold</li>
+                    <li class="disabled"> Done</li>
+                    <li class="disabled"> Completed</li>
+                    <li class="disabled"> Lost</li>
                   </ul>
+
+
                 </div>
 
 
@@ -1569,108 +1584,105 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-  <script>
+  <script> 
+    
+  // $(document).ready(function () {
+  //   // Define colors for each step
+  //   const stepColors = {
+  //       "To Do": "rgb(255 223 93)",
+  //       "In Progress": "rgb(101 193 255)",
+  //       "Pending": "rgb(255 157 71)",
+  //       "Hold": "rgb(215 117 255)",
+  //       "Done": "rgb(49 255 136)",
+  //       "Completed": "rgb(68 223 29)",
+  //       "Lost": "rgb(255 82 64)"
+  //   };
 
     
-$(document).ready(function () {
-// Define colors for each step
-const stepColors = {
-    "To Do": "rgb(255 223 93)",
-    "In Progress": "rgb(101 193 255)",
-    "Pending": "rgb(255 157 71)",
-    "Hold": "rgb(215 117 255)",
-    "Done": "rgb(49 255 136)",
-    "Completed": "rgb(68 223 29)",
-    "Lost": "rgb(255 82 64)"
-};
+  //   const stepOrder = [
+  //       "To Do", "In Progress", "Pending", "Hold", "Done", "Completed", "Lost"
+  //   ];
 
-// This is where we store the steps for reference
-const stepOrder = [
-    "To Do", "In Progress", "Pending", "Hold", "Done", "Completed", "Lost"
-];
+  
+  //   function prefillSteps(currentStatus) {
+  //       let currentStepIndex = stepOrder.indexOf(currentStatus);
+      
+  //       $(".step").each(function (index) {
+  //           let stepName = $(this).text().trim(); 
+  //           //  alert(stepName); 
+  //           if (stepOrder.indexOf(stepName) <= currentStepIndex) {
+  //               $(this).css("background", stepColors[stepName]); // Fill previous steps
+  //               $(this).removeClass('disabled'); // Enable previous steps
+  //           } else {
+  //               $(this).css("background", "#e0e0e0"); // Reset the background for future steps
+  //               $(this).addClass('disabled'); // Disable future steps
+  //           }
+  //       });
+  //   }
 
-// This function is called to initialize the UI with the current lead status
-function prefillSteps(currentStatus) {
-    let currentStepIndex = stepOrder.indexOf(currentStatus);
+  //   // Trigger when a step is clicked
+  //   $(".step").click(function () {
+  //     var stepName2 = $(this).text();
+  //       alert('You Clicked on STEP ...' + stepName2);
+  //       let status = $(this).data("status"); 
+  //       // Reset all steps and clear colors
+  //       $(".step").css("background", "#e0e0e0").addClass('disabled').removeClass('active complete warning danger');
 
-    // Loop through the steps and apply color based on the current status
-    $(".step").each(function (index) {
-        let stepName = $(this).text().trim(); // Get the text of the step (e.g., "To Do")
-        
-        // If the current index is greater than or equal to the step index, fill the step
-        if (stepOrder.indexOf(stepName) <= currentStepIndex) {
-            $(this).css("background", stepColors[stepName]); // Fill previous steps
-            $(this).removeClass('disabled'); // Enable previous steps
-        } else {
-            $(this).css("background", "#e0e0e0"); // Reset the background for future steps
-            $(this).addClass('disabled'); // Disable future steps
-        }
-    });
-}
+  //       // Fill the current step and all previous steps
+  //       $(".step").each(function () {
+  //           let stepName = $(this).text().trim();
+  //           if (stepOrder.indexOf(stepName) <= stepOrder.indexOf(status)) {
+  //               $(this).css("background", stepColors[stepName]).removeClass('disabled').addClass('active');
+  //           }
+  //       });
 
-// Trigger when a step is clicked
-$(".step").click(function () {
-    let status = $(this).data("status");
+  //       // Save the selected status to Local Storage
+  //       localStorage.setItem('currentLeadStatus', status) ;
 
-    // Reset all steps and clear colors
-    $(".step").css("background", "#e0e0e0").addClass('disabled').removeClass('active complete warning danger');
+  //       // Update the status in DB
+  //       updateStatusInDB(status);
+  //   });
 
-    // Fill the current step and all previous steps
-    $(".step").each(function () {
-        let stepName = $(this).text().trim();
-        if (stepOrder.indexOf(stepName) <= stepOrder.indexOf(status)) {
-            $(this).css("background", stepColors[stepName]).removeClass('disabled').addClass('active');
-        }
-    });
+  //   // This function sends the updated status to the backend via AJAX
+  //   function updateStatusInDB(status) {
+  //     let leadId = $('#id').val();
+  //     alert(leadId);
+  //       $.ajax({
+  //           url: "update_status.php",  // Your endpoint for updating status
+  //           type: "POST",
+  //           data: {
+  //               lead_id: leadId,
+  //               status: status
+  //           },
+  //           success: function (response) {
+  //               try {
+  //                   let data = JSON.parse(response);
+  //                   if (data.success) {
+  //                       console.log("Database Updated:", data.message);
+  //                   } else {
+  //                       console.error("Error:", data.message);
+  //                   }
+  //               } catch (error) {
+  //                   console.error("Invalid JSON response:", error);
+  //               }
+  //           },
+  //           error: function (xhr, status, error) {
+  //               console.error("AJAX Error:", error);
+  //           }
+  //       });
+  //   }
 
-    // Save the selected status to Local Storage
-    localStorage.setItem('currentLeadStatus', status);
+  //   // Assuming you have the current status of the lead from the backend or Local Storage
+  //   $(document).ready(function () {
+  //       // Try to get the current lead status from Local Storage, fallback to "To Do"
+  //       let currentLeadStatus = localStorage.getItem('currentLeadStatus') || "To Do";
 
-    // Update the status in DB
-    updateStatusInDB(status);
-});
+  //       // Prefill steps based on the current status of the lead
+  //       prefillSteps(currentLeadStatus);
+  //   });
 
-// This function sends the updated status to the backend via AJAX
-function updateStatusInDB(status) {
-    let leadId = 1;  // Replace with actual lead ID
-
-    $.ajax({
-        url: "update_status.php",  // Your endpoint for updating status
-        type: "POST",
-        data: {
-            lead_id: leadId,
-            status: status
-        },
-        success: function (response) {
-            try {
-                let data = JSON.parse(response);
-                if (data.success) {
-                    console.log("Database Updated:", data.message);
-                } else {
-                    console.error("Error:", data.message);
-                }
-            } catch (error) {
-                console.error("Invalid JSON response:", error);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX Error:", error);
-        }
-    });
-}
-
-// Assuming you have the current status of the lead from the backend or Local Storage
-$(document).ready(function () {
-    // Try to get the current lead status from Local Storage, fallback to "To Do"
-    let currentLeadStatus = localStorage.getItem('currentLeadStatus') || "To Do";
-
-    // Prefill steps based on the current status of the lead
-    prefillSteps(currentLeadStatus);
-});
-
-});
-
-
+  // });
+ 
 </script>
 
 

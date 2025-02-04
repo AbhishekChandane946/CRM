@@ -312,83 +312,194 @@
 
         /* STEP PROGRESS BAR */
         .step-bar {
-          display: flex;
-          list-style: none;
-          padding: 0;
-          margin: 20px 0;
-          justify-content: center;
-      }
-      
-      .step-bar li {
           position: relative;
-          flex: 1;
+          list-style: none;
+          margin-top: 35px;
+          padding: 0;
           text-align: center;
-          font-size: 14px;
-          font-weight: 600;
-          padding: 10px 15px;
-          border-radius: 20px;
-          background: #e0e0e0;
-          transition: all 0.3s ease;
-      }
-      
-      .step-bar li:not(:last-child)::after {
-          content: "";
-          position: absolute;
           width: 100%;
-          height: 4px;
-          background: #ccc;
-          top: 50%;
-          left: 100%;
-          transform: translateY(-50%);
-          z-index: -1;
-      }
-      
-      .step-bar li a {
+          overflow: hidden;
+           
+          counter-reset: step-number;
+        }
+        @media (min-width: 768px) {
+          .step-bar {
+           
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            display: -moz-flex;
+            display: flex;
+            box-orient: horizontal;
+            box-direction: normal;
+            -moz-flex-direction: row;
+            flex-direction: row;
+          }
+        }
+        .step-bar > li {
+          width: 100%;
+          position: relative;
+          background-color: #eee;
+          font-size: 12px;
+        
+        }
+        @media (max-width: 767px) {
+          .step-bar > li {
+            padding: 10px;
+            margin-bottom: 5px;
+          }
+        }
+        .step-bar > li > a {
+          transition: none !important;
           text-decoration: none;
-          color: #333;
           display: block;
-          padding: 5px 1px;
-      }
-      
-      .step-bar li.complete {
-          background: #4CAF50;
           color: white;
+        }
+        .step-bar > li > a:before {
+          counter-increment: step-number;
+          content: counter(step-number) ". ";
+        }
+      .step-bar > li:before, .step-bar > li:after {
+        position: absolute;
+        display: block;
+        content: "";
+        background-color: #eee;
+        border-left: 4px solid #fff;
+        top: 0;
       }
-      
-      .step-bar li.in-progress {
-          background: #ff9800;
-          color: white;
+      .step-bar > li:after {
+        transform: skew(-30deg);
       }
-      
-      .step-bar li.pending {
-          background: #f44336;
-          color: white;
-      }
-      
-      .step-bar li.hold {
-          background: #607d8b;
-          color: white;
-      }
-      
-      .step-bar li.done {
-          background: #2196F3;
-          color: white;
-      }
-      
-      .step-bar li.completed {
-          background: #673ab7;
-          color: white;
-      }
-      
-      .step-bar li.lost {
-          background: #9e9e9e;
-          color: white;
-      }
-      
-      .step-bar li:hover {
-          transform: scale(1.05);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+        .step-bar > li:before {
+          transform: skew(30deg);
+        }
+        .step-bar > li:first-child:before, .step-bar > li:first-child:after {
+          background: white;
+          content: none;
+        }
+        .step-bar > li.active {
+          background-color: #337ab7;
+        }
+        .step-bar > li.active:before, .step-bar > li.active:after {
+          background-color: #337ab7;
+        }
+        .step-bar > li.active:hover {
+          background-color: #285f8f;
+        }
+        .step-bar > li.active:hover:before, .step-bar > li.active:hover:after {
+          background-color: #285f8f;
+        }
+        .step-bar > li.complete {
+          background-color: #5cb85c;
+        }
+        .step-bar > li.complete:before, .step-bar > li.complete:after {
+          background-color: #5cb85c;
+        }
+        .step-bar > li.complete:hover {
+          background: #449d44;
+        }
+        .step-bar > li.complete:hover:before, .step-bar > li.complete:hover:after {
+          background-color: #449d44;
+        }
+        .step-bar > li.danger {
+          background-color: #d9534f;
+        }
+        .step-bar > li.danger:before, .step-bar > li.danger:after {
+          background-color: #d9534f;
+        }
+        .step-bar > li.danger:hover {
+          background: #c9302c;
+        }
+        .step-bar > li.danger:hover:before, .step-bar > li.danger:hover:after {
+          background-color: #c9302c;
+        }
+        .step-bar > li.warning {
+          background-color: #fd8c4a;
+        }
+        .step-bar > li.warning:before, .step-bar > li.warning:after {
+          background-color: #fd8c4a;
+        }
+        .step-bar > li.disabled {
+          pointer-events: none;
+        }
+        .step-bar > li.disabled > a {
+          color: #a2a2a2;
+        }
+        @media (min-width: 768px) {
+          .step-bar > li {
+            line-height: 32px;
+            padding: 0 24px 0 16px;
+          }
+          .step-bar > li:before, .step-bar > li:after {
+            left: -8px;
+            width: 16px;
+            height: 16px;
+          }
+          .step-bar > li:after {
+            top: 16px;
+          }
+        }
+        @media (min-width: 768px) and (min-width: 768px) {
+          .step-bar > li:first-child {
+            padding-left: 16px;
+          }
+        }
+        @media (min-width: 768px) {
+          .step-bar.sm > li {
+          
+            padding: 0 18px 0 12px;
+          }
+          .step-bar.sm > li:before, .step-bar.sm > li:after {
+            left: -6px;
+            width: 12px;
+            height: 12px;
+          }
+          .step-bar.sm > li:after {
+            top: 12px;
+          }
+        }
+        @media (min-width: 768px) and (min-width: 768px) {
+          .step-bar.sm > li:first-child {
+            padding-left: 12px;
+          }
+        }
+        .step-bar.sm > li {
+          font-size: 12px;
+        }
+        @media (min-width: 768px) {
+          .step-bar.md > li {
+            line-height: 40px;
+            padding: 0 30px 0 20px;
+          }
+          .step-bar.md > li:before, .step-bar.md > li:after {
+            left: -10px;
+            width: 20px;
+            height: 20px;
+          }
+          .step-bar.md > li:after {
+            top: 20px;
+          }
+        }
+        @media (min-width: 768px) and (min-width: 768px) {
+          .step-bar.md > li:first-child {
+            padding-left: 20px;
+          }
+        }
+        .step-bar.md > li {
+          font-size: 14px;
+        }
+        @media (min-width: 768px) {
+          .step-bar.lg > li {
+            line-height: 80px;
+            padding: 0 60px 0 40px;
+          }
+          .step-bar.lg > li:before, .step-bar.lg > li:after {
+            left: -20px;
+            width: 40px;
+            height: 40px;
+          }
+        
+        } 
       
         /* STEP PROGRESS BAR */
 
