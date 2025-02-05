@@ -36,9 +36,7 @@
     'LIVE',
     'OTHER'
   ];
-  
    
-  // Determine the progress level (index)
   $currentStep = array_search($leadStatus, $statusSteps);
 
 ?>
@@ -999,15 +997,14 @@
                       <div class="progress-badge inactive">Won/Lost</div> -->
 
                       <ul class="step-bar">
-                          <?php foreach ($statusSteps as $index => $step) : 
-                              // Determine class based on progress
+                          <?php foreach ($statusSteps as $index => $step) :  
                               $class = ($index < $currentStep) ? "complete" : (($index == $currentStep) ? "active" : "pending");
                           ?>
                               <li class="<?= $class; ?>">
                                   <a href="javascript:void(0)"><?= $step; ?></a>
                               </li>
                           <?php endforeach; ?>
-                    </ul>
+                      </ul>
 
 
 
