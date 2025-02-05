@@ -475,243 +475,243 @@
           </div>
         </footer>
 
-<!-- Call Now Modal --> 
-<div class="modal fade" id="callNowModal" tabindex="-1" aria-labelledby="callNowModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-4 call-now-modal">
-      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body">
-        <div class="call-icon mb-3">
-          <i class="fas fa-phone-alt"></i>
-          <p><strong>Lead ID:</strong> <span id="callNowLeadId"></span></p>
-        </div>
-        <h5 class="modal-title mb-2">9960929067</h5>
-        <p><strong>Lead ID:</strong> <span id="callNowLeadId"></span></p>
-        <p class="modal-description mb-4">We’re here to help you with your experience.</p>
-        <button type="button" class="btn quick-action-btn">CALL NOW</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-4 call-now-modal">
-      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body">
-        <div class="call-icon mb-3">
-          <i class="fas fa-sms"></i>
-          <p><strong>Lead ID:</strong> <span id="sendSmsLeadId"></span></p>
-        </div>
-        <div class="mb-3">
-          <label>Select Template</label>
-          <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
-            <label class="form-selectgroup-item flex-fill">
-              <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
-              <div class="form-selectgroup-label d-flex align-items-center p-3">
-                <div class="me-3">
-                  <span class="form-selectgroup-check"></span>
+        <!-- Call Now Modal --> 
+        <div class="modal fade" id="callNowModal" tabindex="-1" aria-labelledby="callNowModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4 call-now-modal">
+              <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-body">
+                <div class="call-icon mb-3">
+                  <i class="fas fa-phone-alt"></i>
+                  <p><strong>Lead ID:</strong> <span id="callNowLeadId"></span></p>
                 </div>
-                <div>
-                    <strong>
-                      "Thank you for reaching out! We've received your inquiry and 
-                      will be contacting you shortly to discuss your needs."
-                    </strong>
-                </div>
+                <h5 class="modal-title mb-2">9960929067</h5>
+                <p><strong>Lead ID:</strong> <span id="callNowLeadId"></span></p>
+                <p class="modal-description mb-4">We’re here to help you with your experience.</p>
+                <button type="button" class="btn quick-action-btn">CALL NOW</button>
               </div>
-            </label>
-            <label class="form-selectgroup-item flex-fill">
-              <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
-              <div class="form-selectgroup-label d-flex align-items-center p-3">
-                <div class="me-3">
-                  <span class="form-selectgroup-check"></span>
-                </div>
-                <div>
-                    <strong>
-                      "Thank you for reaching out! We've received your inquiry and 
-                      will be contacting you shortly to discuss your needs."
-                    </strong>
-                </div>
-              </div>
-            </label>
-            <label class="form-selectgroup-item flex-fill">
-              <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
-              <div class="form-selectgroup-label d-flex align-items-center p-3">
-                <div class="me-3">
-                  <span class="form-selectgroup-check"></span>
-                </div>
-                <div>
-                    <strong>
-                      "Thank you for reaching out! We've received your inquiry and 
-                      will be contacting you shortly to discuss your needs."
-                    </strong>
-                </div>
-              </div>
-            </label>
+            </div>
           </div>
         </div>
-        <p class="modal-description mb-4"> SMS Will Send To : +91 123456789</p>
-        <button type="button" class="btn quick-action-btn">Send</button>
-      </div>
-    </div>
-  </div>
-</div> 
-<!-- Send SMS Modal -->
 
-<!-- Meeting Modal --> 
-<div class="modal fade" id="meetingModal" tabindex="-1" aria-labelledby="meetingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-4 call-now-modal">
-      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body">
-        <div class="call-icon mb-3">
-          <i class="fas fa-calendar"></i>
-          <p><strong>Lead ID:</strong> <span id="meetingLeadId"></span></p>
-        </div>
-        <h6 class="modal-title mb-2">Meeting With  : <span>Abhishek Chandane</span> </h6>
-        <h6 class="modal-title mb-2">Meeting Date : <span> 17-01-2025 </span></h6>
-        <h6 class="modal-title mb-2">Meeting Time : 05:33:43 PM</h6>
-        <h6 class="modal-title mb-2">Meeting Type : Interview, Discussion, Presentation</h6>
-        <p class="modal-description mb-4">We’re here to help you with your experience.</p>
-        <button type="button" class="btn quick-action-btn">Meeting</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Meeting Modal -->
-
-<!-- Edit Modal -->
-<div class="modal modal-blur fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">Lead Details</h5>
-        <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="card">
-          <!-- Sticky Tab Header -->
-          <div class="card-header sticky-header">
-            <ul class="nav nav-tabs" id="myTabs" role="tablist">
-              <li class="nav-item">
-                <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">Lead Data</a>
-              </li>
-              <li class="nav-item">
-                <a href="#tabs-profile-8" class="nav-link" data-bs-toggle="tab">Lead Follow up</a>
-              </li>
-              <li class="nav-item">
-                <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">Notes</a>
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Scrollable Tab Content -->
-          <div class="card-body content-scrollable">
-            <div class="tab-content">
-              <div class="tab-pane fade show active" id="tabs-home-8">
-                <h4>Lead Info</h4>
-                <div class="row">
-                  <div id="leadDetailsList"></div>
+        <div class="modal fade" id="sendSmsModal" tabindex="-1" aria-labelledby="sendSmsModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4 call-now-modal">
+              <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-body">
+                <div class="call-icon mb-3">
+                  <i class="fas fa-sms"></i>
+                  <p><strong>Lead ID:</strong> <span id="sendSmsLeadId"></span></p>
                 </div>
+                <div class="mb-3">
+                  <label>Select Template</label>
+                  <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+                    <label class="form-selectgroup-item flex-fill">
+                      <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
+                      <div class="form-selectgroup-label d-flex align-items-center p-3">
+                        <div class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </div>
+                        <div>
+                            <strong>
+                              "Thank you for reaching out! We've received your inquiry and 
+                              will be contacting you shortly to discuss your needs."
+                            </strong>
+                        </div>
+                      </div>
+                    </label>
+                    <label class="form-selectgroup-item flex-fill">
+                      <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
+                      <div class="form-selectgroup-label d-flex align-items-center p-3">
+                        <div class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </div>
+                        <div>
+                            <strong>
+                              "Thank you for reaching out! We've received your inquiry and 
+                              will be contacting you shortly to discuss your needs."
+                            </strong>
+                        </div>
+                      </div>
+                    </label>
+                    <label class="form-selectgroup-item flex-fill">
+                      <input type="radio" name="form-payment" value="visa" class="form-selectgroup-input">
+                      <div class="form-selectgroup-label d-flex align-items-center p-3">
+                        <div class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </div>
+                        <div>
+                            <strong>
+                              "Thank you for reaching out! We've received your inquiry and 
+                              will be contacting you shortly to discuss your needs."
+                            </strong>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <p class="modal-description mb-4"> SMS Will Send To : +91 123456789</p>
+                <button type="button" class="btn quick-action-btn">Send</button>
               </div>
+            </div>
+          </div>
+        </div> 
+        <!-- Send SMS Modal -->
 
-              <style>
-                .custom-tab-container {
-                  width: 250px;
-                  border-radius: 15px;
-                  background: linear-gradient(135deg, #eef1f6, #ffffff);
-              
-                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-              }
+        <!-- Meeting Modal --> 
+        <div class="modal fade" id="meetingModal" tabindex="-1" aria-labelledby="meetingModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4 call-now-modal">
+              <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-body">
+                <div class="call-icon mb-3">
+                  <i class="fas fa-calendar"></i>
+                  <p><strong>Lead ID:</strong> <span id="meetingLeadId"></span></p>
+                </div>
+                <h6 class="modal-title mb-2">Meeting With  : <span>Abhishek Chandane</span> </h6>
+                <h6 class="modal-title mb-2">Meeting Date : <span> 17-01-2025 </span></h6>
+                <h6 class="modal-title mb-2">Meeting Time : 05:33:43 PM</h6>
+                <h6 class="modal-title mb-2">Meeting Type : Interview, Discussion, Presentation</h6>
+                <p class="modal-description mb-4">We’re here to help you with your experience.</p>
+                <button type="button" class="btn quick-action-btn">Meeting</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Meeting Modal -->
 
-              .custom-tab-list .nav-link {
-                  font-size: 16px;
-                  color: #333;
-                  text-align: left;
-                  border-radius: 10px;
-                  padding: 10px 15px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  transition: 0.3s;
-              }
+        <!-- Edit Modal -->
+        <div class="modal modal-blur fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Lead Details</h5>
+                <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card">
+                  <!-- Sticky Tab Header -->
+                  <div class="card-header sticky-header">
+                    <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                      <li class="nav-item">
+                        <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">Lead Data</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#tabs-profile-8" class="nav-link" data-bs-toggle="tab">Lead Follow up</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">Notes</a>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <!-- Scrollable Tab Content -->
+                  <div class="card-body content-scrollable">
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="tabs-home-8">
+                        <h4>Lead Info</h4>
+                        <div class="row">
+                          <div id="leadDetailsList"></div>
+                        </div>
+                      </div>
 
-              .custom-tab-list .nav-link.active {
-                  background: #574bff;
-                  color: #fff;
-                  font-weight: 500;
-              }
+                      <style>
+                        .custom-tab-container {
+                          width: 250px;
+                          border-radius: 15px;
+                          background: linear-gradient(135deg, #eef1f6, #ffffff);
+                      
+                          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                      }
 
-              .custom-tab-list .nav-link:hover {
-                  background: rgba(87, 75, 255, 0.1);
-              }
+                      .custom-tab-list .nav-link {
+                          font-size: 16px;
+                          color: #333;
+                          text-align: left;
+                          border-radius: 10px;
+                          padding: 10px 15px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: space-between;
+                          transition: 0.3s;
+                      }
 
-              .custom-tab-list .badge {
-                  background: #ff3b30;
-                  color: white;
-                  font-size: 12px;
-                  padding: 4px 8px;
-                  border-radius: 20px;
-                  font-weight: bold;
-              }
+                      .custom-tab-list .nav-link.active {
+                          background: #574bff;
+                          color: #fff;
+                          font-weight: 500;
+                      }
 
-              </style>
-              
-              <div class="d-flex align-items-start " >
-                  <div class="custom-tab-container" style="margin-right: 12px;">
-                    <div class="p-3 nav flex-column nav-pills me-3 custom-tab-list" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button class="nav-link active" id="v-pills-follow1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow1" type="button" role="tab" aria-controls="v-pills-follow1" aria-selected="true">
-                            Follow Up 1 
-                        </button>
-                        <button class="nav-link" id="v-pills-follow2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow2" type="button" role="tab" aria-controls="v-pills-follow2" aria-selected="false">
-                            Follow Up 2
-                        </button>
-                        <button class="nav-link" id="v-pills-follow3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow3" type="button" role="tab" aria-controls="v-pills-follow3" aria-selected="false">
-                            Follow Up 3
-                        </button>
-                        <button class="nav-link" id="v-pills-follow4-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow4" type="button" role="tab" aria-controls="v-pills-follow4" aria-selected="false">
-                            Follow Up 4
-                        </button>
-                        <button class="nav-link" id="v-pills-follow5-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow5" type="button" role="tab" aria-controls="v-pills-follow5" aria-selected="false">
-                            Follow Up 5
-                        </button>
+                      .custom-tab-list .nav-link:hover {
+                          background: rgba(87, 75, 255, 0.1);
+                      }
+
+                      .custom-tab-list .badge {
+                          background: #ff3b30;
+                          color: white;
+                          font-size: 12px;
+                          padding: 4px 8px;
+                          border-radius: 20px;
+                          font-weight: bold;
+                      }
+
+                      </style>
+                      
+                      <div class="d-flex align-items-start " >
+                          <div class="custom-tab-container" style="margin-right: 12px;">
+                            <div class="p-3 nav flex-column nav-pills me-3 custom-tab-list" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <button class="nav-link active" id="v-pills-follow1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow1" type="button" role="tab" aria-controls="v-pills-follow1" aria-selected="true">
+                                    Follow Up 1 
+                                </button>
+                                <button class="nav-link" id="v-pills-follow2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow2" type="button" role="tab" aria-controls="v-pills-follow2" aria-selected="false">
+                                    Follow Up 2
+                                </button>
+                                <button class="nav-link" id="v-pills-follow3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow3" type="button" role="tab" aria-controls="v-pills-follow3" aria-selected="false">
+                                    Follow Up 3
+                                </button>
+                                <button class="nav-link" id="v-pills-follow4-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow4" type="button" role="tab" aria-controls="v-pills-follow4" aria-selected="false">
+                                    Follow Up 4
+                                </button>
+                                <button class="nav-link" id="v-pills-follow5-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow5" type="button" role="tab" aria-controls="v-pills-follow5" aria-selected="false">
+                                    Follow Up 5
+                                </button>
+                            </div>
+                          </div>
+                    
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-follow1" role="tabpanel" aria-labelledby="v-pills-follow1-tab"></div>
+                            <div class="tab-pane fade" id="v-pills-follow2" role="tabpanel" aria-labelledby="v-pills-follow2-tab"></div>
+                            <div class="tab-pane fade" id="v-pills-follow3" role="tabpanel" aria-labelledby="v-pills-follow3-tab"></div>
+                            <div class="tab-pane fade" id="v-pills-follow4" role="tabpanel" aria-labelledby="v-pills-follow4-tab"></div>
+                            <div class="tab-pane fade" id="v-pills-follow5" role="tabpanel" aria-labelledby="v-pills-follow5-tab"></div>
+                        </div>
+                    </div>
+                    
+
+                      <div class="tab-pane fade" id="tabs-activity-8">
+                        <div class="mb-3">
+                          <div class="form-group mb-2">
+                            <select class="selectpicker form-control" data-live-search="true" data-live-search="true"
+                                data-actions-box="true" data-size="5" multiple name="user_id[]" id="user_id"
+                                placeholder="Select Users">
+
+                            </select>
+                        </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-            
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-follow1" role="tabpanel" aria-labelledby="v-pills-follow1-tab"></div>
-                    <div class="tab-pane fade" id="v-pills-follow2" role="tabpanel" aria-labelledby="v-pills-follow2-tab"></div>
-                    <div class="tab-pane fade" id="v-pills-follow3" role="tabpanel" aria-labelledby="v-pills-follow3-tab"></div>
-                    <div class="tab-pane fade" id="v-pills-follow4" role="tabpanel" aria-labelledby="v-pills-follow4-tab"></div>
-                    <div class="tab-pane fade" id="v-pills-follow5" role="tabpanel" aria-labelledby="v-pills-follow5-tab"></div>
                 </div>
-            </div>
-            
+              </div>
 
-              <div class="tab-pane fade" id="tabs-activity-8">
-                <div class="mb-3">
-                  <div class="form-group mb-2">
-                    <select class="selectpicker form-control" data-live-search="true" data-live-search="true"
-                        data-actions-box="true" data-size="5" multiple name="user_id[]" id="user_id"
-                        placeholder="Select Users">
-
-                    </select>
-                </div>
-                </div>
+              <div class="modal-footer">
+                <input type="hidden" name="leadId" id="leadId" />
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Update Lead</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="modal-footer">
-        <input type="hidden" name="leadId" id="leadId" />
-        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Update Lead</button>
-      </div>
-    </div>
-  </div>
-</div>
 <style>
     /* Custom border with a title */
     .bordered-section { 
