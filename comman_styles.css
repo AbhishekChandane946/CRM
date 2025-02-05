@@ -439,7 +439,7 @@
 
         @media (min-width: 768px) {
           .step-bar > li {
-            line-height: 32px;
+            line-height: 14px;
             padding: 0 24px 0 16px;
           }
           .step-bar > li:before, .step-bar > li:after {

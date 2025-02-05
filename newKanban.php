@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-
+    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.min.css " rel="stylesheet">
     <script>
         window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery.min.js"%3E%3C/script%3E'))
     </script>
@@ -27,6 +27,18 @@
 <style>
     ::ng-deep .dx-sortable {
         display: block
+    }
+
+    .dx-theme-material-typography h2 {
+        font-weight: 700 !important;
+        font-size: 16px !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .swal2-popup {
+        /* width: 250px; */
+        padding: 0px;
+        font-size: 10px;
     }
 
     .highlight-target {
@@ -841,10 +853,11 @@
 <script src="./dist/js/demo.min.js?1692870487" defer></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.all.min.js "></script>
 <script>
     $(function () {
-    $('[data-bs-toggle="tooltip"]').tooltip();
-});
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
     $('.selectpicker').selectpicker();
     loadUsers(selectedUserIds = '');
 
@@ -862,7 +875,7 @@
                 var selectedIds = selectedUserIds.split(',').map(id => id.trim());
                 $.each(users, function (index, user) {
                     var selected = selectedIds.includes(user.ID.toString()) ? 'selected' : '';
-                    html += '<option value="' + user.ID + '" ' + selected + '>' + user.USER_NAME +
+                    html += '<option value="' + user.ID + '" ' + selected + '>' + user.ADMIN_NAME +
                         '</option>';
                     console.log('selected===>', selected);
                 });
@@ -876,7 +889,7 @@
     $("#leadAssignUserForm").submit(function (e) {
         e.preventDefault();
         var form = $(this).serialize();
-        console.log('form',form);
+        console.log('form', form);
         $.ajax({
             type: "POST",
             url: "api.php",
@@ -886,11 +899,24 @@
                 $("#leadAssignUserForm")[0].reset();
                 $('#leadAssignUserModal').modal('hide');
                 refreshKanbanBoard();
-                alert(data.message);
+                Swal.fire({
+                    title: response.message,
+                    icon: "success",
+                    draggable: true,
+                    // customClass: {
+                    //     popup: 'small-swal'
+                    // }
+                });
             },
             error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
+                Swal.fire({
+                    title: response.message,
+                    icon: "error",
+                    draggable: true,
+                    customClass: {
+                        popup: 'small-swal'
+                    }
+                });
             },
         });
 
@@ -901,24 +927,34 @@
     }
 
     function setBackgroundColor() {
-        $('.list-title').each(function () {
-            var titleText = $(this).text();
-            var titleText = $(this).text().trim();
-            if (titleText === 'To Do') {
-                $(this).css('background-color', '#f1c40f');
-            } else if (titleText === 'In Progress') {
-                $(this).css('background-color', '#3498db');
-            } else if (titleText === 'Pending') {
-                $(this).css('background-color', '#e67e22');
-            } else if (titleText === 'Hold') {
-                $(this).css('background-color', '#9b59b6');
-            } else if (titleText === 'Done') {
-                $(this).css('background-color', '#2ecc71');
-            } else if (titleText === 'Completed') {
-                $(this).css('background-color', '#27ae60');
-            } else if (titleText === 'Lost') {
-                $(this).css('background-color', '#e74c3c');
-            }
+    $('.list-title').each(function () {
+        var titleText = $(this).text().trim(); 
+        var formattedText = titleText.replace(/_/g, ' '); 
+        formattedText = formattedText.toLowerCase().replace(/\b\w/g, function (char) {
+            return char.toUpperCase();
         });
-    }
+        $(this).html(formattedText);
+        var colors = {
+            "New": "#F1C40F", 
+            "Contacted": "#3498DB", 
+            "Qualified": "#E67E22", 
+            "Opportunity": "#9B59B6", 
+            "Demo Scheduled": "#2ECC71", 
+            "Demo Done": "#27AE60", 
+            "In Negotiation": "#E74C3C", 
+            "Converted": "#16A085", 
+            "Disqualified": "#E74C3C", 
+            "Lost": "#95A5A6", 
+            "Live": "#1ABC9C", 
+            "Other": "#BDC3C7" 
+        };
+
+        if (colors.hasOwnProperty(formattedText)) {
+            $(this).css('background-color', colors[formattedText]);
+        }
+    });
+}
+
+
+  
 </script>

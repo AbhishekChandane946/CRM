@@ -12,28 +12,37 @@
   $leadManager = new LeadsManager();
   $lead = $leadManager->getLeadById($leadId);
 
+  if ($lead['status'] !== 'success') {
+      echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
+      exit;
+  }
 
-  // if ($lead) { 
-  //   echo "<pre>";
-  //   print_r($lead);
-  //   echo "</pre>";
-  // } else {
-  //   echo "<p style='color:red;'>No lead found with ID: {$leadId}</p>";
-  // }
+  $leadDetail = $lead['leadDetail'];
 
+  $leadStatus = $leadDetail['STATUS'];  
 
+  // echo "<script>alert('$leadStatus')</script>";
+
+  $statusSteps = [
+    'New',
+    'CONTACTED',
+    'QUALIFIED',
+    'OPPORTUNITY',
+    'DEMO_SCHEDULED',
+    'IN NEGOTIATION',
+    'CONVERTED',
+    'DISQUALIFIED',
+    'LOST',
+    'LIVE',
+    'OTHER'
+  ];
+  
    
-  $leadDetail = $lead['leadDetail'][0];   
-
-  
-  $leadStatus = $leadDetail['LEAD_STATUS']; 
-  
-  $statusSteps = ['To Do', 'In Progress', 'Pending', 'Hold', 'Done', 'Completed', 'Lost'];  
-  
+  // Determine the progress level (index)
   $currentStep = array_search($leadStatus, $statusSteps);
 
-
 ?>
+
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -816,11 +825,11 @@
 
           <div class="row mt-3">
             <!-- Left Side: Lead Details -->
-            <div class="col-md-4 fixed-height">
+            <div class="col-md-12 fixed-height">
               <div class="card shadow fixed-height">
                 <!-- Header Section -->
                 <div class="card-header d-flex justify-content-between align-items-center bg-white">
-                  <h3 id="leadId" class="mb-0"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?> </h3>
+                  <h3 id="leadId" class="mb-0"><?= htmlspecialchars($leadDetail['PRIMARY_NAME'] ?? 'N/A') ?> </h3>
 
                   <!-- <span class="badge bg-danger text-white">11 Days</span> -->
                 </div>
@@ -886,53 +895,89 @@
                 <!-- Lead Details Section -->
                 <h6 class="text-muted mb-3">About Lead</h6>
                 <div class="card-body">
-                    <div class="datagrid">
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Lead Id</div>
-                            <input id="id" type="text" value="<?= htmlspecialchars($leadDetail['ID'] ?? 'N/A') ?>" >
-                        </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Lead Name</div>
-                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['LEAD_NAME'] ?? 'N/A') ?></div>
-                        </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Phone</div>
-                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['LEAD_PHONE'] ?? 'N/A') ?></div>
-                        </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Source</div>
-                            <div class="datagrid-content">
-                                <span class="badge bg-primary text-light"><?= htmlspecialchars($leadDetail['LEAD_SOURCE'] ?? 'N/A') ?></span>
-                            </div>
-                        </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Product</div>
-                            <div class="datagrid-content">
-                                <span class="badge bg-success text-light"><?= htmlspecialchars($leadDetail['LEAD_PRODUCT'] ?? 'N/A') ?></span>
-                            </div>
-                        </div>
-                        <div class="datagrid-item">
-                          <div class="datagrid-title">Remark</div>
-                          <div class="datagrid-content" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" 
-                              title="<?= htmlspecialchars($leadDetail['LEAD_REMARK'] ?? 'N/A') ?>">
-                              <?= htmlspecialchars(strlen($leadDetail['LEAD_REMARK'] ?? '') > 50 ? substr($leadDetail['LEAD_REMARK'], 0, 50) . '...' : $leadDetail['LEAD_REMARK'] ?? 'N/A') ?>
-                          </div>
-                       </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Status</div>
-                            <div class="datagrid-content">
-                                <span class="badge bg-secondary text-light"><?= htmlspecialchars($leadDetail['LEAD_STATUS'] ?? 'N/A') ?></span>
-                            </div>
-                        </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Created At</div>
-                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['CREATED_TIMESTAMP'] ?? 'N/A') ?></div>
-                        </div>
-                        <div class="datagrid-item">
-                            <div class="datagrid-title">Updated At</div>
-                            <div class="datagrid-content"><?= htmlspecialchars($leadDetail['UPDATED_TIMESTAMP'] ?? 'N/A') ?></div>
-                        </div>
-                    </div>
+
+                <div class="datagrid">
+    <div class="datagrid-item">
+        <div class="datagrid-title">Lead ID</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['ID'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">System ID</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['SYSTEM_ID'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Source Lead ID</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['SOURCE_LEAD_ID'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Product</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['PRODUCT'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Source</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['SOURCE'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Primary Phone</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['PRIMARY_PHONE'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Primary Name</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['PRIMARY_NAME'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Primary Email</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['PRIMARY_EMAIL'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Primary Text</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['PRIMARY_TEXT'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">First Follow-up Date</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['FIRST_FOLLOWUP_DATE'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Second Follow-up Date</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['SECOND_FOLLOWUP_DATE'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Third Follow-up Date</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['THREE_FOLLOWUP_DATE'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Status</div>
+        <div class="datagrid-content">
+            <span class="badge bg-secondary text-light"><?= htmlspecialchars($leadDetail['STATUS'] ?? 'N/A') ?></span>
+        </div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Score</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['SCORE'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Org Owner ID</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['ORG_OWNER_ID'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Current Owner ID</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['CURRENT_OWNER_ID'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Lead Store ID</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['LEAD_STORE_ID'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Created At</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['CREATED_AT'] ?? 'N/A') ?></div>
+    </div>
+    <div class="datagrid-item">
+        <div class="datagrid-title">Updated At</div>
+        <div class="datagrid-content"><?= htmlspecialchars($leadDetail['UPDATED_AT'] ?? 'N/A') ?></div>
+    </div>
+</div>
+
+
                 </div>
  
 
@@ -940,7 +985,7 @@
               </div>
             </div>
 
-            <div class="col-md-8 fixed-height">
+            <div class="col-md-12 fixed-height">
               <div class="card fixed-height"> 
                 <!-- Lead Follow-Up STEP PROGRESS BAR -->
 
@@ -953,16 +998,17 @@
                       <div class="progress-badge inactive">Negotiation</div>
                       <div class="progress-badge inactive">Won/Lost</div> -->
 
-                      <ul  class="step-bar">
-                      <?php foreach ($statusSteps as $index => $step) : 
-                          // Determine class based on progress
-                          $class = ($index < $currentStep) ? "complete" : (($index == $currentStep) ? "active" : "pending");
-                      ?>
-                          <li style="padding:1px;"  class="<?= $class; ?>">
-                              <a href="javascript:void(0)"><?= $step; ?></a>
-                          </li>
-                      <?php endforeach; ?>
-                  </ul>
+                      <ul class="step-bar">
+                          <?php foreach ($statusSteps as $index => $step) : 
+                              // Determine class based on progress
+                              $class = ($index < $currentStep) ? "complete" : (($index == $currentStep) ? "active" : "pending");
+                          ?>
+                              <li class="<?= $class; ?>">
+                                  <a href="javascript:void(0)"><?= $step; ?></a>
+                              </li>
+                          <?php endforeach; ?>
+                    </ul>
+
 
 
 

@@ -66,39 +66,52 @@ class LeadsManager
         }
         return $response;
     }
+
+
     public function getLeads()
     {
         global $dbX;
         try {
-            $dbX->join("lead_assigned la", "leads.ID = la.lead_id", "LEFT");
-            $dbX->join("users u", "la.user_id = u.ID", "LEFT");
-            $dbX->groupBy("leads.ID");
-            $leads = $dbX->get("leads", null, [
-                'leads.ID AS lead_id',
-                'leads.LEAD_NAME AS lead_name',
-                'leads.LEAD_REMARK AS lead_remark',
-                'leads.LEAD_PRODUCT AS lead_product',
-                'leads.LEAD_PHONE AS lead_phone',
-                'leads.CREATED_TIMESTAMP AS created_timestamp',
-                'leads.LEAD_STATUS AS lead_status',
-                'leads.LEAD_SOURCE AS lead_source',
-                'GROUP_CONCAT(u.USER_NAME SEPARATOR ", ") AS assigned_users'
+            $dbX->join("lead_assigned la", "myleadsrecords.ID = la.lead_id", "LEFT");
+            $dbX->join("myadmins24 u", "la.user_id = u.ID", "LEFT");
+            $dbX->join("myadmins24 owner", "myleadsrecords.CURRENT_OWNER_ID = owner.ID", "LEFT"); 
+            $dbX->groupBy("myleadsrecords.ID");
+            $leads = $dbX->get("myleadsrecords", null, [
+                'myleadsrecords.ID AS lead_id',
+                'myleadsrecords.PRIMARY_NAME AS lead_name',
+                'myleadsrecords.PRIMARY_TEXT AS lead_remark',
+                'myleadsrecords.PRODUCT AS lead_product',
+                'myleadsrecords.PRIMARY_PHONE AS lead_phone',
+                'myleadsrecords.CREATED_AT AS created_timestamp',
+                'myleadsrecords.STATUS AS lead_status',
+                'myleadsrecords.SOURCE AS lead_source',
+                'IF(COUNT(la.lead_id) > 0, 
+                    GROUP_CONCAT(DISTINCT u.ADMIN_NAME ORDER BY u.ID ASC SEPARATOR ", "), 
+                    owner.ADMIN_NAME
+                ) AS assigned_users',
+                 'IF(COUNT(la.lead_id) > 0, 
+                    GROUP_CONCAT(DISTINCT u.ID ORDER BY u.ID ASC SEPARATOR ", "), 
+                    owner.ID
+                ) AS assigned_user_ids'
             ]);
-            $employees = $dbX->get("users", null, ['ID', 'USER_NAME']);
+            $employees = $dbX->get("myadmins24", null, ['ID', 'ADMIN_NAME']);
             if (!empty($leads) && !empty($employees)) {
                 $response['status'] = 'success';
                 $response['tasks'] = $leads;
                 $response['employees'] = $employees;
             } else {
-                $response['status'] = 'error';
+                $response['status'] = 'failed';
                 $response['message'] = "Leads not retrieved";
             }
         } catch (Exception  $e) {
-            $response['status']    = 'error';
+            $response['status']    = 'failed';
+            // $response['message']   = "something went to wrong. try again...!";
             $response['message']   = $e->getMessage();
         }
         return $response;
     }
+
+
     public function getLeadsDetails(){
         global $dbX;
         if($_POST['lead_id']){
@@ -126,16 +139,13 @@ class LeadsManager
         return $response;
     }
     public function leadAssignToUser(){
-        echo "In function: POST data leadAssignToUser\n";
-        print_r($params);
-        die();
         if (!isset($_POST['lead_id'])) {
             $response['status'] = 'error';
             $response['message'] = 'lead is required';
             return $response;
             exit;
         }
-        $leadId = $input['lead_id'];
+        $leadId = $_POST['lead_id'];
         global $dbX;
         try {
             $users = $dbX->where('ROLE_ID', 1)->orderBy('ID', 'DESC')->get('users', null, ['ID', 'USER_NAME']);
@@ -160,7 +170,7 @@ class LeadsManager
                     'CREATED_TIMESTAMP' => date('Y-m-d H:i:s')
                 ]);
                 if ($result) {
-                    activityLogs($userId, 'set_lead_tousers', '', $newData);
+                    // activityLogs($userId, 'set_lead_tousers', '', $newData);
                     $response['status'] = 'success';
                     $response['message'] = "Lead successfully assigned to user: {$nextUser['USER_NAME']}";
                     $response['user'] = $nextUser;
@@ -177,47 +187,59 @@ class LeadsManager
     }
     public function leadStatusUpdate(){
         global $dbX;
-        if (!isset($input['lead_id'])) {
-            $response['status'] = 'error';
+        // $helper = new CommonHelpers();
+        if (!isset($_POST['lead_id'])) {
+            $response['status'] = 'failed';
             $response['message'] = 'Lead is required';
             return $response;
             exit;
         }
         try {
-            $new_lead_status = $_POST["new_lead_status"];
-            $validStatuses = [
-                "To Do" => "To Do",
-                "In Progress" => "In Progress",
-                "Pending" => "Pending",
-                "Hold" => "Hold",
-                "Done" => "Done",
-                "Completed" => "Completed"
+            $new_lead_status = strtoupper($_POST["new_lead_status"]);
+            $validTransitions = [
+                "NEW"            => ["CONTACTED", "QUALIFIED", "OPPORTUNITY", "DEMO_SCHEDULED", "DEMO_DONE", "IN_NEGOTIATION", "CONVERTED", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "CONTACTED"      => ["QUALIFIED", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "QUALIFIED"      => ["OPPORTUNITY", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "OPPORTUNITY"    => ["DEMO_SCHEDULED", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "DEMO_SCHEDULED" => ["DEMO_DONE", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "DEMO_DONE"      => ["IN_NEGOTIATION", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "IN_NEGOTIATION" => ["CONVERTED", "DISQAULIFIED", "LOST", "LIVE", "OTHER"],
+                "CONVERTED"      => ["LIVE", "DISQAULIFIED", "LOST", "OTHER"],
+                "DISQAULIFIED"   => ["LOST", "OTHER"],
+                "LOST"           => ["OTHER"],
+                "LIVE"           => [],
+                "OTHER"          => []
             ];
-            if (array_key_exists($new_lead_status, $validStatuses)) {
-                $new_lead_status = $validStatuses[$new_lead_status];
-            } else {
-                $response['status'] = 'error';
-                $response['message'] = "Lead status not matched";
-                echo json_encode($response);
+            if (!array_key_exists($new_lead_status, $validTransitions)) {
+                $response['status'] = 'failed';
+                $response['message'] = "Lead status not valid";
+                return $response;
                 exit;
             }
-            $oldData = $dbX->where('ID', $input["lead_id"])->getOne('leads');
+            $oldData = $dbX->where('ID', $_POST["lead_id"])->getOne('myleadsrecords');
+            $old_status = strtoupper($oldData['STATUS']);
+            if (!in_array($new_lead_status, $validTransitions[$old_status])) {
+                $response['status'] = 'failed';
+                $response['message'] = "Lead status cannot be reverted back from {$old_status} to {$new_lead_status}";
+                return $response;
+                exit;
+            }
             $data = [
-                'LEAD_STATUS' => $new_lead_status
+                'STATUS' => $new_lead_status
             ];
-            $result = $dbX->where('ID', $input["lead_id"])->update('leads', $data);
-            activityLogs($connection, $loggedInUserId = 1, $action = "lead status changed {$oldData['LEAD_STATUS']} to {$new_lead_status}", $oldData, $data);
-        
+            $result = $dbX->where('ID', $_POST["lead_id"])->update('myleadsrecords', $data);
+            // $helper->activityLogs($loggedInUserId = 1, $action = "lead status changed {$old_status} to {$new_lead_status}", $oldData, $data);
             if ($result) {
                 $response['status'] = 'success';
                 $response['message'] = "Lead status successfully updated to {$new_lead_status}";
             } else {
-                $response['status'] = 'error';
+                $response['status'] = 'failed';
                 $response['message'] = 'Failed to change lead status.';
             }
         } catch (Exception $e) {
-            $response['status'] = 'error';
+            $response['status'] = 'failed';
             $response['message'] = $e->getMessage();
+            // $response['message'] = "something went to wrong..!";
         }
         return $response;
     }
@@ -316,80 +338,239 @@ class LeadsManager
         }
         return $response;
     }
+ 
 
 
-
-    // 
-    public function getLeadById($lead_id) {
+    public function setLeadNote(){
         global $dbX;
-    
-        if (empty($lead_id)) {
-            return [
-                'status' => 'error',
-                'message' => 'Missing lead_id parameter.'
-            ];
+        if (!empty($_POST["noteInput"]) && !empty($_POST["leadId"])) {
+            $leadId    = $_POST["leadId"];
+            $noteInput = $_POST["noteInput"];
+            $userId    = 1;  // logged-in User ID
+            try{
+                $result = $dbX->insert('lead_notes', [
+                    'LEAD_ID'    => $leadId,
+                    'USER_ID'    => $userId,
+                    'NOTE'  => $noteInput, 
+                    'NOTED_DATE' => date('Y-m-d H:i:s'),
+                ]);
+                if ($result) {
+                    $response['status']  = 'success';
+                    $response['message'] = 'Note added successfully.';
+                } else {
+                    $response['status']  = 'failed';
+                    $response['message'] = 'Failed to add note.';
+                }
+            }catch (Exception $e){
+                $response['status']  = 'failed';
+                $response['message'] = "something went to wrong. try again...!";
+            }
+        } else {
+            $response['status']  = 'failed';
+            $response['message'] = 'Parameters are missing.';
         }
-    
-        try { 
-            $dbX->where('ID', $lead_id);
-            $leadDetail = $dbX->get("leads");
-            // $dbX->where('ROLE_ID', 1);
-            $dbX->orderBy('ID', 'DESC');
-            $users = $dbX->get('users', null, ['ID', 'USER_NAME']);
-    
-            if (!empty($leadDetail)) {
-                return [
-                    'status' => 'success',
-                    'message' => 'Lead details retrieved successfully.',
-                    'leadDetail' => $leadDetail,
-                    'users' => $users
-                ];
-            } else {
-                return [
-                    'status' => 'error',
-                    'message' => 'Lead data not found.'
+        
+        return $response;
+    }
+    public function getLeadNotes() {
+        global $dbX;
+        if (!empty($_POST["lead_id"])) {
+            $leadId = $_POST["lead_id"];
+            try {
+                $leadNotes = $dbX
+                    ->join("users u", "u.ID = ln.USER_ID", "LEFT")
+                    ->where("ln.LEAD_ID", $leadId)
+                    ->orderBy("ln.ID", "DESC")
+                    ->get("lead_notes ln", null, [
+                        "ln.ID",
+                        "ln.NOTED_DATE",
+                        "ln.NOTE",
+                        "u.USER_NAME as userName",
+                    ]);
+                if (!empty($leadNotes)) {
+                    $html = "";
+                    foreach ($leadNotes as $note) {
+                        $profileImage = "./static/avatars/001m.jpg";
+                        $html .= '
+                            <div class="chat-item mb-3 ">
+                                <div class="row align-items-end">
+                                    <div class="col-auto">
+                                        <span class="avatar avatar-1" style="background-image: url(' . $profileImage . ')"></span>
+                                    </div>
+                                    <div class="col col-lg-9">
+                                        <div class="chat-bubble chat-bubble-me">
+                                            <div class="chat-bubble-title">
+                                                <div class="row">
+                                                    <div class="col chat-bubble-author">' . htmlspecialchars($note["userName"]) . '</div>
+                                                    <div class="col-auto chat-bubble-date">' . date("h:i A", strtotime($note["NOTED_DATE"])) . '</div>
+                                                </div>
+                                            </div>
+                                            <div class="chat-bubble-body">
+                                                <p>' . htmlspecialchars($note["NOTE"]) . '</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                    }
+                    $response = [
+                        "status" => "success",
+                        "html"   => $html
+                    ];
+                } else {
+                    $response = [
+                        "status"  => "failed",
+                        "message" => "No notes found.",
+                        "html"    => "<p class='text-muted'>No notes available.</p>"
+                    ];
+                }
+            } catch (Exception $e) {
+                $response = [
+                    "status"  => "failed",
+                    "message" => $e->getMessage()
                 ];
             }
-        } catch (Exception $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage()
+        } else {
+            $response = [
+                "status"  => "failed",
+                "message" => "Lead ID is missing."
             ];
         }
+        return $response;
     }
 
-
-
-    public function updateLeadStatus($leadId, $status)
-    {
+    public function getLeadAssignedToUsers(){
         global $dbX;
-    
-       
-        if (empty($leadId) || empty($status)) {
-            return ["success" => false, "message" => "Invalid input"];
-        }
-    
-        
-        $data = ["LEAD_STATUS" => $status];
-    
-        
-        if (!$dbX->ping()) {
-            return ["success" => false, "message" => "Database connection error"];
-        }
-    
-      
-        $dbX->where("ID", $leadId);
-    
-        if ($dbX->update("leads", $data)) {
-            return ["success" => true, "message" => "Lead status updated successfully"];
+        $response = [];
+        if (!empty($_POST["lead_id"])) {
+            $users = $dbX->join('lead_assigned ua', 'ua.USER_ID = u.ID AND ua.LEAD_ID = ' . $_POST['lead_id'], 'LEFT')
+                         ->get('users u', null, 'u.ID, u.USER_NAME, ua.LEAD_ID');  
+            if ($users) {
+                $response['status'] = 'success';
+                $response['users'] = $users;
+                $response['message'] = "Lead assignments fetched successfully.";
+            } else {
+                $response['status'] = 'failed';
+                $response['message'] = 'No users found or no assignments for the given lead.';
+            }
         } else {
-             
-            $error = $dbX->getLastError();
-            return ["success" => false, "message" => "Failed to update lead status. Error: $error"];
+            $response['status'] = 'failed';
+            $response['message'] = 'Lead ID is required.';
+        }
+        return $response;
+    }
+
+    public function getLeadStatus(){
+        global $dbX;
+        if (!empty($_POST["lead_id"])) {
+            $statuses = 
+                [
+                    "NEW"            => "New",
+                    "CONTACTED"      => "Contacted",
+                    "QUALIFIED"      => "Qualified",
+                    "OPPORTUNITY"    => "Opportunity",
+                    "DEMO_SCHEDULED" => "Demo Schedule",
+                    "DEMO_DONE"      => "Demo Done",
+                    "IN_NEGOTIATION" => "In Negotiation",
+                    "CONVERTED"      => "Converted",
+                    "DISQAULIFIED"   => "Disqaulified",
+                    "LOST"           => "Lost",
+                    "LIVE"           => "Live",
+                    "OTHER"          => "Other",
+                ];
+                $leadStatus = $dbX->where('ID', $_POST["lead_id"])->getOne('myleadsrecords', ['ID', 'STATUS']);
+            if (!empty($leadStatus)) {
+                $response['status'] = 'success';
+                $response['leadStatuses'] = $statuses;
+                $response['leadStatus'] = $leadStatus;
+                return $response;
+            } else {
+                $response['status'] = 'failed';
+                $response['message'] = 'Error fetching values.';
+                return $response;
+            }
+        } else {
+            $response['status'] = 'failed';
+            $response['message'] = 'Missing parameter.';
+            return $response;
         }
     }
+
+
     
+
+
+
+        // 
+        public function getLeadById($lead_id) {
+            global $dbX;
+        
+            if (empty($lead_id)) {
+                return [
+                    'status' => 'error',
+                    'message' => 'Missing lead_id parameter.'
+                ];
+            }
+        
+            try {
+                $dbX->join("lead_assigned la", "myleadsrecords.ID = la.lead_id", "LEFT");
+                $dbX->join("myadmins24 u", "la.user_id = u.ID", "LEFT");
+                $dbX->join("myadmins24 owner", "myleadsrecords.CURRENT_OWNER_ID = owner.ID", "LEFT");
+                $dbX->where("myleadsrecords.ID", $lead_id);
+                $dbX->groupBy("myleadsrecords.ID");
+        
+                $leadDetail = $dbX->getOne("myleadsrecords", [
+                    'myleadsrecords.ID AS lead_id',
+                    'myleadsrecords.SYSTEM_ID',
+                    'myleadsrecords.SOURCE_LEAD_ID',
+                    'myleadsrecords.PRODUCT',
+                    'myleadsrecords.SOURCE',
+                    'myleadsrecords.PRIMARY_PHONE',
+                    'myleadsrecords.PRIMARY_NAME',
+                    'myleadsrecords.PRIMARY_EMAIL',
+                    'myleadsrecords.PRIMARY_TEXT',
+                    'myleadsrecords.FIRST_FOLLOWUP_DATE',
+                    'myleadsrecords.SECOND_FOLLOWUP_DATE',
+                    'myleadsrecords.THREE_FOLLOWUP_DATE',
+                    'myleadsrecords.STATUS',
+                    'myleadsrecords.SCORE',
+                    'myleadsrecords.ORG_OWNER_ID',
+                    'myleadsrecords.CURRENT_OWNER_ID',
+                    'myleadsrecords.LEAD_STORE_ID',
+                    'myleadsrecords.CREATED_AT',
+                    'myleadsrecords.UPDATED_AT',
+                    'IF(COUNT(la.lead_id) > 0, 
+                        GROUP_CONCAT(DISTINCT u.ADMIN_NAME ORDER BY u.ID ASC SEPARATOR ", "), 
+                        owner.ADMIN_NAME
+                    ) AS assigned_users',
+                    'IF(COUNT(la.lead_id) > 0, 
+                        GROUP_CONCAT(DISTINCT u.ID ORDER BY u.ID ASC SEPARATOR ", "), 
+                        owner.ID
+                    ) AS assigned_user_ids'
+                ]);
+        
+                if (!empty($leadDetail)) {
+                    return [
+                        'status' => 'success',
+                        'message' => 'Lead details retrieved successfully.',
+                        'leadDetail' => $leadDetail
+                    ];
+                } else {
+                    return [
+                        'status' => 'error',
+                        'message' => 'Lead data not found.'
+                    ];
+                }
+            } catch (Exception $e) {
+                return [
+                    'status' => 'error',
+                    'message' => $e->getMessage()
+                ];
+            }
+        }
     
-    
+     
+
+
 
 }
