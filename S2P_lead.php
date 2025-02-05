@@ -474,6 +474,7 @@
             </div>
           </div>
         </footer>
+
 <!-- Call Now Modal --> 
 <div class="modal fade" id="callNowModal" tabindex="-1" aria-labelledby="callNowModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -1007,11 +1008,28 @@
                                               <i class="fas fa-bolt"></i>
                                           </button>
                                           <ul class="dropdown-menu quick-action-dropdown">
-                                              <li><a class="dropdown-item callNowModal" data-bs-toggle="modal" data-lead-id="${lead.ID}"><i class="fas fa-phone"></i> Call Now</a></li>
-                                              <li><a class="dropdown-item sendSmsModal" data-bs-toggle="modal" data-lead-id="${lead.ID}"><i class="fas fa-sms"></i> Send SMS</a></li>
-                                              <li><a class="dropdown-item meetingModal" data-bs-toggle="modal" data-lead-id="${lead.ID}"><i class="fas fa-calendar-alt"></i> Meeting</a></li>
+                                            <li>
+                                              <a class="dropdown-item callNowModal" href="#callNowModal" data-bs-toggle="modal" data-lead-id="${lead.ID}">
+                                                <i class="fas fa-phone"></i> Call Now
+                                              </a>
+                                            </li>
+                                            <li>
+                                              <a class="dropdown-item sendSmsModal" href="#sendSmsModal" data-bs-toggle="modal" data-lead-id="${lead.ID}">
+                                                <i class="fas fa-sms"></i> Send SMS
+                                              </a>
+                                            </li>
+                                            <li>
+                                              <a class="dropdown-item meetingModal" href="#meetingModal" data-bs-toggle="modal" data-lead-id="${lead.ID}">
+                                                <i class="fas fa-calendar-alt"></i> Meeting
+                                              </a>
+                                            </li>
+
                                               <li><a class="dropdown-item editmodal"data-lead-id="${lead.ID}"><i class="fas fa-edit"></i> Edit</a></li>
-                                              <li><a class="dropdown-item deleteLead" href="#" data-lead-id="${lead.ID}"><i class="fas fa-trash"></i> Delete</a></li>
+                                            <li>
+                                              <a class="dropdown-item deleteLead" href="#" data-lead-id="${lead.ID}">
+                                                <i class="fas fa-trash"></i> Delete
+                                              </a>
+                                            </li>
                                           </ul>
                                       </div>
                                   </td>
