@@ -4,12 +4,18 @@
 require_once('config_db.php');
 require_once('MysqliDb.php');
 
+
+date_default_timezone_set('Asia/Calcutta'); 
+
+
 class LeadsManager
 {
     private $db;
-    // pubi $timezone =  ;
+    
+    public $timezone  ;
     public function __construct()
     {
+        $this->timezone = date("Y-m-d H:i:s");
         global $dbX;
         global $dbUserName;
         global $dbPassword;
@@ -167,7 +173,7 @@ class LeadsManager
                 $result = $this->$dbX->insert('lead_assigned', [
                     'LEAD_ID' => $leadId,
                     'USER_ID' => $nextUser['ID'],
-                    'CREATED_TIMESTAMP' => date('Y-m-d H:i:s')
+                    'CREATED_TIMESTAMP' => $this->timezone
                 ]);
                 if ($result) {
                     // activityLogs($userId, 'set_lead_tousers', '', $newData);
@@ -352,7 +358,7 @@ class LeadsManager
                     'LEAD_ID'    => $leadId,
                     'USER_ID'    => $userId,
                     'NOTE'  => $noteInput, 
-                    'NOTED_DATE' => date('Y-m-d H:i:s'),
+                    'NOTED_DATE' => $this->timezone,
                 ]);
                 if ($result) {
                     $response['status']  = 'success';

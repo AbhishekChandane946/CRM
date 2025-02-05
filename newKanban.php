@@ -23,6 +23,7 @@
     <script src="./dist/js/dx.all.js"></script>
     <script src="data.js"></script>
     <link rel="stylesheet" type="text/css" href="kanbanBoard.css" />
+    <link rel="stylesheet" href="comman_styles.css">
 </head>
 <style>
     ::ng-deep .dx-sortable {
@@ -207,7 +208,7 @@
                   </a>
                 </li>  
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                  <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                         <img src="./dist/img/icons/conversion-rate.png" width="24" height="24" > 
                       </span>
@@ -216,11 +217,17 @@
                   </span>
                   </a>
                   <div class="dropdown-menu">
+                  <a class="dropdown-item" href="S2P_lead.php" target="_blank" rel="noopener">
+                        List View
+                    </a>
+
                     <a class="dropdown-item" href="newKanban.php" target="_blank" rel="noopener">
                       Kanban View
                     </a>
- 
-                  </div>
+                    <a class="dropdown-item" href="S2P_calendar.php" target="_blank" rel="noopener">
+                     Calendar
+                    </a> 
+                  </div> 
                 </li>
               </ul>
  
@@ -235,13 +242,18 @@
         <div class="page-header d-print-none">
             <div class="container-xl">
                 <div class="row g-2 align-items-center">
-                    <div class="col">
+                    <div class="col my-3">
                         <div class="page-pretitle">
                             Leads
                         </div>
-                        <h4 class="page-title mb-4">
-                            Kanban
-                        </h4>
+                            <div class="d-flex justify-content-between"> 
+                                    <h4 class="page-title mb-4">
+                                            Kanban
+                                    </h4> 
+                                    <button class="button p-0">
+                                        <a style="text-decoration: none;" class="text-light" href="S2P_lead.php">List View</a>
+                                    </button>
+                            </div>
                     </div>
                 </div>
                 <div class="demo-container">

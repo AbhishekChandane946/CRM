@@ -180,7 +180,7 @@
           </div>
         </div>
       </header>
-      
+
       <header class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu">
           <div class="navbar">
@@ -206,9 +206,16 @@
                   </span>
                   </a>
                   <div class="dropdown-menu">
+                  <a class="dropdown-item" href="S2P_lead.php" target="_blank" rel="noopener">
+                        List View
+                    </a>
+
                     <a class="dropdown-item" href="newKanban.php" target="_blank" rel="noopener">
                       Kanban View
                     </a>
+                    <a class="dropdown-item" href="S2P_calendar.php" target="_blank" rel="noopener">
+                     Calendar
+                    </a> 
  
                   </div>
                 </li>
@@ -263,9 +270,14 @@
           <div class="container-xl">
             <div class="row g-2 align-items-center">
               <div class="col">
-                <h2 class="page-title">
-                  Leads
-                </h2>
+              <div class="d-flex justify-content-between"> 
+                                    <h4 class="page-title mb-4">
+                                            Leads
+                                    </h4> 
+                                    <button class="button p-0">
+                                        <a style="text-decoration: none;" class="text-light" href="newKanban.php">Kanban View</a>
+                                    </button>
+                            </div>
               </div>
               <div class="col-12">
                 <div class="card">
@@ -358,7 +370,7 @@
                     <div class="tab-pane" id="tabs-lead-status-8" role="tabpanel">
                       <div class="d-flex align-items-start">
                         <form id="lead_status_form">
-                          <select name="lead_status" id="lead_status" class="selectpicker">
+                          <select name="lead_status" id="lead_status" class="form-control ">
                           </select>
                           <div id="datepicker-container" style="display:none;">
                             <input type="date" name="demo_scheduled_date" id="demo_scheduled_date" class="form-cotrol">
@@ -772,7 +784,6 @@
       if (tab == "#tabs-lead-status-8") {
         const lead_id = $('#leadId').val();
         getLeadStatus(lead_id);
-        // get(lead_id);
       }
     });
 
@@ -780,7 +791,6 @@
       const lead_id = $('#leadId').val();
       const navContainer = document.getElementById("followUpNav");
       const tabContentContainer = document.getElementById("followUpTabContent");
-
       $.ajax({
         url: "api.php",
         type: "POST",
@@ -824,7 +834,6 @@
             const followUpDate = followUpData[column.date];
             const followUpRemark = followUpData[column.remark];
             let isReadonly = followUpDate && followUpRemark;
-            // Create tab button
             const tabButton = document.createElement("button");
             tabButton.className = `nav-link ${i === 0 ? 'active' : ''}`;
             tabButton.id = `followUpTab${i + 1}`;
@@ -841,11 +850,6 @@
             tabButton.style.border = "1px solid transparent";
             if (i === 0) {
               tabButton.style.border = "1px solid #999696";
-              // tabButton.style.borderTop = "1px solid #999696";
-              // tabButton.style.borderLeft = "1px solid #999696";
-              // tabButton.style.borderBottom = "1px solid #999696";
-              // tabButton.style.borderRight = "1px solid #999696";
-              // tabButton.style.borderRight = "none";
               tabButton.style.border = "1px solid #999696";
             }
             navContainer.appendChild(tabButton);
@@ -898,8 +902,11 @@
           });
         },
         error: function (xhr, status, error) {
-          console.error("AJAX Error: ", error);
-          alert("Failed to retrieve follow-up data. Please try again.");
+          Swal.fire({
+                    icon: "error",
+                    title: "Oops",
+                    text: "Failed to retrieve follow-up data. Please try again.",
+                });
         }
       });
     }
@@ -978,7 +985,7 @@
               rows += `
                               <tr>
                                   <td class="text-center">
-                                      <a href="sec2pay_view_lead.html?id=${lead.ID}" class="text-primary" title="View Lead">
+                                      <a href="S2P_view_lead.php?lead_id=${lead.ID}" class="text-primary" title="View Lead">
                                           <i class="fas fa-eye"></i>
                                       </a>
                                   </td>
@@ -1031,11 +1038,19 @@
             $("#leadTableBody").html(rows);
             $('[data-bs-toggle="tooltip"]').tooltip();
           } else {
-            console.log("No leads found or error in API response.");
+            Swal.fire({
+                    icon: "error",
+                    title: "Oops",
+                    text: "No leads found or error in API response.",
+                });
           }
         },
         error: function () {
-          console.log("Error fetching data.");
+          Swal.fire({
+                    icon: "error",
+                    title: "Oops",
+                    text: "Error fetching data.",
+                });
         }
       });
     }
@@ -1085,7 +1100,7 @@
                   Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Date saved successfully!"
+                    text: response.message
                   });
                 } else {
                   Swal.fire({
@@ -1101,7 +1116,6 @@
                   title: "Error",
                   text: "Failed to save date!"
                 });
-                console.error("Error:", error);
               }
             });
           } else {
@@ -1129,7 +1143,6 @@
             });
           },
           success: function (response) {
-            console.log("Success Response:2", response);
             if (response.status == "success") {
               Swal.fire({
                 icon: "success",
@@ -1150,7 +1163,6 @@
               title: "Error",
               text: "Failed to update status!"
             });
-            console.error("Error:", error);
           }
         });
       }
@@ -1160,7 +1172,6 @@
       let noteInput = $('#noteInput').val();
       let leadId = $('#leadId').val();
       let regex = /^[a-zA-Z0-9 ]+$/;
-
       let formData = {
         leadId: leadId,
         noteInput: noteInput,
@@ -1176,7 +1187,8 @@
             $('#noteInput').val('')
             getLeadNotes(leadId);
             Swal.fire({
-              title: response.message,
+              title: "Success",
+              text: response.message,
               icon: "success",
               draggable: true,
             }).then(() => {
@@ -1184,15 +1196,20 @@
             });
           } else {
             Swal.fire({
-              title: response.message,
               icon: "error",
+              title: "success",
+              text: response.message,
               draggable: true
             });
           }
         },
         error: function (xhr, status, error) {
-          console.error("AJAX Error: ", error);
-          alert("Failed to submit a form. Please try again.");
+          Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Failed to submit a form. Please try again.",
+              draggable: true
+            });
         }
       });
     })
@@ -1204,7 +1221,12 @@
       const totalFollowUps = 5;
       console.log('index--->' + index, 'date-->' + dateInput, 'notesInput-->' + notesInput);
       if (!dateInput || !notesInput) {
-        alert("Please fill all fields before submitting.");
+        Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Please fill all fields before submitting.",
+              draggable: true
+            });
         return;
       }
       let formData = {
@@ -1220,10 +1242,10 @@
         data: formData,
         dataType: "json",
         success: function (response) {
-          console.log('response==>', response);
           if (response && response.status === 'success') {
             Swal.fire({
-              title: `Follow Up ${index} Submitted Successfully!`,
+              title:"success",
+              text: `Follow Up ${index} Submitted Successfully!`,
               icon: "success",
               draggable: true,
             });
@@ -1237,15 +1259,21 @@
             $(`#followUp${index}`).addClass("readonly");
           } else {
             Swal.fire({
-              title: response.message,
               icon: "error",
+              title: "Oops",
+              text: response.message,
               draggable: true,
             });
           }
         },
         error: function (xhr, status, error) {
           console.error("AJAX Error: ", error);
-          alert("Failed to submit follow-up. Please try again.");
+          Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Failed to submit follow-up. Please try again.",
+              draggable: true,
+            });
         }
       });
     });
@@ -1257,7 +1285,6 @@
         name: "lead_id",
         value: leadId
       });
-      console.log('form', form);
       $.ajax({
         type: "POST",
         url: "api.php",
@@ -1266,15 +1293,17 @@
         success: function (response) {
           $("#leadAssignUserForm")[0].reset();
           Swal.fire({
-            title: response.message,
             icon: "success",
+            title: "success",
+            text: response.message,
             draggable: true,
           });
         },
         error: function (response) {
           Swal.fire({
-            title: response.message,
             icon: "error",
+            title: "Ooops",
+            text: response.message,
             draggable: true,
           });
         },
@@ -1303,9 +1332,7 @@
             let convertedLead = convertKeysToCamelCase(lead);
             let leadDetailsHtml = '';
             let colClass = 'col-sm-6 col-md-4';
-            leadDetailsHtml += `<div class="card-body">
-                      <div class="datagrid">`;
-
+            leadDetailsHtml += `<div class="card-body"><div class="datagrid">`;
             for (let key in convertedLead) {
               if (convertedLead.hasOwnProperty(key) && convertedLead[key] !== null && convertedLead[
                   key] !== "") {
@@ -1317,7 +1344,6 @@
                 } else if (key.toLowerCase() === 'product') {
                   badgeHtml = `<span class="badge bg-success">${convertedLead[key]}</span>`;
                 }
-
                 let contentHtml = convertedLead[key];
                 if (key.toLowerCase() === 'creator') {
                   contentHtml = `
@@ -1363,15 +1389,24 @@
             }
             leadDetailsHtml += `</div></div>`;
             $("#leadDetailsList").html(leadDetailsHtml);
-
             $("#leadId").val(leadId);
             $("#editModal").modal("show");
           } else {
-            alert("No lead details found.");
+                Swal.fire({
+                icon: "error",
+                title: "Ooops",
+                text: "No lead details found.",
+                draggable: true,
+              });
           }
         },
         error: function () {
-          console.log("AJAX error.");
+          Swal.fire({
+                icon: "error",
+                title: "Ooops",
+                text: "something went to wrong.",
+                draggable: true,
+              });
         }
       });
     });
@@ -1387,19 +1422,19 @@
       },
       dataType: "json",
       success: function (response) {
-        console.log("response===>", response);
+       
         if (response && response.status == 'success') {
           var leadStatuses = response.leadStatuses;
           var currentStatus = response.leadStatus.STATUS; // Actual selected status
 
           var html = '';
           $.each(leadStatuses, function (key, value) {
-            var selected = key === currentStatus ? 'selected' : ''; // ✅ Compare key, not value
+            var selected = key === currentStatus ? 'selected' : '';  
             html += '<option value="' + key + '" ' + selected + '>' + value +
-            '</option>'; // ✅ Use key as value, value as display text
+            '</option>';  
           });
 
-          $('#lead_status').html(html).selectpicker('refresh');
+          $('#lead_status').html(html) ;
         }
       },
       error: function (xhr, status, error) {
@@ -1427,7 +1462,8 @@
             var selected = user.LEAD_ID !== null ? 'selected' : '';
             html += '<option value="' + user.ID + '" ' + selected + '>' + user.USER_NAME + '</option>';
           });
-          $('#user_id').html(html).selectpicker('refresh');
+          // $('#user_id').html(html).selectpicker('refresh');
+             $('#user_id').html(html).selectpicker('refresh');
         } else {
           console.error('Error fetching data:', data.message);
         }

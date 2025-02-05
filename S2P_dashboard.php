@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Empty page - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title> Dashboard</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
@@ -279,10 +279,16 @@
                   </span>
                   </a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="newKanban.php" target="_blank" rel="noopener">
-                      Kanban View
-                    </a>
- 
+                    <a class="dropdown-item" href="S2P_lead.php" target="_blank" rel="noopener">
+                          List View
+                      </a>
+
+                      <a class="dropdown-item" href="newKanban.php" target="_blank" rel="noopener">
+                        Kanban View
+                      </a>
+                      <a class="dropdown-item" href="S2P_calendar.php" target="_blank" rel="noopener">
+                      Calendar
+                      </a> 
                   </div>
                 </li>
               </ul>
