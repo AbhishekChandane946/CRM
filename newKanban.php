@@ -12,12 +12,18 @@
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
-                    <div class="page-pretitle">
+                <div class="page-pretitle">
                         Leads
                     </div>
+                     <div class="d-flex justify-content-between"> 
+
                     <h4 class="page-title mb-4">
                         Kanban
                     </h4>
+
+                    <button class="button p-0">
+                                        <a style="text-decoration: none;" class="text-light" href="S2P_lead.php">List View</a>
+                                    </button>   </div>
                 </div>
             </div>
             <div class="demo-container">

@@ -49,7 +49,7 @@
                                     <button class="button p-0">
                                         <a style="text-decoration: none;" class="text-light" href="newKanban.php">Kanban View</a>
                                     </button>
-                            </div>
+              </div>
               </div>
               <div class="col-12">
                 <div class="card">
