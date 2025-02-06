@@ -291,14 +291,14 @@
                   </span>
                   </a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="S2P_lead.php" target="_blank" rel="noopener">
+                    <a class="dropdown-item" href="S2P_lead.php"  rel="noopener">
                           List View
                       </a>
 
-                      <a class="dropdown-item" href="newKanban.php" target="_blank" rel="noopener">
+                      <a class="dropdown-item" href="newKanban.php"  rel="noopener">
                         Kanban View
                       </a>
-                      <a class="dropdown-item" href="S2P_calendar.php" target="_blank" rel="noopener">
+                      <a class="dropdown-item" href="S2P_calendar.php"  rel="noopener">
                       Calendar
                       </a> 
                   </div>
