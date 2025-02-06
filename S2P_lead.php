@@ -43,12 +43,12 @@
             <div class="row g-2 align-items-center">
               <div class="col">
               <div class="d-flex justify-content-between"> 
-                                    <h4 class="page-title mb-4">
-                                            Leads
-                                    </h4> 
-                                    <button class="button p-0">
-                                        <a style="text-decoration: none;" class="text-light" href="newKanban.php">Kanban View</a>
-                                    </button>
+                  <h4 class="page-title mb-4">
+                          Leads
+                  </h4> 
+                  <button class="button p-0">
+                      <a style="text-decoration: none;" class="text-light" href="newKanban.php">Kanban View</a>
+                  </button>
               </div>
               </div>
               <div class="col-12">
@@ -449,47 +449,7 @@
             </div>
           </div>
         </div>
-<style>
-    /* Custom border with a title */
-    .bordered-section { 
-    border-radius: 5px;
-    padding: 10px;
-    position: relative;
-    margin-bottom: 10px; 
-  }
 
-  /* Header inside the border */
-  .bordered-section-title {
-    position: absolute;
-    top: -12px;
-    left: 15px;
-    background: #f8f9fa;
-    padding: 0 10px;
-    font-weight: bold;
-  }
-  #editModal.modal-xl {
-    max-width: 90%; 
-  }
-  #editModal.modal-body {
-    max-height: 500px; 
-    overflow: hidden; 
-    display: flex;
-    flex-direction: column;
-  }
-  #editModal.sticky-header {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 1000;
-    border-bottom: 1px solid #ddd;
-  }
-  /* #editModal.content-scrollable {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 15px;
-    scrollbar-width:"thin";
-  } */
-</style>
        <!-- Edited : Abhishek Chandane --> 
 
 
@@ -787,8 +747,8 @@
                                   <td>${lead.ORG_OWNER_ID}</td>
                                   <td>
                                       <div class="dropdown">
-                                          <button class="btn quick-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                              <i class="fas fa-bolt"></i>
+                                          <button class="btn quick-action-btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown">
+                                              <i class="fas fa-bolt text-light"></i>
                                           </button>
                                           <ul class="dropdown-menu quick-action-dropdown">
                                             <li>
