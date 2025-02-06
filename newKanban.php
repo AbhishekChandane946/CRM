@@ -26,7 +26,7 @@
                                     </button>   </div>
                 </div>
             </div>
-            <div class="demo-container">
+            <div class="demo-container mt-3">
                 <div id="kanban"></div>
             </div>
         </div>
