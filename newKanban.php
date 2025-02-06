@@ -22,8 +22,9 @@
                     </h4>
 
                     <button class="button p-0">
-                                        <a style="text-decoration: none;" class="text-light" href="S2P_lead.php">List View</a>
-                                    </button>   </div>
+                        <a style="text-decoration: none;" class="text-light" href="S2P_lead.php">List View</a>
+                    </button>   
+                    </div>
                 </div>
             </div>
             <div class="demo-container mt-3">
