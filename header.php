@@ -19,8 +19,10 @@
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
     <link rel="stylesheet" href="comman_styles.css">  
      
- 
-
+     <!-- Edited : Abhishek Chandane --> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Edited : Abhishek Chandane -->
+     
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
