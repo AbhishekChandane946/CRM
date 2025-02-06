@@ -11,6 +11,7 @@
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet"
@@ -24,53 +25,56 @@
     <script src="data.js"></script>
     <link rel="stylesheet" type="text/css" href="kanbanBoard.css" />
     <link rel="stylesheet" href="comman_styles.css">
+
+    <style>
+        ::ng-deep .dx-sortable {
+            display: block
+        }
+
+      .dx-theme-material-typography h2 {
+          font-weight: 700 !important;
+          font-size: 16px !important;
+          letter-spacing: 0.5px !important;
+      }
+
+      .swal2-popup {
+          /* width: 250px; */
+          padding: 0px;
+          font-size: 10px;
+      }
+
+      .highlight-target {
+          border: 2px dashed #007bff;
+          background-color: #f8f9fa;
+      }
+
+      .dx-theme-material-typography a {
+          color: black;
+      }
+
+      .font-size-10 {
+          font-size: 10px !important;
+      }
+
+      .font-size-12 {
+          font-size: 12px !important;
+      }
+
+      .font-size-14 {
+          font-size: 14px !important;
+      }
+
+      .font-size-16 {
+          font-size: 16px !important;
+      }
+
+      .dropdown-menu {
+          font-size: 12px !important;
+      }
+    </style>
+
 </head>
-<style>
-    ::ng-deep .dx-sortable {
-        display: block
-    }
 
-    .dx-theme-material-typography h2 {
-        font-weight: 700 !important;
-        font-size: 16px !important;
-        letter-spacing: 0.5px !important;
-    }
-
-    .swal2-popup {
-        /* width: 250px; */
-        padding: 0px;
-        font-size: 10px;
-    }
-
-    .highlight-target {
-        border: 2px dashed #007bff;
-        background-color: #f8f9fa;
-    }
-
-    .dx-theme-material-typography a {
-        color: black;
-    }
-
-    .font-size-10 {
-        font-size: 10px !important;
-    }
-
-    .font-size-12 {
-        font-size: 12px !important;
-    }
-
-    .font-size-14 {
-        font-size: 14px !important;
-    }
-
-    .font-size-16 {
-        font-size: 16px !important;
-    }
-
-    .dropdown-menu {
-        font-size: 12px !important;
-    }
-</style>
 
 <body class="dx-viewport">
     
@@ -396,7 +400,5 @@
         }
     });
 }
-
-
-  
+ 
 </script>
