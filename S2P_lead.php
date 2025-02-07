@@ -31,10 +31,6 @@
           width: 250px;
         }
       
-        .nav-link {
-          color: black;
-          background-color: transparent;
-        }
       </style>
       
       <div class="page-wrapper">
@@ -331,13 +327,13 @@
                   <div class="card-header sticky-header">
                     <ul class="nav nav-tabs" id="myTabs" role="tablist">
                       <li class="nav-item">
-                        <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">Lead Data</a>
+                        <button href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">Lead Data</button>
                       </li>
                       <li class="nav-item">
-                        <a href="#tabs-profile-8" class="nav-link" data-bs-toggle="tab">Lead Follow up</a>
+                        <button href="#tabs-profile-8" class="nav-link" data-bs-toggle="tab">Lead Follow up</button>
                       </li>
                       <li class="nav-item">
-                        <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">Notes</a>
+                        <button href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">Notes</button>
                       </li>
                     </ul>
                   </div>
@@ -531,129 +527,87 @@
       }
     });
 
-    function renderFollowUpData() {
-      const lead_id = $('#leadId').val();
-      const navContainer = document.getElementById("followUpNav");
-      const tabContentContainer = document.getElementById("followUpTabContent");
-      $.ajax({
+
+
+function renderFollowUpData() {
+    const lead_id = $('#leadId').val();
+    const navContainer = document.getElementById("followUpNav");
+    const tabContentContainer = document.getElementById("followUpTabContent");
+    
+    $.ajax({
         url: "api.php",
         type: "POST",
         dataType: "json",
-        data: {
-          action: "leadsmanager.getLeadsDetails",
-          lead_id: lead_id
-        },
+        data: { action: "leadsmanager.getLeadsDetails", lead_id: lead_id },
         success: function (response) {
-          console.log('Full API Response:', response);
-          const followUpData = response.leadsDetail[0];
-          const columns = [{
-              date: "FIRST_FOLLOWUP_DATE",
-              remark: "FIRST_FOLLOWUP_REMARK",
-              title: "Follow Up 1"
-            },
-            {
-              date: "SECOND_FOLLOWUP_DATE",
-              remark: "SECOND_FOLLOWUP_REMARK",
-              title: "Follow Up 2"
-            },
-            {
-              date: "THREE_FOLLOWUP_DATE",
-              remark: "THREE_FOLLOWUP_REMARK",
-              title: "Follow Up 3"
-            },
-            {
-              date: "FOUR_FOLLOWUP_DATE",
-              remark: "FOUR_FOLLOWUP_REMARK",
-              title: "Follow Up 4"
-            },
-            {
-              date: "FIVE_FOLLOWUP_DATE",
-              remark: "FIVE_FOLLOWUP_REMARK",
-              title: "Follow Up 5"
-            }
-          ];
-          navContainer.innerHTML = "";
-          tabContentContainer.innerHTML = "";
-          columns.forEach((column, i) => {
-            const followUpDate = followUpData[column.date];
-            const followUpRemark = followUpData[column.remark];
-            let isReadonly = followUpDate && followUpRemark;
-            const tabButton = document.createElement("button");
-            tabButton.className = `nav-link ${i === 0 ? 'active' : ''}`;
-            tabButton.id = `followUpTab${i + 1}`;
-            tabButton.setAttribute("data-bs-toggle", "pill");
-            tabButton.setAttribute("data-bs-target", `#followUpContent${i + 1}`);
-            tabButton.setAttribute("type", "button");
-            tabButton.setAttribute("role", "tab");
-            tabButton.setAttribute("aria-controls", `followUpContent${i + 1}`);
-            tabButton.setAttribute("aria-selected", i === 0 ? "true" : "false");
-            tabButton.style.width = "200px";
-            tabButton.innerText = column.title;
-            tabButton.style.color = "black";
-            tabButton.style.backgroundColor = "transparent";
-            tabButton.style.border = "1px solid transparent";
-            if (i === 0) {
-              tabButton.style.border = "1px solid #999696";
-              tabButton.style.border = "1px solid #999696";
-            }
-            navContainer.appendChild(tabButton);
-            const tabPane = document.createElement("div");
-            tabPane.className = `tab-pane fade ${i === 0 ? 'show active' : ''}`;
-            tabPane.id = `followUpContent${i + 1}`;
-            tabPane.setAttribute("role", "tabpanel");
-            tabPane.setAttribute("aria-labelledby", `followUpTab${i + 1}`);
-            tabPane.innerHTML = `
-                    <div class="card shadow-sm bg-white rounded ${i === 0 ? 'active-tab-content' : ''}">
-                        <h5 class="card-header">${column.title}</h5>
+            console.log('Full API Response:', response);
+            const followUpData = response.leadsDetail[0];
+            
+            const columns = [
+                { date: "FIRST_FOLLOWUP_DATE", remark: "FIRST_FOLLOWUP_REMARK", title: "Follow Up 1" },
+                { date: "SECOND_FOLLOWUP_DATE", remark: "SECOND_FOLLOWUP_REMARK", title: "Follow Up 2" },
+                { date: "THREE_FOLLOWUP_DATE", remark: "THREE_FOLLOWUP_REMARK", title: "Follow Up 3" },
+                { date: "FOUR_FOLLOWUP_DATE", remark: "FOUR_FOLLOWUP_REMARK", title: "Follow Up 4" },
+                { date: "FIVE_FOLLOWUP_DATE", remark: "FIVE_FOLLOWUP_REMARK", title: "Follow Up 5" }
+            ];
+            
+            navContainer.innerHTML = "";
+            tabContentContainer.innerHTML = "";
+            
+            columns.forEach((column, i) => {
+                const followUpDate = followUpData[column.date];
+                const followUpRemark = followUpData[column.remark];
+                let isReadonly = followUpDate && followUpRemark;
+                
+                const tabButton = document.createElement("button");
+                tabButton.className = `nav-link ${i === 0 ? 'active' : ''}`;
+                tabButton.id = `followUpTab${i + 1}`;
+                tabButton.setAttribute("data-bs-toggle", "pill");
+                tabButton.setAttribute("data-bs-target", `#followUpContent${i + 1}`);
+                tabButton.setAttribute("type", "button");
+                tabButton.setAttribute("role", "tab");
+                tabButton.setAttribute("aria-controls", `followUpContent${i + 1}`);
+                tabButton.setAttribute("aria-selected", i === 0 ? "true" : "false");
+                tabButton.classList.add("btn", "btn-outline-primary", "w-100", "mb-2");
+                tabButton.innerText = column.title;
+                
+                navContainer.appendChild(tabButton);
+                
+                const tabPane = document.createElement("div");
+                tabPane.className = `tab-pane fade ${i === 0 ? 'show active' : ''}`;
+                tabPane.id = `followUpContent${i + 1}`;
+                tabPane.setAttribute("role", "tabpanel");
+                tabPane.setAttribute("aria-labelledby", `followUpTab${i + 1}`);
+                tabPane.innerHTML = `
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">${column.title}</div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div>
-                                        <input type="date" id="date${i + 1}" class="form-control" value="${followUpDate || ''}" ${isReadonly ? 'readonly' : ''}>
-                                    </div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <input type="date" id="date${i + 1}" class="form-control" value="${followUpDate || ''}" ${isReadonly ? 'readonly' : ''}>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div>
-                                        <textarea id="notes${i + 1}" class="form-control" placeholder="Type something…" rows="2" ${isReadonly ? 'readonly' : ''}>${followUpRemark || ''}</textarea>
-                                    </div>
+                                <div class="col-md-4">
+                                    <textarea id="notes${i + 1}" class="form-control" placeholder="Type something…" rows="2" ${isReadonly ? 'readonly' : ''}>${followUpRemark || ''}</textarea>
                                 </div>
-                                <div class="col-lg-4 d-flex justify-content-center">
-                                    <div class="mt-3">
-                                        <button class="btn btn-outline-success w-100 submitFollowUp" id="submitBtn${i + 1}" data-index="${i + 1}" ${isReadonly ? 'style="display: none;"' : ''}>Submit</button>
-                                    </div>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <button class="btn btn-success w-100 submitFollowUp" id="submitBtn${i + 1}" data-index="${i + 1}" ${isReadonly ? 'style="display: none;"' : ''}>Submit</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
-            tabContentContainer.appendChild(tabPane);
-          });
-          $(document).on("shown.bs.tab", 'button[data-bs-toggle="pill"]', function () {
-            $(".nav-link").css({
-              "color": "black",
-              "background-color": "transparent",
-              "border": "1px solid transparent",
-              "border-right": "none",
+                
+                tabContentContainer.appendChild(tabPane);
             });
-            $(".tab-pane").removeClass("active-tab-content");
-            $(this).css({
-              "color": "black",
-              "background-color": "transparent",
-              "border": "1px solid #999696",
-            });
-            const targetTabContentId = $(this).attr("data-bs-target");
-            $(targetTabContentId).addClass("active-tab-content");
-          });
         },
-        error: function (xhr, status, error) {
-          Swal.fire({
-                    icon: "error",
-                    title: "Oops",
-                    text: "Failed to retrieve follow-up data. Please try again.",
-                });
+        error: function () {
+            Swal.fire({ icon: "error", title: "Oops", text: "Failed to retrieve follow-up data. Please try again." });
         }
-      });
-    }
+    });
+}
+
+
+
     fetchLeads();
     document.addEventListener('DOMContentLoaded', function () {
       const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -1103,11 +1057,11 @@
                   key] !== "") {
                 let badgeHtml = '';
                 if (key.toLowerCase() === 'source') {
-                  badgeHtml = `<span class="badge bg-primary">${convertedLead[key]}</span>`;
+                  badgeHtml = `<span class="badge bg-primary text-light">${convertedLead[key]}</span>`;
                 } else if (key.toLowerCase() === 'status') {
                   badgeHtml = `<span class="badge bg-secondary">${convertedLead[key]}</span>`;
                 } else if (key.toLowerCase() === 'product') {
-                  badgeHtml = `<span class="badge bg-success">${convertedLead[key]}</span>`;
+                  badgeHtml = `<span class="badge bg-success text-light">${convertedLead[key]}</span>`;
                 }
                 let contentHtml = convertedLead[key];
                 if (key.toLowerCase() === 'creator') {
