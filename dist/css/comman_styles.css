@@ -1,3 +1,7 @@
+
+
+.bg-gradiant{ background: linear-gradient(90deg, #007bff, #0056b3); }
+
 .button {
     background: linear-gradient(90deg, #007bff, #0056b3);
     color: #fff;
@@ -564,11 +568,12 @@
     
           .quick-action-dropdown .dropdown-item:hover {
             background-color: #f0f0f0;
+            color: rgb(26, 25, 21);
           }
     
-          .quick-action-dropdown .dropdown-item i {
+          .quick-action-dropdown .dropdown-item svg{
             font-size: 16px;
-            color: #007bff;
+            color: #007bff !important;
           }
      
             .tooltip {
