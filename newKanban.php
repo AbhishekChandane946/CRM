@@ -58,9 +58,136 @@
     </div>
 </div>
 
+
+
+
+
+
 <!-- KANBAN HEADER BUT JUST ONLY FOR LINKS -->
 <?php include 'K_foot.php';?>
 
 
-<?php include 'footer.php';?>
-<!-- MAIN FOOTER -->
+<script>
+$(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip();
+});
+
+$('.selectpicker').selectpicker();
+loadUsers();
+
+function loadUsers(selectedUserIds = '') {
+    $.ajax({
+        type: "POST",
+        url: "api.php",
+        data: { action: "users.getUsers" },
+        dataType: "json",
+        success: function (data) {
+            console.log("API Response:", data); // Debugging
+
+            if (data.status === "success") {
+                var users = data.users;
+                var selectedIds = selectedUserIds.split(',').map(id => id.trim());
+
+                // Clear existing options before appending
+                $('#user_id').empty();
+
+                $.each(users, function (index, user) {
+                    var selected = selectedIds.includes(user.ID.toString()) ? 'selected' : '';
+                    $('#user_id').append(`<option value="${user.ID}" ${selected}>${user.USER_NAME}</option>`);
+                });
+
+                // Refresh dropdown to apply new options
+                $('#user_id').selectpicker('refresh');
+            } else {
+                console.log("Error: ", data.message);
+            }
+        },
+        error: function (xhr) {
+            console.log("AJAX Error:", xhr.responseText);
+        }
+    });
+}
+
+$("#leadAssignUserForm").submit(function (e) {
+    e.preventDefault();
+    var form = $(this).serialize();
+    console.log("Form Data:", form);
+
+    $.ajax({
+        type: "POST",
+        url: "api.php",
+        data: form,
+        dataType: "json",
+        success: function (data) {
+            if (data.status === "success") {
+                // Reset form before hiding modal
+                $("#leadAssignUserForm")[0].reset();
+                $('#user_id').selectpicker('refresh'); // Ensure dropdown resets
+                $('#user_id').selectpicker('toggle'); // Close dropdown
+
+                $('#leadAssignUserModal').modal('hide');
+                refreshKanbanBoard();
+
+                Swal.fire({
+                    title: data.message,
+                    icon: "success",
+                    draggable: true,
+                    customClass: { popup: 'small-swal' }
+                });
+            } else {
+                Swal.fire({
+                    title: data.message,
+                    icon: "error",
+                    draggable: true,
+                    customClass: { popup: 'small-swal' }
+                });
+            }
+        },
+        error: function (xhr) {
+            Swal.fire({
+                title: "An error occurred.",
+                text: xhr.responseText,
+                icon: "error",
+                draggable: true,
+                customClass: { popup: 'small-swal' }
+            });
+        }
+    });
+});
+
+function refreshKanbanBoard() {
+    getLeads(statuses);
+}
+
+function setBackgroundColor() {
+    $('.list-title').each(function () {
+        var titleText = $(this).text().trim();
+        var formattedText = titleText.replace(/_/g, ' ')
+            .toLowerCase()
+            .replace(/\b\w/g, function (char) { return char.toUpperCase(); });
+
+        $(this).html(formattedText);
+
+        var colors = {
+            "New": "#F1C40F",
+            "Contacted": "#3498DB",
+            "Qualified": "#E67E22",
+            "Opportunity": "#9B59B6",
+            "Demo Scheduled": "#2ECC71",
+            "Demo Done": "#27AE60",
+            "In Negotiation": "#E74C3C",
+            "Converted": "#16A085",
+            "Disqualified": "#E74C3C",
+            "Lost": "#95A5A6",
+            "Live": "#1ABC9C",
+            "Other": "#BDC3C7"
+        };
+
+        if (colors.hasOwnProperty(formattedText)) {
+            $(this).css('background-color', colors[formattedText]);
+        }
+    });
+}
+
+  
+</script>

@@ -14,7 +14,7 @@
                     <!-- Page title actions -->
                     <div class="col-auto ms-auto d-print-none">
                       <div class="btn-list">
-                          <button style="border-radius: 25px;" class="button"> Filter</button>   
+                          <button style=" padding:7px;" class="button"> Filter</button>   
                       </div>
                     </div>
                   </div>

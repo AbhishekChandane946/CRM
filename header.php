@@ -14,15 +14,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title> CRM</title>
     <!-- CSS files -->
+    <link rel="stylesheet" href="dist/css/comman_styles.css"> 
+    
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
-
-    <link rel="stylesheet" href="comman_styles.css">   
+    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/> 
+    <link rel="stylesheet" href="dist/css/product_dashboard.css">
      
-     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <style>
       @import url('https://rsms.me/inter/inter.css');
