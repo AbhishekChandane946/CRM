@@ -181,10 +181,10 @@ function renderCard($container, lead) {
     const $badges = $('<div>').appendTo($headerRow);
 
     if (lead.lead_source) {
-        $('<span>').addClass('badge bg-primary me-2').attr('title', `Lead Source: ${lead.lead_source}`).text(lead.lead_source).appendTo($badges);
+        $('<span>').addClass('badge bg-primary text-light me-2').attr('title', `Lead Source: ${lead.lead_source}`).text(lead.lead_source).appendTo($badges);
     }
     if (lead.lead_product) {
-        $('<span>').addClass('badge bg-success').attr('title', `Lead Product: ${lead.lead_product}`).text(lead.lead_product).appendTo($badges);
+        $('<span>').addClass('badge bg-success text-light').attr('title', `Lead Product: ${lead.lead_product}`).text(lead.lead_product).appendTo($badges);
     }
 
     const $dropdown = $('<div>').addClass('dropdown').appendTo($headerRow);
