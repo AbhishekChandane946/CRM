@@ -540,7 +540,7 @@ function renderFollowUpData() {
                 tabButton.setAttribute("role", "tab");
                 tabButton.setAttribute("aria-controls", `followUpContent${i + 1}`);
                 tabButton.setAttribute("aria-selected", i === 0 ? "true" : "false");
-                tabButton.classList.add("btn", "", "w-100", "mb-2");
+                tabButton.classList.add("btn", "btn-outline-primary", "w-100", "mb-2");
                 tabButton.innerText = column.title;
                 
                 navContainer.appendChild(tabButton);
