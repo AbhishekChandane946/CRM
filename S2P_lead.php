@@ -130,7 +130,7 @@
                     </div>
                     <div class="tab-pane" id="tabs-profile-8" role="tabpanel">
                       <div class="d-flex align-items-start">
-                        <div class="nav flex-column nav-pills me-3 shadow-sm  rounded " id="followUpNav" role="tablist"
+                        <div style="border: 1px solid rgb(179, 179, 179);" class="nav flex-column nav-pills me-3 shadow-sm  rounded " id="followUpNav" role="tablist"
                           aria-orientation="vertical"></div>
                         <div class="tab-content w-100" id="followUpTabContent"></div>
                       </div>
