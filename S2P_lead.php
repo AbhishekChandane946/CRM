@@ -390,35 +390,7 @@
 
                       </style>
                       
-                      <div class="d-flex align-items-start " >
-                          <div class="custom-tab-container" style="margin-right: 12px;">
-                            <div class="p-3 nav flex-column nav-pills me-3 custom-tab-list" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <button class="nav-link active" id="v-pills-follow1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow1" type="button" role="tab" aria-controls="v-pills-follow1" aria-selected="true">
-                                    Follow Up 1 
-                                </button>
-                                <button class="nav-link" id="v-pills-follow2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow2" type="button" role="tab" aria-controls="v-pills-follow2" aria-selected="false">
-                                    Follow Up 2
-                                </button>
-                                <button class="nav-link" id="v-pills-follow3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow3" type="button" role="tab" aria-controls="v-pills-follow3" aria-selected="false">
-                                    Follow Up 3
-                                </button>
-                                <button class="nav-link" id="v-pills-follow4-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow4" type="button" role="tab" aria-controls="v-pills-follow4" aria-selected="false">
-                                    Follow Up 4
-                                </button>
-                                <button class="nav-link" id="v-pills-follow5-tab" data-bs-toggle="pill" data-bs-target="#v-pills-follow5" type="button" role="tab" aria-controls="v-pills-follow5" aria-selected="false">
-                                    Follow Up 5
-                                </button>
-                            </div>
-                          </div>
-                    
-                        <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-follow1" role="tabpanel" aria-labelledby="v-pills-follow1-tab"></div>
-                            <div class="tab-pane fade" id="v-pills-follow2" role="tabpanel" aria-labelledby="v-pills-follow2-tab"></div>
-                            <div class="tab-pane fade" id="v-pills-follow3" role="tabpanel" aria-labelledby="v-pills-follow3-tab"></div>
-                            <div class="tab-pane fade" id="v-pills-follow4" role="tabpanel" aria-labelledby="v-pills-follow4-tab"></div>
-                            <div class="tab-pane fade" id="v-pills-follow5" role="tabpanel" aria-labelledby="v-pills-follow5-tab"></div>
-                        </div>
-                    </div>
+
                     
 
                       <div class="tab-pane fade" id="tabs-activity-8">
