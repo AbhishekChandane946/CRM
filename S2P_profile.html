@@ -34,6 +34,9 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }   
+      .form-check-input:checked {
+        background-color: #28a745 !important; 
+    }
     </style>
     
   </head>
@@ -746,80 +749,130 @@
                                 </ul>
                                 
                             </div>
+
                             <div class="card-body bg-light p-4 rounded-bottom">
                                 <div class="tab-content">
                                     <div class="tab-pane active show" id="overview">
                                         <h4 class="fw-bold text-primary">Job Information</h4>
                                         <p class="text-muted">Details about job roles, department, and location.</p>
                                     </div>
-                        <!-- Permissions Tab with Switch Toggles in Two Columns -->
-                        <div class="tab-pane" id="permissions" style="min-height: 300px;">
-                            <h4 class="fw-bold text-primary mb-3">Permissions</h4>
-                            <p class="text-muted">Manage user permissions and access levels.</p>
-                            
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="form-check form-switch d-flex align-items-center">
-                                                <input class="form-check-input me-2" type="checkbox" id="perm1">
-                                                <label class="form-check-label" for="perm1">View Dashboard</label>
+
+                                    
+                                    <!-- Permissions Tab with Switch Toggles in Two Columns -->
+                                    <div class="tab-pane" id="permissions" style="min-height: 300px;">
+
+                                       <div class="card shadow-sm border-0 p-3">
+                                        <h4 class="fw-bold text-primary mb-3">Permissions</h4>
+                                        <p class="text-muted">Manage user permissions and access levels.</p>
+                                    
+                                        <!-- Scrollable Container -->
+                                        <div class=" p-3" style="max-height: 300px; overflow-y: auto;">
+                                            <div class="row g-3">
+                                                <!-- Permission Item 1 -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-3 mt-1" type="checkbox" id="perm1">
+                                                        <div class="d-flex flex-column">
+                                                            <label class="form-check-label fw-bold" for="perm1">View Dashboard</label>
+                                                            <small class="text-muted">Allows access to the main dashboard overview.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    
+                                                <!-- Permission Item 2 -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-3 mt-1" type="checkbox" id="perm2">
+                                                        <div class="d-flex flex-column">
+                                                            <label class="form-check-label fw-bold" for="perm2">Manage Users</label>
+                                                            <small class="text-muted">Allows managing user accounts and roles.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    
+                                                <!-- Permission Item 3 -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-3 mt-1" type="checkbox" id="perm3">
+                                                        <div class="d-flex flex-column">
+                                                            <label class="form-check-label fw-bold" for="perm3">Edit Settings</label>
+                                                            <small class="text-muted">Grants access to change system settings.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    
+                                                <!-- Permission Item 4 -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-3 mt-1" type="checkbox" id="perm4">
+                                                        <div class="d-flex flex-column">
+                                                            <label class="form-check-label fw-bold" for="perm4">Access Reports</label>
+                                                            <small class="text-muted">Allows viewing and exporting system reports.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    
+                                                <!-- Permission Item 5 -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-3 mt-1" type="checkbox" id="perm5">
+                                                        <div class="d-flex flex-column">
+                                                            <label class="form-check-label fw-bold" for="perm5">Modify Permissions</label>
+                                                            <small class="text-muted">Enables modifying user access levels.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        </div> 
+
+                                        <div class="card shadow-sm border-0 p-3">
+                                          <h4 class="fw-bold text-primary mb-3">Group Permissions</h4>
+                                          <p class="text-muted">Manage permissions for different user roles.</p>
+                                      
+                                          <!-- Scrollable container -->
+                                          <div class="border rounded p-3" style="max-height: 300px; overflow-y: auto;">
+                                              <div class="row g-3">
+                                                  <!-- Permission Item 1 -->
+                                                  <div class="col-md-6">
+                                                      <div class="d-flex align-items-center">
+                                                          <input class="form-check-input me-3 mt-1" type="checkbox" id="perm1">
+                                                          <div class="d-flex flex-column">
+                                                              <label class="form-check-label fw-bold" for="perm1">View Dashboard</label>
+                                                              <small class="text-muted">Allows access to the main dashboard overview.</small>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                      
+                                                  <!-- Permission Item 2 -->
+                                                  <div class="col-md-6">
+                                                      <div class="d-flex align-items-center">
+                                                          <input class="form-check-input me-3 mt-1" type="checkbox" id="perm2">
+                                                          <div class="d-flex flex-column">
+                                                              <label class="form-check-label fw-bold" for="perm2">Manage Users</label>
+                                                              <small class="text-muted">Allows managing user accounts and roles.</small>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                      
+                                                  <!-- Permission Item 3 -->
+                                                  <div class="col-md-6">
+                                                      <div class="d-flex align-items-center">
+                                                          <input class="form-check-input me-3 mt-1" type="checkbox" id="perm3">
+                                                          <div class="d-flex flex-column">
+                                                              <label class="form-check-label fw-bold" for="perm3">Edit Settings</label>
+                                                              <small class="text-muted">Grants access to change system settings.</small>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                      
+                                              </div>
+                                          </div>
+                                        </div> 
+
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="form-check form-switch d-flex align-items-center">
-                                                <input class="form-check-input me-2" type="checkbox" id="perm2" checked>
-                                                <label class="form-check-label" for="perm2">Edit Profile</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="form-check form-switch d-flex align-items-center">
-                                                <input class="form-check-input me-2" type="checkbox" id="perm3">
-                                                <label class="form-check-label" for="perm3">Manage Users</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="form-check form-switch d-flex align-items-center">
-                                                <input class="form-check-input me-2" type="checkbox" id="perm4" checked>
-                                                <label class="form-check-label" for="perm4">View Reports</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="form-check form-switch d-flex align-items-center">
-                                                <input class="form-check-input me-2" type="checkbox" id="perm5">
-                                                <label class="form-check-label" for="perm5">Modify Settings</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="form-check form-switch d-flex align-items-center">
-                                                <input class="form-check-input me-2" type="checkbox" id="perm6">
-                                                <label class="form-check-label" for="perm6">Access API</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
+
+                                    <!-- Permissions Tab with Switch Toggles in Two Columns -->
 
                                     <div class="tab-pane" id="activity">
                                         <h4 class="fw-bold text-primary">Recent Activity</h4>
