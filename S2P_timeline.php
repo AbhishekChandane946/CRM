@@ -39,7 +39,7 @@
     </style>
     
     <style>
-          .timeline {
+    .timeline {
         list-style: none;
         padding: 0;
         position: relative;
@@ -135,9 +135,7 @@
           color: #856404; 
           background-color: #fff3cd;  
       }
- 
-
-
+  
     </style>
     
   </head>
