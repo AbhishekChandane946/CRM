@@ -45,6 +45,10 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
+                      <label for="eventDate">Selected Date:</label>
+                <input type="text" id="eventDate" class="form-control" readonly>
+                
+                <p id="availabilityMessage" class="mt-2"></p> <!-- Availability Message Here -->
                           <form id="eventForm">
                               <!-- Event Name -->
                               <div class="mb-3">
@@ -197,128 +201,121 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 
         <script> 
-         $(document).ready(function () {
-          var calendarEl = $('#calendar')[0];
+  
 
-          var calendar = new FullCalendar.Calendar(calendarEl, {
-              initialView: 'dayGridMonth', 
 
-              events: [
-                        {
-                          "id": 1,
-                          "title": "Project Discussion",
-                          "start": "2025-01-27",
-                          "description": "Meeting to discuss project milestones.",
-                          "type": "Meeting"
-                        },
-                        {
-                          "id": 2,
-                          "title": "Client Call",
-                          "start": "2024-02-05",
-                          "description": "Follow-up call with the client regarding requirements.",
-                          "type": "Meeting"
-                        },
-                        {
-                          "id": 3,
-                          "title": "New Lead: John Doe",
-                          "start": "2024-02-10",
-                          "description": "Potential client interested in software services.",
-                          "type": "Lead"
-                        },
-                        {
-                          "id": 4,
-                          "title": "Team Sync-up",
-                          "start": "2024-02-15",
-                          "description": "Weekly meeting with the development team.",
-                          "type": "Meeting"
-                        },
-                        {
-                          "id": 5,
-                          "title": "Lead: ABC Corp",
-                          "start": "2024-02-18",
-                          "description": "Company looking for CRM software solutions.",
-                          "type": "Lead"
-                        },
-                        {
-                          "id": 6,
-                          "title": "Sprint Planning",
-                          "start": "2024-02-20",
-                          "description": "Discuss upcoming sprint tasks and backlog.",
-                          "type": "Meeting"
-                        },
-                        {
-                          "id": 7,
-                          "title": "Lead: XYZ Pvt Ltd",
-                          "start": "2025-01-28",
-                          "description": "Potential customer exploring cloud services.",
-                          "type": "Lead"
-                        },
-                        {
-                          "id": 8,
-                          "title": "Investor Meeting",
-                          "start": "2025-01-20",
-                          "description": "Presentation to investors about growth strategy.",
-                          "type": "Meeting"
-                        },
-                        {
-                          "id": 9,
-                          "title": "Lead: Jane Smith",
-                          "start": "2025-01-14",
-                          "description": "Lead interested in website development.",
-                          "type": "Lead"
-                        },
-                        {
-                          "id": 10,
-                          "title": "Annual Review",
-                          "start": "2025-01-06",
-                          "description": "Year-end performance review meeting.",
-                          "type": "Meeting"
-                        }
-                      ],
 
-              dateClick: function (info) {
-                  $('#eventDate').val(info.dateStr);
-                  $('#eventModal').modal('show'); // Show event creation modal
-              },
 
-              eventClick: function (info) {
-                  var eventType = info.event.extendedProps.type; // Fetch event type
 
-                  if (eventType === "Meeting") {
-                      $('#meetingId').val(info.event.id);
-                      $('#meetingTitle').text(info.event.title);
-                      $('#meetingDate').text(info.event.startStr);
-                      $('#meetingDescription').text(info.event.extendedProps.description || "No details provided.");
-                      $('#meetingModal').modal('show'); // Open Meeting modal
-                  } else if (eventType === "Lead") {
-                      $('#leadId').val(info.event.id);
-                      $('#leadTitle').text(info.event.title);
-                      $('#leadDate').text(info.event.startStr);
-                      $('#leadDescription').text(info.event.extendedProps.description || "No details provided.");
-                      $('#leadModal').modal('show'); // Open View Lead Details modal
+
+
+
+          $(document).ready(function () {
+              var calendarEl = $('#calendar')[0];
+
+              var eventsData = [  // Your predefined events
+                  {
+                      "id": 1,
+                      "title": "Project Discussion",
+                      "start": "2025-01-27",
+                      "description": "Meeting to discuss project milestones.",
+                      "type": "Meeting"
+                  },
+                  {
+                      "id": 2,
+                      "title": "Client Call",
+                      "start": "2024-02-05",
+                      "description": "Follow-up call with the client regarding requirements.",
+                      "type": "Meeting"
+                  },
+                  {
+                      "id": 3,
+                      "title": "New Lead: John Doe",
+                      "start": "2024-02-10",
+                      "description": "Potential client interested in software services.",
+                      "type": "Lead"
+                  },
+                  {
+                      "id": 4,
+                      "title": "New Lead: Abhishek Chandane",
+                      "start": "2025-02-14",
+                      "description": "Potential client interested in software services.",
+                      "type": "Lead"
                   }
-              },
-              
+              ];
 
-              eventContent: function(arg) {
-                  let eventTitle = arg.event.title;
-                  let eventType = arg.event.extendedProps.type;
-                  let bgColor = eventType === 'Meeting' ? '#8c31b9' : '#14b1ff';  
-                
-                  return {
-                      html: `
-                          <div style="background: ${bgColor};  text-align: center; font-size: 14px; font-weight: bold; color: white;">
-                              ${eventTitle}
-                          </div>
-                      `
-                  };
-             }
-          
+              var calendar = new FullCalendar.Calendar(calendarEl, {
+                  initialView: 'dayGridMonth',
+
+                  events: eventsData, // Use predefined events
+
+                  dateClick: function (info) {
+                      $('#eventDate').val(info.dateStr);
+                      checkAvailability(info.dateStr); // Call function to check availability
+                      $('#eventModal').modal('show'); // Show modal for event creation
+                  },
+
+                  eventClick: function (info) {
+                      var eventType = info.event.extendedProps.type;
+
+                      if (eventType === "Meeting") {
+                          $('#meetingId').val(info.event.id);
+                          $('#meetingTitle').text(info.event.title);
+                          $('#meetingDate').text(info.event.startStr);
+                          $('#meetingDescription').text(info.event.extendedProps.description || "No details provided.");
+                          $('#meetingModal').modal('show'); 
+                      } else if (eventType === "Lead") {
+                          $('#leadId').val(info.event.id);
+                          $('#leadTitle').text(info.event.title);
+                          $('#leadDate').text(info.event.startStr);
+                          $('#leadDescription').text(info.event.extendedProps.description || "No details provided.");
+                          $('#leadModal').modal('show'); 
+                      }
+                  },
+
+                  eventContent: function(arg) {
+                      let eventTitle = arg.event.title;
+                      let eventType = arg.event.extendedProps.type;
+                      let bgColor = eventType === 'Meeting' ? '#8c31b9' : '#14b1ff';  
+
+                      return {
+                          html: `
+                              <div style="background: ${bgColor}; text-align: center; font-size: 14px; font-weight: bold; color: white;">
+                                  ${eventTitle}
+                              </div>
+                          `
+                      };
+                  }
+              });
+
+              calendar.render();
+
+
+                // Function to check if the selected date is available or outdated
+                function checkAvailability(selectedDate) {
+                    let today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+                    
+                    if (selectedDate < today) {
+                        $('#availabilityMessage').html("<span class='text-warning'>⚠️ This date is in the past. You cannot schedule an event.</span>");
+                        return;
+                    }
+
+                    let isAvailable = !eventsData.some(event => event.start === selectedDate);
+                    let message = isAvailable 
+                        ? "<span class='text-success'>✅ Date is available.</span>" 
+                        : "<span class='text-danger'>❌ Date is already booked.</span>";
+                    
+                    $('#availabilityMessage').html(message);
+                }
+              
             });
 
-          calendar.render(); 
 
-          });  
+
+
+
+
+
        </script>
 
 
