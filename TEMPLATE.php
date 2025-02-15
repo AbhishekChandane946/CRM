@@ -44,6 +44,10 @@
       overflow-y: auto;   
     }
 
+    .img-size{
+      height: 290px;
+    }
+
 
     </style> 
     
@@ -657,66 +661,90 @@
               <!-- Left Column: Email Template Selection -->
               <div class="col-xl-6">
                   <div class="card">
-                      <div class="card-body">
-                          <h4 class="card-title mb-4">Select Email Template</h4>
-                          <div class="row g-3">
-                              <!-- Template Options -->
-                              <div class="col-md-4">
-                                  <label class="form-imagecheck text-center w-100">
-                                      <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
-                                      <span class="form-imagecheck-figure d-block">
-                                          <img src="payment/screenshot.jpg" alt="Screenshot Dark" class="form-imagecheck-image rounded">
-                                      </span>
-                                      <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
-                                  </label>
-                              </div>
-                              <div class="col-md-4">
-                                  <label class="form-imagecheck text-center w-100">
-                                      <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" checked />
-                                      <span class="form-imagecheck-figure d-block">
-                                          <img src="message/screenshot.jpg" alt="Color Palette Guide" class="form-imagecheck-image rounded">
-                                      </span>
-                                      <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
-                                  </label>
-                              </div>
-                              <div class="col-md-4">
-                                  <label class="form-imagecheck text-center w-100">
-                                      <input name="template" type="radio" value="valentines-1/source.html" class="form-imagecheck-input" />
-                                      <span class="form-imagecheck-figure d-block">
-                                          <img src="valentines-1/screenshot.jpg" alt="Stylish Workplace" class="form-imagecheck-image rounded">
-                                      </span>
-                                      <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
-                                  </label>
-                              </div>
+                    <div class="card-body">
+                      <h4 class="card-title mb-4">Select Email Template</h4>
+
+                      <div class="row g-3">
+                          <!-- Template Options -->
+                          <div class="col-md-4">
+                              <label class="form-imagecheck text-center w-100">
+                                  <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
+                                  <span class="form-imagecheck-figure d-block">
+                                      <img src="payment/MMC-&-OTC-Charges.png" alt="Screenshot Dark" class="img-size form-imagecheck-image rounded">
+                                  </span>
+                                  <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
+                              </label>
                           </div>
 
-                          <!-- Input Fields -->
-                          <div class="row mt-4">
-                              <div class="col-md-6">
-                                  <div class="mb-3">
-                                      <label class="form-label fw-semibold">Title:</label>
-                                      <input type="text" id="title-input" class="form-control" placeholder="Enter title">
-                                  </div>
-                                  <div class="mb-3">
-                                      <label class="form-label fw-semibold">MMC:</label>
-                                      <input type="text" id="mmc-input" class="form-control" placeholder="Enter MMC">
-                                  </div>
-                              </div>
-                              <div class="col-md-6">
-                                  <div class="mb-3">
-                                      <label class="form-label fw-semibold">Content:</label>
-                                      <textarea id="content-input" class="form-control" placeholder="Enter content" rows="1"></textarea>
-                                  </div>
-                                  <div class="mb-3">
-                                      <label class="form-label fw-semibold">OTC:</label>
-                                      <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC">
-                                  </div>
-                              </div>
-                          </div>
+                          <div class="col-md-4">
+                              <label class="form-imagecheck text-center w-100">
+                                  <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" />
+                                  <span class="form-imagecheck-figure d-block">
+                                      <img src="message/Follow-up-Message.png" alt="Color Palette Guide" class="img-size form-imagecheck-image rounded">
+                                  </span>
+                                  <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
+                              </label>
+                                        </div>
 
-                          <!-- Preview Button -->
-                          <button id="preview-btn" class="btn btn-primary w-100">Preview</button>
+                          <div class="col-md-4">
+                              <label class="form-imagecheck text-center w-100">
+                                  <input name="template" type="radio" value="valentines-1/source.html" class="form-imagecheck-input" />
+                                  <span class="form-imagecheck-figure d-block">
+                                      <img src="valentines-1/New-Lead-Acknowledgment.png" alt="Stylish Workplace" class="img-size form-imagecheck-image rounded">
+                                  </span>
+                                  <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
+                              </label>
+                          </div>
                       </div>
+
+                      <!-- Hidden Inputs Container (Initially Hidden) -->
+                      <div id="template-inputs-container" class="mt-4 d-none">
+                          <div id="mmc-otc-inputs" class="d-none">
+                              <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label fw-semibold">MMC:</label>
+                                    <input type="text" id="mmc-input" class="form-control mb-2" placeholder="Enter MMC" required>
+                                  </div>
+                                  <div class="col-6">
+                                    <label class="form-label fw-semibold">OTC:</label>
+                                   <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC" required>
+                                  </div>
+                              </div>
+                   
+                          </div>
+
+                          <div id="followup-inputs" class="d-none">
+                              <div class="row">
+                                <div class="col-6">
+                                 <label class="form-label fw-semibold">Follow-up Reason:</label>
+                                  <input type="text" id="followup-reason-input" class="form-control" placeholder="Enter Reason" required>
+                                </div>
+                              </div>
+                          </div>
+
+                          <div id="lead-source-inputs" class="d-none">
+                            <div class="row">
+                              <div class="col-6">
+                                <label class="form-label fw-semibold">Lead Source:</label>
+                                <input type="text" id="lead-source-input" class="form-control" placeholder="Enter Lead Source" required>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-6">
+                              <!-- Preview Button -->
+                              <button id="preview-btn" class="btn btn-primary w-100 mt-4">Preview</button>
+                          </div>
+                          <div class="col-6">
+                            <!-- Send Mail Button -->
+                            <button id="send-mail" class="btn btn-danger w-100 mt-4">Send Mail</button>
+                          </div>
+                      </div>
+
+                    </div>
+
                   </div>
               </div>
 
@@ -725,7 +753,7 @@
                   <div class="card">
                       <div class="card-body">
                           <h5 class="card-title">Preview</h5>
-                          <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 300px;">
+                          <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 540px;">
                               <p class="text-muted">Selected template preview will appear here.</p>
                           </div>
                       </div>
@@ -787,7 +815,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
-          $("#preview-btn").on("click", function () {
+          // Function to load and preview the selected template
+          function previewTemplate() {
               let selectedTemplate = $("input[name='template']:checked").val();
 
               if (selectedTemplate) {
@@ -802,8 +831,12 @@
                           let title = $("#title-input").val();
                           let heading = $("#heading-input").val();
                           let content = $("#content-input").val();
+
+                          // Default placeholders if empty
                           let mmc = $("#mmc-input").val().trim() || "- - -";
                           let otc = $("#otc-input").val().trim() || "- - -";
+                          let followupReason = $("#followup-reason-input").val().trim() || " Reason Goes Here !  ";
+                          let leadSource = $("#lead-source-input").val().trim() || " our services ";
 
                           // Replace placeholders in the fetched content
                           data = data.replace(/{LOGO}/g, logo);
@@ -812,23 +845,78 @@
                           data = data.replace(/{CONTENT}/g, content);
                           data = data.replace(/{MMC}/g, mmc);
                           data = data.replace(/{OTC}/g, otc);
+                          data = data.replace(/{FOLLOWUP_REASON}/g, followupReason);
+                          data = data.replace(/{LEAD_SOURCE}/g, leadSource);
 
                           // Show the updated content in the preview container
                           $("#preview-container").html(data);
-                       },
+                      },
                       error: function () {
                           $("#preview-container").html("<p class='text-danger'>Error loading file.</p>");
                       }
                   });
-              } else {
-                  alert("Please select a template.");
               }
-          });
+          }
+
+        // Show input fields based on selected template
+        $("input[name='template']").on("change", function () {
+            // Hide all additional inputs
+            $("#template-inputs-container").addClass("d-none");
+            $("#mmc-otc-inputs, #followup-inputs, #lead-source-inputs").addClass("d-none");
+
+            // Show the container first
+            $("#template-inputs-container").removeClass("d-none");
+
+            // Show inputs based on the selected template
+            let selectedValue = $(this).val();
+
+            if (selectedValue === "payment/source.html") {
+                $("#mmc-otc-inputs").removeClass("d-none");
+            } else if (selectedValue === "message/source.html") {
+                $("#followup-inputs").removeClass("d-none");
+            } else if (selectedValue === "valentines-1/source.html") {
+                $("#lead-source-inputs").removeClass("d-none");
+            }
+
+            previewTemplate();
+
+        });
+
+
+          // Trigger preview on button click
+          $("#preview-btn").on("click", previewTemplate);
+
+          
+        $("#send-mail").on("click", function () {
+            let selectedTemplate = $("input[name='template']:checked").val();
+            let formData = { template: selectedTemplate };
+
+            if (selectedTemplate === "payment/source.html") {
+                formData.mmc = $("#mmc-input").val();
+                formData.otc = $("#otc-input").val();
+            } else if (selectedTemplate === "message/source.html") {
+                formData.followupReason = $("#followup-reason-input").val();
+            } else if (selectedTemplate === "valentines-1/source.html") {
+                formData.leadSource = $("#lead-source-input").val();
+            }
+
+            // Send data to server using AJAX
+            $.ajax({
+                url: "send_email.php", // PHP script to process the email
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    alert("Email Sent Successfully!");
+                },
+                error: function () {
+                    alert("Error Sending Email");
+                }
+            });
+        });
+          
       });
     </script>
-
-
-
+ 
 
   </body>
 </html>
