@@ -710,6 +710,16 @@
                                    <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC" required>
                                   </div>
                               </div>
+                              <div class="row mt-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Select Product:</label>
+                                    <select id="product-select" class="form-select">
+                                        <option value="">-- Select Product --</option>
+                                        <option value="SEC2PAY">SEC2PAY</option>
+                                        <option value="INDIRAIL">INDIRAIL</option>
+                                    </select>
+                                </div>
+                              </div>
                    
                           </div>
 
@@ -837,6 +847,7 @@
                           let otc = $("#otc-input").val().trim() || "- - -";
                           let followupReason = $("#followup-reason-input").val().trim() || " Reason Goes Here !  ";
                           let leadSource = $("#lead-source-input").val().trim() || " our services ";
+                          let product = $("#product-select").val().trim() || " - - - ";
 
                           // Replace placeholders in the fetched content
                           data = data.replace(/{LOGO}/g, logo);
@@ -847,6 +858,7 @@
                           data = data.replace(/{OTC}/g, otc);
                           data = data.replace(/{FOLLOWUP_REASON}/g, followupReason);
                           data = data.replace(/{LEAD_SOURCE}/g, leadSource);
+                          data = data.replace(/{PRODUCT}/g, product);
 
                           // Show the updated content in the preview container
                           $("#preview-container").html(data);
