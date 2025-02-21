@@ -12,19 +12,18 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>  TEMPLATE.PHP </title>
+    <title>  Lead Details UI</title>
     <!-- CSS files -->
-    <link rel="stylesheet" href="dist/css/comman_styles.css"> 
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
 
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
 
-    <!-- FontAwesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -32,25 +31,61 @@
       }
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
-      }   
-      .form-check-input:checked {
-        background-color: #28a745 !important; 
-    } 
+      }
 
-
-    .preview-container {
-      min-height: 600px;  
-      max-height: 500px;  
-      overflow-y: auto;   
+      .stage-bar {
+        display: flex;
+        align-items: center;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
     }
 
-    .img-size{
-      height: 290px;
+    .stage {
+        flex: 1;
+        text-align: center;
+        padding: 12px 15px;
+        font-weight: bold;
+        position: relative;
+        color: #fff;
     }
 
+   
+    .stage:not(:last-child) {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+       
+    }
+
+    
+    .stage:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -10px;
+        width: 0;
+        height: 0;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-left: 10px solid white; /* Adjust color */
+        z-index: 1;
+    }
+
+    
+    .new { background: #b7e4c7; color: #1b4332; } 
+    .contacted { background: #bee5eb; color: #0c5460; }
+    .failed { background: #f8d7da; color: #721c24; }
+    .opportunity { background: #ffe8a1; color: #856404; }
+    .converted { background: #d4edda; color: #155724; }
+    .lost { background: #d6d8d9; color: #1b1e21; }
+    .disqualified { background: #e2e3e5; color: #383d41; }
+    .review { background: #d9d9d9; color: #636c72; border-radius: 15px; }  
+ 
 
     </style> 
-    
+
   </head>
   <body >
     <script src="./dist/js/demo-theme.min.js?1692870487"></script>
@@ -656,126 +691,291 @@
         </div>
         <!-- Page body -->
         <div class="page-body">
-        <div class="container-xl">
-          <div class="row">
-              <!-- Left Column: Email Template Selection -->
-              <div class="col-xl-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title mb-4">Select Email Template</h4>
-
-                      <div class="row g-3">
-                          <!-- Template Options -->
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="payment/MMC-&-OTC-Charges.png" alt="Screenshot Dark" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="message/Follow-up-Message.png" alt="Color Palette Guide" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="valentines-1/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="valentines-1/New-Lead-Acknowledgment.png" alt="Stylish Workplace" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
-                              </label>
-                          </div>
-
-
-
-                      </div>
-
-                      <!-- Hidden Inputs Container (Initially Hidden) -->
-                      <div id="template-inputs-container" class="mt-4 d-none">
-                          <div id="mmc-otc-inputs" class="d-none">
-                              <div class="row">
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">MMC:</label>
-                                    <input type="text" id="mmc-input" class="form-control mb-2" placeholder="Enter MMC" required>
-                                  </div>
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">OTC:</label>
-                                   <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC" required>
-                                  </div>
-                              </div>
-                              <div class="row mt-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Select Product:</label>
-                                    <select id="product-select" class="form-select">
-                                        <option value="">-- Select Product --</option>
-                                        <option value="SEC2PAY">SEC2PAY</option>
-                                        <option value="INDIRAIL">INDIRAIL</option>
-                                    </select>
-                                </div>
-                              </div>
-                   
-                          </div>
-
-                          <div id="followup-inputs" class="d-none">
-                              <div class="row">
-                                <div class="col-6">
-                                 <label class="form-label fw-semibold">Follow-up Reason:</label>
-                                  <input type="text" id="followup-reason-input" class="form-control" placeholder="Enter Reason" required>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div id="lead-source-inputs" class="d-none">
-                            <div class="row">
-                              <div class="col-6">
-                                <label class="form-label fw-semibold">Lead Source:</label>
-                                <input type="text" id="lead-source-input" class="form-control" placeholder="Enter Lead Source" required>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-
-                      <div class="row">
-                          <div class="col-6">
-                              <!-- Preview Button -->
-                              <button id="preview-btn" class="btn btn-primary w-100 mt-4">Preview</button>
-                          </div>
-                          <div class="col-6">
-                            <!-- Send Mail Button -->
-                            <button id="send-mail" class="btn btn-danger w-100 mt-4">Send Mail</button>
-                          </div>
-                      </div>
-
+        <div class="container-xl card p-4 shadow-sm"> 
+            <div class="card shadow-sm p-3 border-0">
+                <div class="d-flex justify-content-between align-items-center">
+                    
+                    <!-- Left Section: Lead Information -->
+                    <div>
+                        <h1 class="mb-3 text-primary">  Singrai Saren</h1>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span class="badge bg-purple text-light">#YZK497</span>
+                            <span class="badge bg-blue text-light"> Indirail</span>
+                            <!-- <span class="badge bg-yellow text-light text-dark">📍 Proposal Made</span> -->
+                            <span class="badge bg-green text-light">  singrai@email.com</span>
+                            <span class="badge bg-red text-light">  +91 98765 43210</span>
+                        </div>
                     </div>
 
-                  </div>
-              </div>
+                    <!-- Right Section: Assigned User -->
+                    <div class="text-end"> 
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
+                            <strong class="text-dark">Akshta Revankar</strong>
+                        </div>
+                    </div>
 
-              <!-- Right Column: Preview Section -->
-              <div class="col-xl-6">
-                  <div class="card">
-                      <div class="card-body">
-                          <h5 class="card-title">Preview</h5>
-                          <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 540px;">
-                              <p class="text-muted">Selected template preview will appear here.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
+                </div>
+            </div>
+
+        
+            <!-- Stages -->
+            <div class="mt-4 stage-bar">
+                <div class="stage new">New</div>
+                <div class="stage contacted">Contacted</div>
+                <div class="stage failed">Contact Failed</div>
+                <div class="stage opportunity">Opportunity</div>
+                <div class="stage converted">Converted</div>
+                <div class="stage lost">Lost</div>
+                <div class="stage disqualified">Disqualified</div>
+                <div class="stage review">Post Review</div>
+            </div>
+            
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mt-5" id="leadTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="lead-history-tab" data-bs-toggle="tab" href="#lead-history">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-2 icon-tabler icons-tabler-outline icon-tabler-transfer">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M20 10h-16l5.5 -6" />
+                            <path d="M4 14h16l-5.5 6" />
+                        </svg>
+                        Lead Transfer History
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="lead-interactions-tab" data-bs-toggle="tab" href="#lead-interactions">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon me-2 icon-tabler icons-tabler-outline icon-tabler-directions"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 21v-4" /><path d="M12 13v-4" /><path d="M12 5v-2" /><path d="M10 21h4" /><path d="M8 5v4h11l2 -2l-2 -2z" /><path d="M14 13v4h-8l-2 -2l2 -2z" /></svg>
+                        Lead Interactions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="lead-payment-tab" data-bs-toggle="tab" href="#lead-payment">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-rupee"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M15 7h-6h1a3 3 0 0 1 0 6h-1l3 3" /><path d="M9 10h6" /></svg>
+                        Lead Payment Tracking
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content mt-3">
+                <!-- Lead Transfer History -->
+                <div class="tab-pane fade show active" id="lead-history">
+                    <div class="card shadow-sm border-0 p-3">
+                        <h5 class="text-primary mb-3">
+                            <i class="ti ti-transfer"></i> Lead Transfer History
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table card-table table-hover">
+                                <thead>
+                                    <tr class="text-muted">
+                                        <th>Date & Time</th>
+                                        <th>Transferred From</th>
+                                        <th>Transferred To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-clock"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.5 21h-4.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h10" /><path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M18 16.5v1.5l.5 .5" /></svg> 
+                                            <strong>12 Feb 2024, 10:30 AM</strong>
+                                        </td>
+                                        <td class="text-danger"><i class="ti ti-user"></i> Abhishek Chandane</td>
+                                        <td class="text-success"><i class="ti ti-user-check"></i> Akshta Revankar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-clock"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.5 21h-4.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h10" /><path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M18 16.5v1.5l.5 .5" /></svg> 
+                                            <strong>05 Feb 2024, 03:15 PM</strong>
+                                        </td>
+                                        <td class="text-danger"><i class="ti ti-user"></i> Sarah Lee</td>
+                                        <td class="text-success"><i class="ti ti-user-check"></i> Abhishek Chandane</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lead Interactions Tab -->
+                <div class="tab-pane fade" id="lead-interactions">
+                    <div class="card shadow-sm border-0 p-3">
+                        <h5 class="text-primary mb-3">
+                            <i class="ti ti-message"></i> Lead Interactions
+                        </h5>
+
+                        <div class="d-flex flex-column gap-3">
+                            <!-- Interaction 1 -->
+                            <div class="d-flex align-items-start bg-light rounded p-3 border">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-phone">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/>
+                                    </svg>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Phone Call <span class="text-muted small ms-2">14 Feb 2024, 11:00 AM</span></h6>
+                                    <p class="mb-0"><strong>Notes:</strong> Client interested in bulk purchase.</p>
+                                </div>
+                            </div>
+
+                            <!-- Interaction 2 -->
+                            <div class="d-flex align-items-start bg-light rounded p-3 border">
+                                <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icon-tabler-mail">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M22 7.535v9.465a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9.465l9.445 6.297l.116 .066a1 1 0 0 0 .878 0l.116 -.066l9.445 -6.297z"/>
+                                        <path d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z"/>
+                                    </svg>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Email Sent <span class="text-muted small ms-2">10 Feb 2024, 02:45 PM</span></h6>
+                                    <p class="mb-0"><strong>Notes:</strong> Sent proposal and pricing details.</p>
+                                </div>
+                            </div>
+
+                            <!-- Interaction 3 -->
+                            <div class="d-flex align-items-start bg-light rounded p-3 border">
+                                <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-calendar-stats">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"/>
+                                        <path d="M18 14v4h4"/>
+                                        <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/>
+                                        <path d="M15 3v4"/>
+                                        <path d="M7 3v4"/>
+                                        <path d="M3 11h16"/>
+                                    </svg>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Meeting <span class="text-muted small ms-2">08 Feb 2024, 04:20 PM</span></h6>
+                                    <p class="mb-0"><strong>Notes:</strong> Discussion on project scope.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lead Payment Tracking Tab -->
+                <div class="tab-pane fade" id="lead-payment">
+                    <div class="row">
+                        <!-- Left Side: Add Payment Related Info -->
+                        <div class="col-md-6">
+                            <div class="card shadow-sm border-0 p-3">
+                                <h5 class="text-primary mb-3">
+                                    <i class="ti ti-credit-card"></i> Add New Payment Information
+                                </h5>
+                                <form>
+                                    <div class="row">
+                                        <!-- Date -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Date</label>
+                                            <input type="date" class="form-control">
+                                        </div>
+
+                                        <!-- Payment Type -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Payment Type</label>
+                                            <select class="form-select">
+                                                <option selected>Select Payment Type</option>
+                                                <option>Online</option>
+                                                <option>Offline</option>
+                                                <option>Bank Transfer</option>
+                                                <option>Credit/Debit Card</option>
+                                                <option>UPI</option>
+                                                <option>Cash</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Payment Status -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Payment Status</label>
+                                            <select class="form-select">
+                                                <option selected>Select Payment Status</option>
+                                                <option>Pending</option>
+                                                <option>Completed</option>
+                                                <option>Failed</option>
+                                                <option>Refunded</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Amount -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Amount</label>
+                                            <input type="number" class="form-control" placeholder="Enter Amount ($)" min="1">
+                                        </div>
+
+                                        <!-- Remark (Full Width) -->
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Remark</label>
+                                            <textarea class="form-control" rows="2" placeholder="Enter any remarks"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-success w-100">
+                                        <i class="ti ti-check"></i> Submit Payment
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Table: Previous Payments -->
+                        <div class="col-md-6">
+                            <div class="card shadow-sm border-0 p-3">
+                                <h5 class="text-primary mb-3">
+                                    <i class="ti ti-cash"></i> Previous Payment Info
+                                </h5>
+
+                                <!-- Table: Previous Payments -->
+                                <div class="table-responsive">
+                                    <table id="paymentTable" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Payment Type</th>
+                                                <th>Status</th>
+                                                <th>Amount</th>
+                                                <th>Remark</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2024-02-01</td>
+                                                <td>Credit Card</td>
+                                                <td><span class="badge bg-success text-light">Completed</span></td>
+                                                <td>$1,500</td>
+                                                <td>Initial payment</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2024-02-10</td>
+                                                <td>Bank Transfer</td>
+                                                <td><span class="badge bg-success text-light">Completed</span></td>
+                                                <td>$1,000</td>
+                                                <td>Second installment</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2024-02-15</td>
+                                                <td>UPI</td>
+                                                <td><span class="badge bg-warning text-light">Pending</span></td>
+                                                <td>$500</td>
+                                                <td>Final installment</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
+
+
+            
+ 
+        </div>
         </div>
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
@@ -813,134 +1013,29 @@
         </footer>
       </div>
     </div>
-    
-
-
-
-    <!-- FontAwesome Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="./dist/js/tabler.min.js?1692870487" defer></script>
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
 
+    
+    <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
     <script>
-      $(document).ready(function () {
-          // Function to load and preview the selected template
-          function previewTemplate() {
-              let selectedTemplate = $("input[name='template']:checked").val();
-
-              if (selectedTemplate) {
-                  // Fetch and load the file into preview-container
-                  $.ajax({
-                      url: selectedTemplate,
-                      type: "GET",
-                      dataType: "html",
-                      success: function (data) {
-                          // Get input values
-                          let logo = $("#logo-input").val();
-                          let title = $("#title-input").val();
-                          let heading = $("#heading-input").val();
-                          let content = $("#content-input").val();
-
-                          // Default placeholders if empty
-                          let mmc = $("#mmc-input").val().trim() || "- - -";
-                          let otc = $("#otc-input").val().trim() || "- - -";
-                          let followupReason = $("#followup-reason-input").val().trim() || " Reason Goes Here !  ";
-                          let leadSource = $("#lead-source-input").val().trim() || " our services ";
-                          let product = $("#product-select").val().trim() || " - - - ";
-
-                          // Replace placeholders in the fetched content
-                          data = data.replace(/{LOGO}/g, logo);
-                          data = data.replace(/{TITLE}/g, title);
-                          data = data.replace(/{HEADING}/g, heading);
-                          data = data.replace(/{CONTENT}/g, content);
-                          data = data.replace(/{MMC}/g, mmc);
-                          data = data.replace(/{OTC}/g, otc);
-                          data = data.replace(/{FOLLOWUP_REASON}/g, followupReason);
-                          data = data.replace(/{LEAD_SOURCE}/g, leadSource);
-                          data = data.replace(/{PRODUCT}/g, product);
-
-                          // Show the updated content in the preview container
-                          $("#preview-container").html(data);
-                      },
-                      error: function () {
-                          $("#preview-container").html("<p class='text-danger'>Error loading file.</p>");
-                      }
-                  });
-              }
-          }
-
-        // Show input fields based on selected template
-        $("input[name='template']").on("change", function () {
-            // Hide all additional inputs
-            $("#template-inputs-container").addClass("d-none");
-            $("#mmc-otc-inputs, #followup-inputs, #lead-source-inputs").addClass("d-none");
-
-            // Show the container first
-            $("#template-inputs-container").removeClass("d-none");
-
-            // Show inputs based on the selected template
-            let selectedValue = $(this).val();
-
-            if (selectedValue === "payment/source.html") {
-                $("#mmc-otc-inputs").removeClass("d-none");
-            } else if (selectedValue === "message/source.html") {
-                $("#followup-inputs").removeClass("d-none");
-            } else if (selectedValue === "valentines-1/source.html") {
-                $("#lead-source-inputs").removeClass("d-none");
-            }
-
-            previewTemplate();
-
-        });
-
-
-          // Trigger preview on button click
-          $("#preview-btn").on("click", previewTemplate);
-
-          
-        $("#send-mail").on("click", function () {
-            let selectedTemplate = $("input[name='template']:checked").val();
-            let formData = { template: selectedTemplate };
-
-            if (selectedTemplate === "payment/source.html") {
-                formData.mmc = $("#mmc-input").val();
-                formData.otc = $("#otc-input").val();
-            } else if (selectedTemplate === "message/source.html") {
-                formData.followupReason = $("#followup-reason-input").val();
-            } else if (selectedTemplate === "valentines-1/source.html") {
-                formData.leadSource = $("#lead-source-input").val();
-            }
-
-            // Send data to server using AJAX
-            $.ajax({
-                url: "send_email.php", // PHP script to process the email
-                type: "POST",
-                data: formData,
-                success: function (response) {
-                    alert("Email Sent Successfully!");
-                },
-                error: function () {
-                    alert("Error Sending Email");
-                }
+        $(document).ready(function () {
+            $('#paymentTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true
             });
         });
-          
-      });
     </script>
- 
+
 
   </body>
 </html>
-
-
-
-
-
-
-
-
-

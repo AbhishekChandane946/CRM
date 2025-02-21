@@ -12,19 +12,14 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>  TEMPLATE.PHP </title>
+    <title>Empty page - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link rel="stylesheet" href="dist/css/comman_styles.css"> 
+ 
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
-
-
-
-    <!-- FontAwesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -32,25 +27,19 @@
       }
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
-      }   
-      .form-check-input:checked {
-        background-color: #28a745 !important; 
-    } 
+      }
 
-
-    .preview-container {
-      min-height: 600px;  
-      max-height: 500px;  
-      overflow-y: auto;   
+        
+    .select2-container .select2-selection--multiple,
+    .select2-container .select2-selection--single {
+        min-height: 40px; /* Adjust height as needed */ 
+        padding: 5px;
     }
 
-    .img-size{
-      height: 290px;
-    }
+     
+ 
 
-
-    </style> 
-    
+    </style>
   </head>
   <body >
     <script src="./dist/js/demo-theme.min.js?1692870487"></script>
@@ -656,126 +645,220 @@
         </div>
         <!-- Page body -->
         <div class="page-body">
-        <div class="container-xl">
-          <div class="row">
-              <!-- Left Column: Email Template Selection -->
-              <div class="col-xl-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title mb-4">Select Email Template</h4>
-
-                      <div class="row g-3">
-                          <!-- Template Options -->
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="payment/MMC-&-OTC-Charges.png" alt="Screenshot Dark" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="message/Follow-up-Message.png" alt="Color Palette Guide" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="valentines-1/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="valentines-1/New-Lead-Acknowledgment.png" alt="Stylish Workplace" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
-                              </label>
-                          </div>
-
-
-
-                      </div>
-
-                      <!-- Hidden Inputs Container (Initially Hidden) -->
-                      <div id="template-inputs-container" class="mt-4 d-none">
-                          <div id="mmc-otc-inputs" class="d-none">
-                              <div class="row">
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">MMC:</label>
-                                    <input type="text" id="mmc-input" class="form-control mb-2" placeholder="Enter MMC" required>
-                                  </div>
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">OTC:</label>
-                                   <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC" required>
-                                  </div>
-                              </div>
-                              <div class="row mt-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Select Product:</label>
-                                    <select id="product-select" class="form-select">
-                                        <option value="">-- Select Product --</option>
-                                        <option value="SEC2PAY">SEC2PAY</option>
-                                        <option value="INDIRAIL">INDIRAIL</option>
-                                    </select>
-                                </div>
-                              </div>
-                   
-                          </div>
-
-                          <div id="followup-inputs" class="d-none">
-                              <div class="row">
-                                <div class="col-6">
-                                 <label class="form-label fw-semibold">Follow-up Reason:</label>
-                                  <input type="text" id="followup-reason-input" class="form-control" placeholder="Enter Reason" required>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div id="lead-source-inputs" class="d-none">
-                            <div class="row">
-                              <div class="col-6">
-                                <label class="form-label fw-semibold">Lead Source:</label>
-                                <input type="text" id="lead-source-input" class="form-control" placeholder="Enter Lead Source" required>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-
-                      <div class="row">
-                          <div class="col-6">
-                              <!-- Preview Button -->
-                              <button id="preview-btn" class="btn btn-primary w-100 mt-4">Preview</button>
-                          </div>
-                          <div class="col-6">
-                            <!-- Send Mail Button -->
-                            <button id="send-mail" class="btn btn-danger w-100 mt-4">Send Mail</button>
-                          </div>
-                      </div>
-
+          <div class="container-xl">
+            <!-- Content here -->
+            <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center mb-3"> 
+                        <h3 class="card-title">Invoices</h3>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTaskModal">
+                            <!-- Tabler Plus Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 5l0 14" />
+                                <path d="M5 12l14 0" />
+                            </svg>
+                            Create Task
+                        </button> 
                     </div>
 
-                  </div>
-              </div>
+                    <div class="card-body border-bottom py-3">
+                        <div class="d-flex">
+                        <div class="text-secondary">
+                            Show
+                            <div class="mx-2 d-inline-block">
+                            <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
+                            </div>
+                            entries
+                        </div>
+                        <div class="ms-auto text-secondary">
+                            Search:
+                            <div class="ms-2 d-inline-block">
+                            <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                            <tr> 
+                                <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all tasks"></th>
+                                <th class="w-1">No. <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 15l6 -6l6 6"></path></svg>
+                                </th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Due Date</th>
+                                <th>Assign To</th>
+                                <th>Task Created By</th>
+                                <th>Status</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr> 
+                          <td>
+                              <a href="UI_task_details_S2P.php?task_id=001" class="text-primary" title="View Task">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                      class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+                                      <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
+                                  </svg>
+                              </a>
+                          </td>
+                          <td><span class="text-secondary">001</span></td>
+                          <td>Task Title 1</td>
+                          <td>Task Description 1</td>
+                          <td>2025-02-18</td>
+                          <td>User 1</td>
+                          <td> Admin </td>
+                          <td><span class="badge bg-warning text-light">Pending</span></td>
+ 
+                        </tr>
 
-              <!-- Right Column: Preview Section -->
-              <div class="col-xl-6">
-                  <div class="card">
-                      <div class="card-body">
-                          <h5 class="card-title">Preview</h5>
-                          <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 540px;">
-                              <p class="text-muted">Selected template preview will appear here.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                        <tr> 
+                          <td>
+                              <a href="UI_task_details_S2P.php?task_id=001" class="text-primary" title="View Task">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                      class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+                                      <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
+                                  </svg>
+                              </a>
+                          </td>
+                          <td><span class="text-secondary">002</span></td>
+                          <td>Task Title 2</td>
+                          <td>Task Description 2</td>
+                          <td>2025-02-18</td>
+                          <td>User 1</td>
+                          <td> Abhishek Chandane </td>
+                          <td><span class="badge bg-warning text-light">Pending</span></td>
+ 
+                        </tr>
+
+                        <tr> 
+                          <td>
+                              <a href="UI_task_details_S2P.php?task_id=001" class="text-primary" title="View Task">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                      class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+                                      <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
+                                  </svg>
+                              </a>
+                          </td>
+                          <td><span class="text-secondary">003</span></td>
+                          <td>Task Title 3</td>
+                          <td>Task Description 3</td>
+                          <td>2025-02-18</td>
+                          <td>User 1</td>
+                          <td> Sunil Chavan </td>
+                          <td><span class="badge bg-warning text-light">Pending</span></td>
+ 
+                        </tr>
+
+            
+                        </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer d-flex align-items-center">
+                        <p class="m-0 text-secondary">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
+                        <ul class="pagination m-0 ms-auto">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>
+                            prev
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                            next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+            </div>
           </div>
+
+
+        <!-- Create Task Modal -->
+        <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createTaskModalLabel">Create Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <!-- Title -->
+                            <div class="col-md-12">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" placeholder="Enter task title">
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-md-12">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" rows="2" placeholder="Enter task description"></textarea>
+                            </div>
+
+                            <!-- Start Date -->
+                            <div class="col-md-6">
+                                <label class="form-label">Start Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <!-- Due Date -->
+                            <div class="col-md-6">
+                                <label class="form-label">Due Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <!-- Assign To -->
+                            <div class="col-md-6">
+                                <label class="form-label">Assign Task To</label>
+                                <select  class="form-control select2" id="assignTaskTo">
+                                  <option value="abhishek">Abhishek Chandane</option>
+                                  <option value="sunil">Sunil Chavan</option>
+                                </select>
+                            </div> 
+                            <!-- Select Lead (Searchable Dropdown) -->
+                            <div class="col-md-6">
+                                <label class="form-label">Select Lead</label>
+                                <div class="input-group">
+                                    <select class="form-select" id="selectLead"  >
+                                        <option value="lead1">lead 1</option>
+                                        <option value="lead2">lead 2</option>
+                                        <option value="lead3">lead 3</option>
+                                        <option value="lead4">lead 4</option>
+                                        <option value="lead5">lead 5</option>
+                                        <option value="lead6">lead 6</option>
+                                        <option value="lead7">lead 7</option>
+                                        <option value="lead8">lead 8</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-            </div>
+  
         </div>
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
@@ -813,134 +896,44 @@
         </footer>
       </div>
     </div>
-    
 
 
-
-    <!-- FontAwesome Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+ 
+  
 
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="./dist/js/tabler.min.js?1692870487" defer></script>
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
+ 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery (Before Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include Select2 CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+    <!-- Initialize Select2 & Fix Issue in Modal -->
     <script>
-      $(document).ready(function () {
-          // Function to load and preview the selected template
-          function previewTemplate() {
-              let selectedTemplate = $("input[name='template']:checked").val();
+        $(document).ready(function () {
+            $('#selectLead').select2({
+                placeholder: "Select a Lead",
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#createTaskModal')  
+            });
 
-              if (selectedTemplate) {
-                  // Fetch and load the file into preview-container
-                  $.ajax({
-                      url: selectedTemplate,
-                      type: "GET",
-                      dataType: "html",
-                      success: function (data) {
-                          // Get input values
-                          let logo = $("#logo-input").val();
-                          let title = $("#title-input").val();
-                          let heading = $("#heading-input").val();
-                          let content = $("#content-input").val();
-
-                          // Default placeholders if empty
-                          let mmc = $("#mmc-input").val().trim() || "- - -";
-                          let otc = $("#otc-input").val().trim() || "- - -";
-                          let followupReason = $("#followup-reason-input").val().trim() || " Reason Goes Here !  ";
-                          let leadSource = $("#lead-source-input").val().trim() || " our services ";
-                          let product = $("#product-select").val().trim() || " - - - ";
-
-                          // Replace placeholders in the fetched content
-                          data = data.replace(/{LOGO}/g, logo);
-                          data = data.replace(/{TITLE}/g, title);
-                          data = data.replace(/{HEADING}/g, heading);
-                          data = data.replace(/{CONTENT}/g, content);
-                          data = data.replace(/{MMC}/g, mmc);
-                          data = data.replace(/{OTC}/g, otc);
-                          data = data.replace(/{FOLLOWUP_REASON}/g, followupReason);
-                          data = data.replace(/{LEAD_SOURCE}/g, leadSource);
-                          data = data.replace(/{PRODUCT}/g, product);
-
-                          // Show the updated content in the preview container
-                          $("#preview-container").html(data);
-                      },
-                      error: function () {
-                          $("#preview-container").html("<p class='text-danger'>Error loading file.</p>");
-                      }
-                  });
-              }
-          }
-
-        // Show input fields based on selected template
-        $("input[name='template']").on("change", function () {
-            // Hide all additional inputs
-            $("#template-inputs-container").addClass("d-none");
-            $("#mmc-otc-inputs, #followup-inputs, #lead-source-inputs").addClass("d-none");
-
-            // Show the container first
-            $("#template-inputs-container").removeClass("d-none");
-
-            // Show inputs based on the selected template
-            let selectedValue = $(this).val();
-
-            if (selectedValue === "payment/source.html") {
-                $("#mmc-otc-inputs").removeClass("d-none");
-            } else if (selectedValue === "message/source.html") {
-                $("#followup-inputs").removeClass("d-none");
-            } else if (selectedValue === "valentines-1/source.html") {
-                $("#lead-source-inputs").removeClass("d-none");
-            }
-
-            previewTemplate();
-
-        });
-
-
-          // Trigger preview on button click
-          $("#preview-btn").on("click", previewTemplate);
-
-          
-        $("#send-mail").on("click", function () {
-            let selectedTemplate = $("input[name='template']:checked").val();
-            let formData = { template: selectedTemplate };
-
-            if (selectedTemplate === "payment/source.html") {
-                formData.mmc = $("#mmc-input").val();
-                formData.otc = $("#otc-input").val();
-            } else if (selectedTemplate === "message/source.html") {
-                formData.followupReason = $("#followup-reason-input").val();
-            } else if (selectedTemplate === "valentines-1/source.html") {
-                formData.leadSource = $("#lead-source-input").val();
-            }
-
-            // Send data to server using AJAX
-            $.ajax({
-                url: "send_email.php", // PHP script to process the email
-                type: "POST",
-                data: formData,
-                success: function (response) {
-                    alert("Email Sent Successfully!");
-                },
-                error: function () {
-                    alert("Error Sending Email");
-                }
+            $('#assignTaskTo').select2({
+                placeholder: "Assign Task To",
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#createTaskModal')  
             });
         });
-          
-      });
     </script>
- 
+
+
 
   </body>
 </html>
-
-
-
-
-
-
-
-
-

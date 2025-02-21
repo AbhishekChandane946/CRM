@@ -46,10 +46,42 @@
 
     .img-size{
       height: 290px;
-    }
-
-
+    }  
     </style> 
+
+<style>
+  .social-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: all 0.4s ease-in-out;
+        }
+        .social-btn {
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: margin-right 0.4s ease-in-out;
+        }
+        .social-input {
+            opacity: 0;
+            width: 0;
+            transition: all 0.4s ease-in-out;
+            transform: translateX(-20px);
+            margin-left: 5px;
+            margin-right: 4px;
+        }
+        .social-container.active .social-input {
+            opacity: 1;
+            width: 250px;
+            transform: translateX(0);
+        }
+        .social-row {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center; 
+        }
+    </style>
+
     
   </head>
   <body >
@@ -684,7 +716,7 @@
                                   </span>
                                   <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
                               </label>
-                                        </div>
+                          </div>
 
                           <div class="col-md-4">
                               <label class="form-imagecheck text-center w-100">
@@ -695,11 +727,85 @@
                                   <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
                               </label>
                           </div>
+
+                            <!-- Additional 6 Templates -->
+                            <div class="col-md-4">
+                                <label class="form-imagecheck text-center w-100">
+                                    <input name="template" type="radio" value="welcome-email/source.html" class="form-imagecheck-input" />
+                                    <span class="form-imagecheck-figure d-block">
+                                        <img src="welcome-email/Welcome-Email.png" alt="Welcome Email" class="img-size form-imagecheck-image rounded">
+                                    </span>
+                                    <span class="d-block mt-2 fw-semibold">Welcome Email</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-imagecheck text-center w-100">
+                                    <input name="template" type="radio" value="promotion/source.html" class="form-imagecheck-input" />
+                                    <span class="form-imagecheck-figure d-block">
+                                        <img src="promotion/Special-Offer.png" alt="Special Offer" class="img-size form-imagecheck-image rounded">
+                                    </span>
+                                    <span class="d-block mt-2 fw-semibold">Special Offer</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-imagecheck text-center w-100">
+                                    <input name="template" type="radio" value="newsletter/source.html" class="form-imagecheck-input" />
+                                    <span class="form-imagecheck-figure d-block">
+                                        <img src="newsletter/Newsletter.png" alt="Newsletter" class="img-size form-imagecheck-image rounded">
+                                    </span>
+                                    <span class="d-block mt-2 fw-semibold">Newsletter</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-imagecheck text-center w-100">
+                                    <input name="template" type="radio" value="event-invitation/source.html" class="form-imagecheck-input" />
+                                    <span class="form-imagecheck-figure d-block">
+                                        <img src="event-invitation/Event-Invite.png" alt="Event Invitation" class="img-size form-imagecheck-image rounded">
+                                    </span>
+                                    <span class="d-block mt-2 fw-semibold">Event Invitation</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-imagecheck text-center w-100">
+                                    <input name="template" type="radio" value="survey/source.html" class="form-imagecheck-input" />
+                                    <span class="form-imagecheck-figure d-block">
+                                        <img src="survey/Customer-Feedback.png" alt="Customer Feedback" class="img-size form-imagecheck-image rounded">
+                                    </span>
+                                    <span class="d-block mt-2 fw-semibold">Customer Feedback</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-imagecheck text-center w-100">
+                                    <input name="template" type="radio" value="abandoned-cart/source.html" class="form-imagecheck-input" />
+                                    <span class="form-imagecheck-figure d-block">
+                                        <img src="abandoned-cart/Abandoned-Cart.png" alt="Abandoned Cart" class="img-size form-imagecheck-image rounded">
+                                    </span>
+                                    <span class="d-block mt-2 fw-semibold">Abandoned Cart</span>
+                                </label>
+                            </div>
+
                       </div>
 
                       <!-- Hidden Inputs Container (Initially Hidden) -->
                       <div id="template-inputs-container" class="mt-4 d-none">
                           <div id="company-details" class="d-none">
+
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label class="form-label fw-semibold">Title:</label>
+                                      <input type="text" id="title-input" class="form-control mb-2" placeholder="Enter Title" required>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label class="form-label fw-semibold">Description:</label>
+                                      <textarea id="description-input" class="form-control" placeholder="Enter Description" required></textarea>
+                                  </div>
+                              </div>
+
                               <div class="row">
                                   <div class="col-md-6">
                                       <label class="form-label fw-semibold">Company Logo URL:</label>
@@ -709,27 +815,40 @@
                                       <label class="form-label fw-semibold">Banner Image URL:</label>
                                       <input type="text" id="banner-image-input" class="form-control mb-2" placeholder="Enter Banner Image URL" required>
                                   </div>
+                              </div>  
+
+                              <div class="row mt-4"> 
+                                <label class="form-label fw-semibold">Social Media Link URL:</label>
+                                <div class="col-md-12">
+                                                                    <div class="social-row">
+                                  <div class="social-container active" id="facebook-container">
+                                      <button class="btn btn-facebook social-btn" data-target="#facebook-link-input">
+                                          <i class="fab fa-facebook"></i>
+                                      </button>
+                                      <input type="text" id="facebook-link-input" class="form-control social-input" placeholder="Facebook Link">
+                                  </div>
+                                  <div class="social-container" id="twitter-container">
+                                      <button class="btn btn-twitter social-btn" data-target="#twitter-link-input">
+                                          <i class="fab fa-twitter"></i>
+                                      </button>
+                                      <input type="text" id="twitter-link-input" class="form-control social-input" placeholder="Twitter Link">
+                                  </div>
+                                  <div class="social-container" id="linkedin-container">
+                                      <button class="btn btn-linkedin social-btn" data-target="#linkedin-link-input">
+                                          <i class="fab fa-linkedin"></i>
+                                      </button>
+                                      <input type="text" id="linkedin-link-input" class="form-control social-input" placeholder="LinkedIn Link">
+                                  </div>
+                                  <div class="social-container" id="instagram-container">
+                                      <button class="btn btn-instagram social-btn" data-target="#instagram-link-input">
+                                          <i class="fab fa-instagram"></i>
+                                      </button>
+                                      <input type="text" id="instagram-link-input" class="form-control social-input" placeholder="Instagram Link">
+                                  </div>
+                                </div>
+                                </div>
                               </div>
-                              <div class="row mt-3">
-                                  <div class="col-md-6">
-                                      <label class="form-label fw-semibold">Facebook Link:</label>
-                                      <input type="text" id="facebook-link-input" class="form-control mb-2" placeholder="Enter Facebook URL">
-                                  </div>
-                                  <div class="col-md-6">
-                                      <label class="form-label fw-semibold">Twitter Link:</label>
-                                      <input type="text" id="twitter-link-input" class="form-control mb-2" placeholder="Enter Twitter URL">
-                                  </div>
-                              </div>
-                              <div class="row mt-3">
-                                  <div class="col-md-6">
-                                      <label class="form-label fw-semibold">LinkedIn Link:</label>
-                                      <input type="text" id="linkedin-link-input" class="form-control mb-2" placeholder="Enter LinkedIn URL">
-                                  </div>
-                                  <div class="col-md-6">
-                                      <label class="form-label fw-semibold">Instagram Link:</label>
-                                      <input type="text" id="instagram-link-input" class="form-control mb-2" placeholder="Enter Instagram URL">
-                                  </div>
-                              </div>
+
                           </div>
                       </div>
 
@@ -829,6 +948,8 @@
                     dataType: "html",
                     success: function (data) {
                         // Get user-provided values
+                        let title = $("#title-input").val(); 
+                        let description = $("#description-input").val();
                         let companyLogo = $("#company-logo-input").val(); 
                         let bannerImage = $("#banner-image-input").val();
                         let facebookLink = $("#facebook-link-input").val();
@@ -837,6 +958,8 @@
                         let instagramLink = $("#instagram-link-input").val();
 
                         // Default placeholders if empty
+                        title = title.trim() || "TITLE GOES HERE";
+                        description = description.trim() || "DESCRIPTION GOES HERE";
                         companyLogo = companyLogo.trim() || "default-logo.png";
                         bannerImage = bannerImage.trim() || "default-banner.jpg";
                         facebookLink = facebookLink.trim() || "https://default-facebook.com";
@@ -845,6 +968,8 @@
                         instagramLink = instagramLink.trim() || "https://default-instagram.com";
 
                         // Replace placeholders in the fetched content
+                        data = data.replace(/{TITLE}/g, title);
+                        data = data.replace(/{DESCRIPTION}/g, description);
                         data = data.replace(/{COMPANY_LOGO}/g, companyLogo);
                         data = data.replace(/{BANNER_IMAGE}/g, bannerImage);
                         data = data.replace(/{FACEBOOK_LINK}/g, facebookLink);
@@ -914,6 +1039,29 @@
       }); 
     </script>
  
+
+
+
+
+ <script>
+    $(document).ready(function(){
+        $('.social-btn').click(function() {
+            let container = $(this).parent();
+            let input = container.find('.social-input');
+            if (container.hasClass('active')) {
+                container.removeClass('active');
+                input.css({ width: 0, opacity: 0 });
+            } else {
+                $('.social-container').removeClass('active');
+                $('.social-input').css({ width: 0, opacity: 0 });
+                container.addClass('active');
+                input.css({ width: '250px', opacity: 1 });
+            }
+        });
+    });
+                                  </script>
+
+
 
   </body>
 </html>

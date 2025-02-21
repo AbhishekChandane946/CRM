@@ -1,3 +1,10 @@
+
+
+<?php
+// Get Task ID from URL
+$task_id = isset($_GET['task_id']) ? $_GET['task_id'] : 'Unknown';
+?>
+
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -12,19 +19,13 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>  TEMPLATE.PHP </title>
+    <title>Empty page - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link rel="stylesheet" href="dist/css/comman_styles.css"> 
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
-
-
-
-    <!-- FontAwesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -32,25 +33,8 @@
       }
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
-      }   
-      .form-check-input:checked {
-        background-color: #28a745 !important; 
-    } 
-
-
-    .preview-container {
-      min-height: 600px;  
-      max-height: 500px;  
-      overflow-y: auto;   
-    }
-
-    .img-size{
-      height: 290px;
-    }
-
-
-    </style> 
-    
+      }
+    </style>
   </head>
   <body >
     <script src="./dist/js/demo-theme.min.js?1692870487"></script>
@@ -648,7 +632,7 @@
             <div class="row g-2 align-items-center">
               <div class="col">
                 <h2 class="page-title">
-                  Empty page
+                 Task Details 
                 </h2>
               </div>
             </div>
@@ -656,127 +640,225 @@
         </div>
         <!-- Page body -->
         <div class="page-body">
-        <div class="container-xl">
-          <div class="row">
-              <!-- Left Column: Email Template Selection -->
-              <div class="col-xl-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title mb-4">Select Email Template</h4>
-
-                      <div class="row g-3">
-                          <!-- Template Options -->
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="payment/MMC-&-OTC-Charges.png" alt="Screenshot Dark" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="message/Follow-up-Message.png" alt="Color Palette Guide" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="valentines-1/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="valentines-1/New-Lead-Acknowledgment.png" alt="Stylish Workplace" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
-                              </label>
-                          </div>
-
-
-
-                      </div>
-
-                      <!-- Hidden Inputs Container (Initially Hidden) -->
-                      <div id="template-inputs-container" class="mt-4 d-none">
-                          <div id="mmc-otc-inputs" class="d-none">
-                              <div class="row">
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">MMC:</label>
-                                    <input type="text" id="mmc-input" class="form-control mb-2" placeholder="Enter MMC" required>
-                                  </div>
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">OTC:</label>
-                                   <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC" required>
-                                  </div>
-                              </div>
-                              <div class="row mt-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Select Product:</label>
-                                    <select id="product-select" class="form-select">
-                                        <option value="">-- Select Product --</option>
-                                        <option value="SEC2PAY">SEC2PAY</option>
-                                        <option value="INDIRAIL">INDIRAIL</option>
-                                    </select>
-                                </div>
-                              </div>
-                   
-                          </div>
-
-                          <div id="followup-inputs" class="d-none">
-                              <div class="row">
-                                <div class="col-6">
-                                 <label class="form-label fw-semibold">Follow-up Reason:</label>
-                                  <input type="text" id="followup-reason-input" class="form-control" placeholder="Enter Reason" required>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div id="lead-source-inputs" class="d-none">
-                            <div class="row">
-                              <div class="col-6">
-                                <label class="form-label fw-semibold">Lead Source:</label>
-                                <input type="text" id="lead-source-input" class="form-control" placeholder="Enter Lead Source" required>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-
-                      <div class="row">
-                          <div class="col-6">
-                              <!-- Preview Button -->
-                              <button id="preview-btn" class="btn btn-primary w-100 mt-4">Preview</button>
-                          </div>
-                          <div class="col-6">
-                            <!-- Send Mail Button -->
-                            <button id="send-mail" class="btn btn-danger w-100 mt-4">Send Mail</button>
-                          </div>
-                      </div>
-
+            <div class="container-xl mt-4"> 
+                
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h2 class="page-title mb-1"></h2>
+                        <div class="text-muted">
+                            <strong>Task ID:</strong> 
+                            <span class="badge bg-primary text-light px-2 py-1">
+                                <?php echo htmlspecialchars($task_id); ?>
+                            </span>
+                        </div>
                     </div>
 
-                  </div>
-              </div>
 
-              <!-- Right Column: Preview Section -->
-              <div class="col-xl-6">
-                  <div class="card">
-                      <div class="card-body">
-                          <h5 class="card-title">Preview</h5>
-                          <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 540px;">
-                              <p class="text-muted">Selected template preview will appear here.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
+                    <a href="UI_task_list_S2P.php" class="btn btn-outline-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 6L9 12L15 18"></path>
+                        </svg>
+                        Back to List
+                    </a>
+                </div>
+
+                <!-- Task Details Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title mb-0 text-primary fw-bold">Task Information</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <!-- First Column -->
+                            <div class="col">
+                                <div class="d-flex align-items-start gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-label text-info flex-shrink-0">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M16.52 7h-10.52a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h10.52a1 1 0 0 0 .78 -.375l3.7 -4.625l-3.7 -4.625a1 1 0 0 0 -.78 -.375" />
+                                    </svg> 
+                                    <div>
+                                        <p class="mb-0"><strong class="fw-bold">Title:</strong> Task Title 1</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-start gap-3 mt-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-article text-secondary flex-shrink-0">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 8h10" />
+                                        <path d="M7 12h10" />
+                                        <path d="M7 16h10" />
+                                    </svg>
+                                    <div>
+                                        <p class="mb-0"><strong class="fw-bold">Description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem minus recusandae quidem id voluptatibus consequatur temporibus, iste delectus ipsam sequi nisi amet. Saepe soluta illum cupiditate tenetur tempora exercitationem nulla.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second Column -->
+                            <div class="col">
+                                <div class="d-flex align-items-start gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-due text-primary flex-shrink-0">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                        <path d="M16 3v4" />
+                                        <path d="M8 3v4" />
+                                        <path d="M4 11h16" />
+                                        <path d="M12 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                    </svg>
+                                    <div>
+                                        <p class="mb-0"><strong class="fw-bold">Due Date:</strong> 2025-02-18</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-start gap-3 mt-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus text-success flex-shrink-0">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                        <path d="M16 19h6" />
+                                        <path d="M19 16v6" />
+                                    </svg>
+                                    <div>
+                                        <p class="mb-0"><strong class="fw-bold">Assigned To:</strong> User 1</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-start gap-3 mt-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-warning flex-shrink-0" width="28" height="28"
+                                        viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M12 8v4"></path>
+                                        <path d="M12 16h.01"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="mb-0"><strong class="fw-bold">Status:</strong> 
+                                            <span class="badge bg-warning text-light px-3 py-1">Pending</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-end gap-2 mt-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/>
+                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
+                        <path d="M16 5l3 3"/>
+                    </svg>
+                    Edit Task
+                </button> 
+                    
+                <button class="btn btn-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M5 7l1 14h12l1 -14"></path>
+                        <path d="M9 7v-2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    Delete Task
+                </button>
+
+                </div>
 
             </div>
         </div>
+
+
+    <!-- Edit Task Modal -->
+        <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <!-- Title -->
+                             <div class="col-md-12">
+                                <label class="form-label">Id</label>
+                                <input type="text" class="form-control" id="taskId" >
+
+                             </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" id="taskTitle" placeholder="Enter task title">
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-md-12">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" id="taskDescription" rows="2" placeholder="Enter task description"></textarea>
+                            </div>
+
+                            <!-- Start Date -->
+                            <div class="col-md-6">
+                                <label class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="taskStartDate">
+                            </div>
+                            <!-- Due Date -->
+                            <div class="col-md-6">
+                                <label class="form-label">Due Date</label>
+                                <input type="date" class="form-control" id="taskDueDate">
+                            </div>
+
+                            <!-- Assign To (Select2 Preselected) -->
+                            <div class="col-md-6">
+                                <label class="form-label">Assign Task To</label>
+                                <select class="form-control select2" id="assignTaskTo">
+                                    <option value="abhishek">Abhishek Chandane</option>
+                                    <option value="sunil">Sunil Chavan</option>
+                                </select>
+                            </div>
+
+                            <!-- Select Lead (Select2 Preselected) -->
+                            <div class="col-md-6">
+                                <label class="form-label">Select Lead</label>
+                                <select class="form-control select2" id="selectLead">
+                                    <option value="lead1">Lead 1</option>
+                                    <option value="lead2">Lead 2</option>
+                                    <option value="lead3">Lead 3</option>
+                                    <option value="lead4">Lead 4</option>
+                                    <option value="lead5">Lead 5</option>
+                                    <option value="lead6">Lead 6</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End Edit Task Modal -->
+
+
+
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
             <div class="row text-center align-items-center flex-row-reverse">
@@ -813,134 +895,68 @@
         </footer>
       </div>
     </div>
-    
-
-
-
-    <!-- FontAwesome Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="./dist/js/tabler.min.js?1692870487" defer></script>
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery (Before Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include Select2 CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
     <script>
-      $(document).ready(function () {
-          // Function to load and preview the selected template
-          function previewTemplate() {
-              let selectedTemplate = $("input[name='template']:checked").val();
+        $(document).ready(function () {
+            // Initialize Select2
+            $('.select2').select2({
+                dropdownParent: $('#editTaskModal'),
+                allowClear: true,
+                width: '100%',  
+            });
 
-              if (selectedTemplate) {
-                  // Fetch and load the file into preview-container
-                  $.ajax({
-                      url: selectedTemplate,
-                      type: "GET",
-                      dataType: "html",
-                      success: function (data) {
-                          // Get input values
-                          let logo = $("#logo-input").val();
-                          let title = $("#title-input").val();
-                          let heading = $("#heading-input").val();
-                          let content = $("#content-input").val();
+            // Example task data (this would usually come from your backend)
+            var taskData = {
+                title: "Task Title 1",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                startDate: "2025-02-10",
+                dueDate: "2025-02-18",
+                assignedTo: "abhishek",
+                lead: "lead3"
+            };
 
-                          // Default placeholders if empty
-                          let mmc = $("#mmc-input").val().trim() || "- - -";
-                          let otc = $("#otc-input").val().trim() || "- - -";
-                          let followupReason = $("#followup-reason-input").val().trim() || " Reason Goes Here !  ";
-                          let leadSource = $("#lead-source-input").val().trim() || " our services ";
-                          let product = $("#product-select").val().trim() || " - - - ";
+            // When the Edit Task button is clicked, populate the modal with task details
+            $('#editTaskModal').on('show.bs.modal', function () {
+                // Set text and date fields
+                $('#taskTitle').val(taskData.title);
+                $('#taskDescription').val(taskData.description);
+                $('#taskStartDate').val(taskData.startDate);
+                $('#taskDueDate').val(taskData.dueDate);
 
-                          // Replace placeholders in the fetched content
-                          data = data.replace(/{LOGO}/g, logo);
-                          data = data.replace(/{TITLE}/g, title);
-                          data = data.replace(/{HEADING}/g, heading);
-                          data = data.replace(/{CONTENT}/g, content);
-                          data = data.replace(/{MMC}/g, mmc);
-                          data = data.replace(/{OTC}/g, otc);
-                          data = data.replace(/{FOLLOWUP_REASON}/g, followupReason);
-                          data = data.replace(/{LEAD_SOURCE}/g, leadSource);
-                          data = data.replace(/{PRODUCT}/g, product);
+                // Set Select2 dropdown values
+                $('#assignTaskTo').val(taskData.assignedTo).trigger('change');
+                $('#selectLead').val(taskData.lead).trigger('change');
+            });
 
-                          // Show the updated content in the preview container
-                          $("#preview-container").html(data);
-                      },
-                      error: function () {
-                          $("#preview-container").html("<p class='text-danger'>Error loading file.</p>");
-                      }
-                  });
-              }
-          }
+            // Save button click event (just an example)
+            $('#saveTaskChanges').click(function () {
+                var updatedTask = {
+                    title: $('#taskTitle').val(),
+                    description: $('#taskDescription').val(),
+                    startDate: $('#taskStartDate').val(),
+                    dueDate: $('#taskDueDate').val(),
+                    assignedTo: $('#assignTaskTo').val(),
+                    lead: $('#selectLead').val()
+                };
 
-        // Show input fields based on selected template
-        $("input[name='template']").on("change", function () {
-            // Hide all additional inputs
-            $("#template-inputs-container").addClass("d-none");
-            $("#mmc-otc-inputs, #followup-inputs, #lead-source-inputs").addClass("d-none");
-
-            // Show the container first
-            $("#template-inputs-container").removeClass("d-none");
-
-            // Show inputs based on the selected template
-            let selectedValue = $(this).val();
-
-            if (selectedValue === "payment/source.html") {
-                $("#mmc-otc-inputs").removeClass("d-none");
-            } else if (selectedValue === "message/source.html") {
-                $("#followup-inputs").removeClass("d-none");
-            } else if (selectedValue === "valentines-1/source.html") {
-                $("#lead-source-inputs").removeClass("d-none");
-            }
-
-            previewTemplate();
-
-        });
-
-
-          // Trigger preview on button click
-          $("#preview-btn").on("click", previewTemplate);
-
-          
-        $("#send-mail").on("click", function () {
-            let selectedTemplate = $("input[name='template']:checked").val();
-            let formData = { template: selectedTemplate };
-
-            if (selectedTemplate === "payment/source.html") {
-                formData.mmc = $("#mmc-input").val();
-                formData.otc = $("#otc-input").val();
-            } else if (selectedTemplate === "message/source.html") {
-                formData.followupReason = $("#followup-reason-input").val();
-            } else if (selectedTemplate === "valentines-1/source.html") {
-                formData.leadSource = $("#lead-source-input").val();
-            }
-
-            // Send data to server using AJAX
-            $.ajax({
-                url: "send_email.php", // PHP script to process the email
-                type: "POST",
-                data: formData,
-                success: function (response) {
-                    alert("Email Sent Successfully!");
-                },
-                error: function () {
-                    alert("Error Sending Email");
-                }
+                console.log("Updated Task:", updatedTask);
+                $('#editTaskModal').modal('hide');
             });
         });
-          
-      });
     </script>
- 
+
+
 
   </body>
 </html>
-
-
-
-
-
-
-
-
-

@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>  TEMPLATE.PHP </title>
+    <title>  2 </title>
     <!-- CSS files -->
     <link rel="stylesheet" href="dist/css/comman_styles.css"> 
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
@@ -46,10 +46,42 @@
 
     .img-size{
       height: 290px;
-    }
-
-
+    }  
     </style> 
+
+<style>
+  .social-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: all 0.4s ease-in-out;
+        }
+        .social-btn {
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: margin-right 0.4s ease-in-out;
+        }
+        .social-input {
+            opacity: 0;
+            width: 0;
+            transition: all 0.4s ease-in-out;
+            transform: translateX(-20px);
+            margin-left: 5px;
+            margin-right: 4px;
+        }
+        .social-container.active .social-input {
+            opacity: 1;
+            width: 250px;
+            transform: translateX(0);
+        }
+        .social-row {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center; 
+        }
+    </style>
+
     
   </head>
   <body >
@@ -157,7 +189,7 @@
                       </div>
                       <div class="list-group-item">
                         <div class="row align-items-center">
-                          <div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span></div>
+                          <div class="col-auto"><span class="status-dot d-block"></span></div>
                           <div class="col text-truncate">
                             <a href="#" class="text-body d-block">Example 4</a>
                             <div class="d-block text-secondary text-truncate mt-n1">
@@ -657,122 +689,212 @@
         <!-- Page body -->
         <div class="page-body">
         <div class="container-xl">
-          <div class="row">
-              <!-- Left Column: Email Template Selection -->
-              <div class="col-xl-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title mb-4">Select Email Template</h4>
+                        <!-- Bootstrap Modal -->
+                        <div class="modal fade" id="templateModal" tabindex="-1" aria-labelledby="templateModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Customize Template</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="max-height: 80vh; overflow-y: auto;"> 
+                                        <div class="row">
+                                            <!-- Left Side: Inputs -->
+                                            <div class="col-md-6">
+                                                <h5 class="mb-3">Enter Required Details</h5>
+                                                <div id="template-inputs-container">
+                                                    <div id="company-details">
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-semibold">Title:</label>
+                                                            <input type="text" id="title-input" class="form-control" placeholder="Enter Title" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-semibold">Description:</label>
+                                                            <textarea id="description-input" class="form-control" placeholder="Enter Description" required></textarea>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-semibold">Company Logo URL:</label>
+                                                            <input type="text" id="company-logo-input" class="form-control" placeholder="Enter Logo URL" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-semibold">Banner Image URL:</label>
+                                                            <input type="text" id="banner-image-input" class="form-control" placeholder="Enter Banner Image URL" required>
+                                                        </div>
+                                                        <!-- Social Media Links -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-semibold">Social Media Links:</label>
+                                                            <div class="social-row">
+                                                                <div class="social-container active">
+                                                                    <button class="btn btn-facebook social-btn"><i class="fab fa-facebook"></i></button>
+                                                                    <input type="text" id="facebook-link-input" class="form-control social-input" placeholder="Facebook Link">
+                                                                </div>
+                                                                <div class="social-container">
+                                                                    <button class="btn btn-twitter social-btn"><i class="fab fa-twitter"></i></button>
+                                                                    <input type="text" id="twitter-link-input" class="form-control social-input" placeholder="Twitter Link">
+                                                                </div>
+                                                                <div class="social-container">
+                                                                    <button class="btn btn-linkedin social-btn"><i class="fab fa-linkedin"></i></button>
+                                                                    <input type="text" id="linkedin-link-input" class="form-control social-input" placeholder="LinkedIn Link">
+                                                                </div>
+                                                                <div class="social-container">
+                                                                    <button class="btn btn-instagram social-btn"><i class="fab fa-instagram"></i></button>
+                                                                    <input type="text" id="instagram-link-input" class="form-control social-input" placeholder="Instagram Link">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button id="preview-btn" class="btn btn-primary w-100 mt-3">Preview</button>
+                                                <button id="send-mail" class="btn btn-danger w-100 mt-2">Send Mail</button>
+                                            </div>
 
-                      <div class="row g-3">
-                          <!-- Template Options -->
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="payment/MMC-&-OTC-Charges.png" alt="Screenshot Dark" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="message/Follow-up-Message.png" alt="Color Palette Guide" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
-                              </label>
-                          </div>
-
-                          <div class="col-md-4">
-                              <label class="form-imagecheck text-center w-100">
-                                  <input name="template" type="radio" value="valentines-1/source.html" class="form-imagecheck-input" />
-                                  <span class="form-imagecheck-figure d-block">
-                                      <img src="valentines-1/New-Lead-Acknowledgment.png" alt="Stylish Workplace" class="img-size form-imagecheck-image rounded">
-                                  </span>
-                                  <span class="d-block mt-2 fw-semibold">New Lead Acknowledgment</span>
-                              </label>
-                          </div>
-
-
-
-                      </div>
-
-                      <!-- Hidden Inputs Container (Initially Hidden) -->
-                      <div id="template-inputs-container" class="mt-4 d-none">
-                          <div id="mmc-otc-inputs" class="d-none">
-                              <div class="row">
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">MMC:</label>
-                                    <input type="text" id="mmc-input" class="form-control mb-2" placeholder="Enter MMC" required>
-                                  </div>
-                                  <div class="col-6">
-                                    <label class="form-label fw-semibold">OTC:</label>
-                                   <input type="text" id="otc-input" class="form-control" placeholder="Enter OTC" required>
-                                  </div>
-                              </div>
-                              <div class="row mt-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Select Product:</label>
-                                    <select id="product-select" class="form-select">
-                                        <option value="">-- Select Product --</option>
-                                        <option value="SEC2PAY">SEC2PAY</option>
-                                        <option value="INDIRAIL">INDIRAIL</option>
-                                    </select>
+                                            <!-- Right Side: Preview -->
+                                            <div class="col-md-6">
+                                                <h5 class="mb-3">Preview</h5>
+                                                <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 540px;">
+                                                    <p class="text-muted">Selected template preview will appear here.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                   
-                          </div>
-
-                          <div id="followup-inputs" class="d-none">
-                              <div class="row">
-                                <div class="col-6">
-                                 <label class="form-label fw-semibold">Follow-up Reason:</label>
-                                  <input type="text" id="followup-reason-input" class="form-control" placeholder="Enter Reason" required>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div id="lead-source-inputs" class="d-none">
-                            <div class="row">
-                              <div class="col-6">
-                                <label class="form-label fw-semibold">Lead Source:</label>
-                                <input type="text" id="lead-source-input" class="form-control" placeholder="Enter Lead Source" required>
-                              </div>
                             </div>
-                          </div>
-                      </div>
+                        </div>
 
-                      <div class="row">
-                          <div class="col-6">
-                              <!-- Preview Button -->
-                              <button id="preview-btn" class="btn btn-primary w-100 mt-4">Preview</button>
-                          </div>
-                          <div class="col-6">
-                            <!-- Send Mail Button -->
-                            <button id="send-mail" class="btn btn-danger w-100 mt-4">Send Mail</button>
-                          </div>
-                      </div>
+                        <!-- Template Selection -->
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4">Select Email Template</h4>
+                                        <div class="row g-3">
+                                            <!-- Template Options -->
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="payment/source.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="payment/MMC-&-OTC-Charges.png" alt="Screenshot Dark" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">MMC & OTC Charges</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="message/source.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="message/Follow-up-Message.png" alt="Follow-up Message" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Follow-up Message</span>
+                                                </label>
+                                            </div>
 
-                    </div>
+                                            <!-- CRM Lead Template Options -->
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="assets/email-templates/new-lead/new-lead.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/new-lead/new-lead.png" alt="New Lead Notification" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">New Lead Notification</span>
+                                                </label>
+                                            </div>
 
-                  </div>
-              </div>
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="assets/email-templates/Lead Follow-up/lead-followup.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/Lead Follow-up/screenshot.png" alt="Lead Follow-up" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Lead Follow-up</span>
+                                                </label>
+                                            </div>
 
-              <!-- Right Column: Preview Section -->
-              <div class="col-xl-6">
-                  <div class="card">
-                      <div class="card-body">
-                          <h5 class="card-title">Preview</h5>
-                          <div id="preview-container" class="border rounded bg-light p-3" style="min-height: 540px;">
-                              <p class="text-muted">Selected template preview will appear here.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="assets/email-templates/Lead_conversion/lead_conversion.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/Lead_conversion/Screenshot.png" alt="Lead Conversion" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Lead Conversion</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="assets/email-templates/customer_welcome/customer_welcome.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/customer_welcome/screenshot.jpg" alt="Customer Welcome Email" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Customer Welcome Email</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="assets/email-templates/followup_meeting/followup_meeting.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/followup_meeting/Screenshot.png" alt="Follow-up Meeting" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Follow-up Meeting</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="assets/email-templates/product_demo_invite/product_demo_invite.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/product_demo_invite/product_demo_invite.png" alt="Product Demo Invite" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Product Demo Invite</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="crm/proposal-email.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/----/proposal-email.png" alt="Business Proposal" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Business Proposal</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="crm/deal-closed.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/----/deal-closed.png" alt="Deal Closed Confirmation" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Deal Closed Confirmation</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="crm/customer-feedback.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/----/customer-feedback.png" alt="Customer Feedback" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Customer Feedback</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-imagecheck text-center w-100">
+                                                    <input name="template" type="radio" value="crm/referral-request.html" class="form-imagecheck-input" />
+                                                    <span class="form-imagecheck-figure d-block">
+                                                        <img src="assets/email-templates/----/referral-request.png" alt="Referral Request" class="img-size form-imagecheck-image rounded">
+                                                    </span>
+                                                    <span class="d-block mt-2 fw-semibold">Referral Request</span>
+                                                </label>
+                                            </div>
+
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
         </div>
 
             </div>
@@ -826,112 +948,82 @@
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        
+
+
+    <!-- jQuery & Script -->
     <script>
-      $(document).ready(function () {
-          // Function to load and preview the selected template
-          function previewTemplate() {
-              let selectedTemplate = $("input[name='template']:checked").val();
+        $(document).ready(function () {
+            // Show modal when a template is selected
+            $("input[name='template']").on("change", function () {
+                $("#templateModal").modal("show");
+                previewTemplate();
+            });
 
-              if (selectedTemplate) {
-                  // Fetch and load the file into preview-container
-                  $.ajax({
-                      url: selectedTemplate,
-                      type: "GET",
-                      dataType: "html",
-                      success: function (data) {
-                          // Get input values
-                          let logo = $("#logo-input").val();
-                          let title = $("#title-input").val();
-                          let heading = $("#heading-input").val();
-                          let content = $("#content-input").val();
+            // Function to load and preview the selected template
+            function previewTemplate() {
+                let selectedTemplate = $("input[name='template']:checked").val();
 
-                          // Default placeholders if empty
-                          let mmc = $("#mmc-input").val().trim() || "- - -";
-                          let otc = $("#otc-input").val().trim() || "- - -";
-                          let followupReason = $("#followup-reason-input").val().trim() || " Reason Goes Here !  ";
-                          let leadSource = $("#lead-source-input").val().trim() || " our services ";
-                          let product = $("#product-select").val().trim() || " - - - ";
+                if (selectedTemplate) {
+                    $.ajax({
+                        url: selectedTemplate,
+                        type: "GET",
+                        dataType: "html",
+                        success: function (data) {
+                            // Get user-provided values
+                            let title = $("#title-input").val() || "TITLE GOES HERE";
+                            let description = $("#description-input").val() || "DESCRIPTION GOES HERE";
+                            let companyLogo = $("#company-logo-input").val() || "default-logo.png";
+                            let bannerImage = $("#banner-image-input").val() || "default-banner.jpg";
+                            let facebookLink = $("#facebook-link-input").val() || "https://default-facebook.com";
+                            let twitterLink = $("#twitter-link-input").val() || "https://default-twitter.com";
+                            let linkedinLink = $("#linkedin-link-input").val() || "https://default-linkedin.com";
+                            let instagramLink = $("#instagram-link-input").val() || "https://default-instagram.com";
 
-                          // Replace placeholders in the fetched content
-                          data = data.replace(/{LOGO}/g, logo);
-                          data = data.replace(/{TITLE}/g, title);
-                          data = data.replace(/{HEADING}/g, heading);
-                          data = data.replace(/{CONTENT}/g, content);
-                          data = data.replace(/{MMC}/g, mmc);
-                          data = data.replace(/{OTC}/g, otc);
-                          data = data.replace(/{FOLLOWUP_REASON}/g, followupReason);
-                          data = data.replace(/{LEAD_SOURCE}/g, leadSource);
-                          data = data.replace(/{PRODUCT}/g, product);
+                            // Replace placeholders in the fetched content
+                            data = data.replace(/{TITLE}/g, title);
+                            data = data.replace(/{DESCRIPTION}/g, description);
+                            data = data.replace(/{COMPANY_LOGO}/g, companyLogo);
+                            data = data.replace(/{BANNER_IMAGE}/g, bannerImage);
+                            data = data.replace(/{FACEBOOK_LINK}/g, facebookLink);
+                            data = data.replace(/{TWITTER_LINK}/g, twitterLink);
+                            data = data.replace(/{LINKEDIN_LINK}/g, linkedinLink);
+                            data = data.replace(/{INSTAGRAM_LINK}/g, instagramLink);
 
-                          // Show the updated content in the preview container
-                          $("#preview-container").html(data);
-                      },
-                      error: function () {
-                          $("#preview-container").html("<p class='text-danger'>Error loading file.</p>");
-                      }
-                  });
-              }
-          }
-
-        // Show input fields based on selected template
-        $("input[name='template']").on("change", function () {
-            // Hide all additional inputs
-            $("#template-inputs-container").addClass("d-none");
-            $("#mmc-otc-inputs, #followup-inputs, #lead-source-inputs").addClass("d-none");
-
-            // Show the container first
-            $("#template-inputs-container").removeClass("d-none");
-
-            // Show inputs based on the selected template
-            let selectedValue = $(this).val();
-
-            if (selectedValue === "payment/source.html") {
-                $("#mmc-otc-inputs").removeClass("d-none");
-            } else if (selectedValue === "message/source.html") {
-                $("#followup-inputs").removeClass("d-none");
-            } else if (selectedValue === "valentines-1/source.html") {
-                $("#lead-source-inputs").removeClass("d-none");
+                            // Show the updated content in the preview container
+                            $("#preview-container").html(data);
+                        },
+                        error: function () {
+                            $("#preview-container").html("<p class='text-danger'>Error loading file.</p>");
+                        }
+                    });
+                }
             }
 
-            previewTemplate();
+            // Preview button inside the modal
+            $("#preview-btn").on("click", previewTemplate);
 
-        });
-
-
-          // Trigger preview on button click
-          $("#preview-btn").on("click", previewTemplate);
-
-          
-        $("#send-mail").on("click", function () {
-            let selectedTemplate = $("input[name='template']:checked").val();
-            let formData = { template: selectedTemplate };
-
-            if (selectedTemplate === "payment/source.html") {
-                formData.mmc = $("#mmc-input").val();
-                formData.otc = $("#otc-input").val();
-            } else if (selectedTemplate === "message/source.html") {
-                formData.followupReason = $("#followup-reason-input").val();
-            } else if (selectedTemplate === "valentines-1/source.html") {
-                formData.leadSource = $("#lead-source-input").val();
-            }
-
-            // Send data to server using AJAX
-            $.ajax({
-                url: "send_email.php", // PHP script to process the email
-                type: "POST",
-                data: formData,
-                success: function (response) {
-                    alert("Email Sent Successfully!");
-                },
-                error: function () {
-                    alert("Error Sending Email");
+            // Social Media Button Toggle
+            $(".social-btn").click(function() {
+                let container = $(this).parent();
+                let input = container.find('.social-input');
+                if (container.hasClass('active')) {
+                    container.removeClass('active');
+                    input.css({ width: 0, opacity: 0 });
+                } else {
+                    $(".social-container").removeClass('active');
+                    $(".social-input").css({ width: 0, opacity: 0 });
+                    container.addClass('active');
+                    input.css({ width: '250px', opacity: 1 });
                 }
             });
         });
-          
-      });
     </script>
- 
+
+
+
+
 
   </body>
 </html>
