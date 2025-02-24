@@ -819,48 +819,49 @@
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
 
     
-<!-- jQuery & Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery & Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <!-- DataTables JS -->
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
     
     <!-- Custom Script -->
+    <!-- Include SweetAlert2 (Add in <head> or before </body>) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(document).ready(function () {
 
-      $('#productTable').DataTable({
-        "processing": true,
-        "serverSide": false, // Change to true if using server-side processing
-        "paging": true, // Enable pagination
-        "lengthMenu": [10, 25, 50, 100], // Define pagination options
-        "pageLength": 10, // Set default records per page
-        "ajax": {
-            "url": "product_api.php",
-            "type": "GET",
-            "dataSrc": ""
-        },
-        "columns": [
-            { "data": "id" },
-            { "data": "name" },
-            { "data": "type" },
-            { "data": "price" },
-            { "data": "description" },
-            {
-                "data": "id",
-                "render": function (data) {
-                    return `
-                        <button class="btn btn-warning btn-sm edit-btn" data-id="${data}">Edit</button>
-                        <button class="btn btn-danger btn-sm delete-btn" data-id="${data}">Delete</button>
-                    `;
+        $('#productTable').DataTable({
+            "processing": true,
+            "serverSide": false, // Change to true if using server-side processing
+            "paging": true, // Enable pagination
+            "lengthMenu": [10, 25, 50, 100], // Define pagination options
+            "pageLength": 10, // Set default records per page
+            "ajax": {
+                "url": "product_api.php",
+                "type": "GET",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "type" },
+                { "data": "price" },
+                { "data": "description" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <button class="btn btn-warning btn-sm edit-btn" data-id="${data}">Edit</button>
+                            <button class="btn btn-danger btn-sm delete-btn" data-id="${data}">Delete</button>
+                        `;
+                    }
                 }
-            }
-        ]
-      });
-
-
+            ]
+        });
 
         // Fetch and display products
         function fetchProducts() {
@@ -877,7 +878,7 @@
                                 <td>${product.id}</td>
                                 <td>${product.name}</td>
                                 <td>${product.type}</td>
-                                 <td>${product.price}</td>
+                                <td>${product.price}</td>
                                 <td>${product.description}</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning edit-btn" data-id="${product.id}">Edit</button>
@@ -889,11 +890,12 @@
                 }
             });
         }
-        // Call fetch function on page load
-        fetchProducts();
- 
-        // Handle "Add Product" button click
-        $("#addProductBtn").click(function () {
+        fetchProducts(); // Load data on page load
+
+        // Handle "Add Product" button click inside the modal
+        $("#addProductBtn").click(function (event) {
+            event.preventDefault(); // Prevent form submission
+
             let formData = {
                 name: $("#productName").val(),
                 type: $("#productType").val(),
@@ -907,44 +909,139 @@
                 contentType: "application/json",
                 data: JSON.stringify(formData),
                 success: function (response) {
-                    console.log(response); // Debug: Log server response
                     if (response.status === "success") {
-                        alert("Product added successfully!");
-                        $("#productModal").modal("hide");
-                        $("#productForm")[0].reset(); // Clear form
-                        fetchProducts(); // Refresh table
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Product Added!',
+                            text: 'The product has been successfully added.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            $("#productModal").modal("hide"); // Hide modal after success
+                            $(".modal-backdrop").remove(); // Remove backdrop
+                            $("#productForm")[0].reset(); // Clear form fields
+                            fetchProducts(); // Refresh product list
+                        });
                     } else {
-                        alert("Error: " + response.message); // Show detailed error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response.message
+                        });
                     }
                 },
-                error: function (xhr, status, error) {
-                    console.log(xhr.responseText); // Debug: Log error response
-                    alert("Error saving product. Please check console for details.");
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: 'Error saving product. Please try again.'
+                    });
                 }
             });
         });
-    
 
-
-        // Delete Product - Handle delete button click
+        // Delete Product - Handle delete button click with SweetAlert
         $(document).on("click", ".delete-btn", function () {
             let productId = $(this).data("id");
 
-            if (confirm("Are you sure you want to delete this product?")) {
-                $.ajax({
-                    url: "product_api.php",
-                    method: "DELETE",
-                    contentType: "application/json",
-                    data: JSON.stringify({ id: productId }),
-                    success: function (response) {
-                        alert(response.message);
-                        fetchProducts(); // Refresh table
-                    }
-                });
-            }
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "product_api.php",
+                        method: "DELETE",
+                        contentType: "application/json",
+                        data: JSON.stringify({ id: productId }),
+                        success: function (response) {
+                            if (response.status === "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: 'The product has been deleted.',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                                fetchProducts(); // Refresh table
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: response.message
+                                });
+                            }
+                        }
+                    });
+                }
+            });
         });
+
+        // Update Product - Placeholder for future enhancement with SweetAlert
+        $(document).on("click", ".edit-btn", function () {
+            let productId = $(this).data("id");
+
+            // Fetch product details via AJAX
+            $.ajax({
+                url: `product_api.php?id=${productId}`,
+                method: "GET",
+                success: function (response) {
+                    if (response.status === "success") {
+                        $("#productName").val(response.data.name);
+                        $("#productType").val(response.data.type);
+                        $("#productPrice").val(response.data.price);
+                        $("#productDescription").val(response.data.description);
+
+                        $("#addProductBtn").text("Update Product").off("click").on("click", function () {
+                            let updatedData = {
+                                id: productId,
+                                name: $("#productName").val(),
+                                type: $("#productType").val(),
+                                price: $("#productPrice").val(),
+                                description: $("#productDescription").val()
+                            };
+
+                            $.ajax({
+                                url: "product_api.php",
+                                method: "PUT",
+                                contentType: "application/json",
+                                data: JSON.stringify(updatedData),
+                                success: function (response) {
+                                    if (response.status === "success") {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Updated!',
+                                            text: 'The product has been updated.',
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        });
+                                        $("#productModal").modal("hide");
+                                        fetchProducts();
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error!',
+                                            text: response.message
+                                        });
+                                    }
+                                }
+                            });
+                        });
+
+                        $("#productModal").modal("show");
+                    }
+                }
+            });
+        });
+
     });
 </script>
+
 
 
   </body>
