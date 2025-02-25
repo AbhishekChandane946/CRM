@@ -1,3 +1,11 @@
+<?php
+session_start(); // Start session to access user data
+
+// Dummy authentication check (Replace this with actual authentication logic)
+$_SESSION['user_role'] = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'Sales'; 
+
+$user_role = $_SESSION['user_role']; // Get logged-in user's role
+?>
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -14,14 +22,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>  Product UI</title>
     <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+   
 
 
     <style>
@@ -32,57 +40,7 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
-
-      .stage-bar {
-        display: flex;
-        align-items: center;
-        background: #f8f9fa;
-        padding: 10px;
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .stage {
-        flex: 1;
-        text-align: center;
-        padding: 12px 15px;
-        font-weight: bold;
-        position: relative;
-        color: #fff;
-    }
-
-   
-    .stage:not(:last-child) {
-        border-top-right-radius: 25px;
-        border-bottom-right-radius: 25px;
-       
-    }
-
-    
-    .stage:not(:last-child)::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: -10px;
-        width: 0;
-        height: 0;
-        border-top: 25px solid transparent;
-        border-bottom: 25px solid transparent;
-        border-left: 10px solid white; /* Adjust color */
-        z-index: 1;
-    }
-
-    
-    .new { background: #b7e4c7; color: #1b4332; } 
-    .contacted { background: #bee5eb; color: #0c5460; }
-    .failed { background: #f8d7da; color: #721c24; }
-    .opportunity { background: #ffe8a1; color: #856404; }
-    .converted { background: #d4edda; color: #155724; }
-    .lost { background: #d6d8d9; color: #1b1e21; }
-    .disqualified { background: #e2e3e5; color: #383d41; }
-    .review { background: #d9d9d9; color: #636c72; border-radius: 15px; }  
- 
+  
 
     </style> 
 
@@ -686,10 +644,20 @@
                 Empty Page
             </h2>
 
-            <!-- Create Product Button -->
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
-                <i class="ti ti-plus"></i> Create Product
-            </button>
+            <!-- Conditionally Display Buttons -->
+            <?php if ($user_role === "Admin") : ?>
+                <!-- Show Add Product Button for Admins -->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                    <i class="ti ti-plus"></i> Add Product
+                </button>
+            <?php else : ?>
+                <!-- Show Create Quotation Button for Sales -->
+                <a href="S2P_product_quotation.php" class="btn btn-success">
+                    <i class="ti ti-file"></i> Create Quotation
+                </a>
+            <?php endif; ?>
+
+
         </div>
             </div>
           </div>
@@ -702,50 +670,112 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title"><i class="ti ti-plus"></i> Create Product</h5>
+                        <h5 class="modal-title"><i class="ti ti-plus"></i> Add Product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         <form id="productForm" method="POST">
+                        <input type="text" id="productId" value="ID">
                             <div class="row">
                                 <!-- Product Name -->
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-12 mb-3 mt-3">
                                     <label class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" name="name" id="productName" placeholder="Enter Product Name" required>
+                                    <input type="text" class="form-control" name="name" id="productName" 
+                                          placeholder="Enter Product Name" data-validetta="required,minLength[3]">
                                 </div>
 
                                 <!-- Product Type -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Product Type</label>
-                                    <select class="form-select" name="type" id="productType">
-                                        <option selected>Select Type</option>
-                                        <option>B2B</option>
-                                        <option>B2C</option>
+                                    <select class="form-select" name="type" id="productType" data-validetta="required">
+                                        <option value="">Select Type</option>
+                                        <option value="B2B">B2B</option>
+                                        <option value="B2C">B2C</option>
                                     </select>
                                 </div>
 
                                 <!-- Product Price -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Price ($)</label>
-                                    <input type="number" class="form-control" name="price" id="productPrice" placeholder="Enter Price" required>
+                                    <input type="number" class="form-control" name="price" id="productPrice" 
+                                          placeholder="Enter Price" data-validetta="required,number,min[1]">
                                 </div>
 
                                 <!-- Product Description -->
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Description</label>
-                                    <textarea class="form-control" name="description" id="productDescription" rows="2" placeholder="Enter product description"></textarea>
+                                    <textarea class="form-control" name="description" id="productDescription" 
+                                              rows="2" placeholder="Enter product description" data-validetta="required"></textarea>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="addProductBtn" 
-                            form="productForm"><i class="ti ti-check"></i> Add Product</button>
+                        <button type="submit" class="btn btn-primary" id="addProductBtn"><i class="ti ti-check"></i> Add Product</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        
+        <!-- Edit Product Modal -->
+        <div class="modal fade" id="editProductModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="ti ti-pencil"></i> Edit Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editProductForm" method="POST">
+                            <input type="hidden" id="editProductId"> <!-- Hidden ID Field -->
+
+                            <div class="row">
+                                <!-- Product Name -->
+                                <div class="col-md-12 mb-3 mt-3">
+                                    <label class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" name="name" id="editProductName" 
+                                          placeholder="Enter Product Name" data-validetta="required,minLength[3]">
+                                </div>
+
+                                <!-- Product Type -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Product Type</label>
+                                    <select class="form-select" name="type" id="editProductType" data-validetta="required">
+                                        <option value="">Select Type</option>
+                                        <option value="B2B">B2B</option>
+                                        <option value="B2C">B2C</option>
+                                    </select>
+                                </div>
+
+                                <!-- Product Price -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Price ($)</label>
+                                    <input type="number" class="form-control" name="price" id="editProductPrice" 
+                                          placeholder="Enter Price" data-validetta="required,number,min[1]">
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" name="description" id="editProductDescription" 
+                                              rows="2" placeholder="Enter product description" data-validetta="required"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success" id="saveEditProductBtn">
+                            <i class="ti ti-check"></i> Update Product
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <!-- Page body -->
         <div class="page-body">
@@ -756,10 +786,11 @@
                 <div class="col-md-12">
                     <div class="card shadow-sm border-0 p-3">
                         <h5 class="text-primary mb-3"><i class="ti ti-list"></i> Product List</h5>
-                        <table class="table table-striped table-bordered" id="productTable">
+                        <table class="table card-table table-vcenter text-nowrap datatable cell-border stipe hover dataTable no-footer" id="productTable">
                               <thead>
                                   <tr>
-                                      <th>#</th>
+                                      <th>View Product</th>
+                                      <th>Sr.No</th>
                                       <th>Name</th>
                                       <th>Type</th>
                                       <th>Price ($)</th>
@@ -813,236 +844,394 @@
         </footer>
       </div>
     </div>
+
+
+    <!-- View Product XL Modal -->
+    <div class="modal modal-xl fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary" id="viewProductModalLabel">
+                        <i class="ti ti-eye"></i> View Product Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><strong>Product Name:</strong></h6>
+                            <p id="viewProductName"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><strong>Type:</strong></h6>
+                            <p id="viewProductType"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><strong>Price ($):</strong></h6>
+                            <p id="viewProductPrice"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><strong>Description:</strong></h6>
+                            <p id="viewProductDescription"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="./dist/js/tabler.min.js?1692870487" defer></script>
     <script src="./dist/js/demo.min.js?1692870487" defer></script>
 
     
-  <!-- jQuery & Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (Must be loaded first) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-  <!-- DataTables JS -->
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables --> 
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-    
-    <!-- Custom Script -->
-    <!-- Include SweetAlert2 (Add in <head> or before </body>) -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Validetta CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hsnaydd/validetta@1.0.1/dist/validetta.min.css">
 
-<script>
-    $(document).ready(function () {
+    <!-- Validetta JS -->
+    <script src="https://cdn.jsdelivr.net/gh/hsnaydd/validetta@1.0.1/dist/validetta.min.js"></script>
+ 
 
-        $('#productTable').DataTable({
-            "processing": true,
-            "serverSide": false, // Change to true if using server-side processing
-            "paging": true, // Enable pagination
-            "lengthMenu": [10, 25, 50, 100], // Define pagination options
-            "pageLength": 10, // Set default records per page
-            "ajax": {
-                "url": "product_api.php",
-                "type": "GET",
-                "dataSrc": ""
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+          $('#productTable').DataTable({
+        "processing": true,
+        "serverSide": false,
+        "paging": true,
+        "lengthMenu": [10, 25, 50, 100],
+        "pageLength": 10,
+        "ajax": {
+            "url": "product_api.php",
+            "type": "GET",
+            "dataSrc": ""
+        },
+        "columns": [
+            { 
+                "data": "id",
+                "render": function (data) {
+                    return ` 
+                      <button class="btn view-btn" data-id="${data}" style="border: none; background: none;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                              class="icon icon-tabler icons-tabler-outline icon-tabler-eye" style="cursor: pointer; color: #0d6efd;"> 
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> 
+                              <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> 
+                              <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path> 
+                          </svg>
+                      </button>
+                    `;
+                }
             },
-            "columns": [
-                { "data": "id" },
-                { "data": "name" },
-                { "data": "type" },
-                { "data": "price" },
-                { "data": "description" },
-                {
-                    "data": "id",
-                    "render": function (data) {
-                        return `
-                            <button class="btn btn-warning btn-sm edit-btn" data-id="${data}">Edit</button>
-                            <button class="btn btn-danger btn-sm delete-btn" data-id="${data}">Delete</button>
-                        `;
-                    }
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "type" },
+            { "data": "price" },
+            { "data": "description" },
+            {
+                "data": "id",
+                "render": function (data) {
+                    return `
+                        <button class="btn btn-warning btn-sm edit-btn" data-id="${data}">Edit</button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="${data}">Delete</button>
+                    `;
                 }
-            ]
-        });
+            }
+        ]
+    });
 
-        // Fetch and display products
-        function fetchProducts() {
-            $.ajax({
-                url: "product_api.php",
-                method: "GET",
-                dataType: "json",
-                success: function (data) {
-                    let tableBody = $("#productTable tbody");
-                    tableBody.empty();
-                    $.each(data, function (index, product) {
-                        tableBody.append(`
-                            <tr>
-                                <td>${product.id}</td>
-                                <td>${product.name}</td>
-                                <td>${product.type}</td>
-                                <td>${product.price}</td>
-                                <td>${product.description}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning edit-btn" data-id="${product.id}">Edit</button>
-                                    <button class="btn btn-sm btn-danger delete-btn" data-id="${product.id}">Delete</button>
-                                </td>
-                            </tr>
-                        `);
-                    });
-                }
-            });
-        }
-        fetchProducts(); // Load data on page load
 
-        // Handle "Add Product" button click inside the modal
-        $("#addProductBtn").click(function (event) {
-            event.preventDefault(); // Prevent form submission
 
-            let formData = {
+            $("#productForm").validetta({
+               realTime: true, // Validate in real-time
+               bubblePosition: 'bottom', 
+               onValid: function (event) {
+               event.preventDefault(); // Prevent default form submission
+
+              let formData = {
                 name: $("#productName").val(),
                 type: $("#productType").val(),
                 price: $("#productPrice").val(),
                 description: $("#productDescription").val()
-            };
+              };
 
-            $.ajax({
-                url: "product_api.php",
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(formData),
-                success: function (response) {
-                    if (response.status === "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Product Added!',
-                            text: 'The product has been successfully added.',
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(() => {
-                            $("#productModal").modal("hide"); // Hide modal after success
-                            $(".modal-backdrop").remove(); // Remove backdrop
-                            $("#productForm")[0].reset(); // Clear form fields
-                            fetchProducts(); // Refresh product list
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: response.message
+              // AJAX request to add product
+              $.ajax({
+                  url: "product_api.php",
+                  method: "POST",
+                  contentType: "application/json",
+                  data: JSON.stringify(formData),
+                  success: function (response) {
+                      if (response.status === "success") {
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Product Added!',
+                              text: 'The product has been successfully added.',
+                              showConfirmButton: false,
+                              timer: 2000
+                          }).then(() => {
+                              $("#productModal").modal("hide"); // Hide modal
+                              $(".modal-backdrop").remove(); // Remove modal backdrop
+                              $("#productForm")[0].reset(); // Clear form fields
+                              fetchProducts(); // Refresh product list
+                          });
+                      } else {
+                          Swal.fire({
+                              icon: 'error',
+                              title: 'Error!',
+                              text: response.message
+                          });
+                      }
+                  },
+                  error: function () {
+                      Swal.fire({
+                          icon: 'error',
+                          title: 'Oops!',
+                          text: 'Error saving product. Please try again.'
+                      });
+                  }
+              });
+              },
+              onError: function (event) {
+                  event.preventDefault(); // Prevent form submission if validation fails
+              }
+              
+            });
+
+           
+            // Handle "Add Product" button click
+            $("#addProductBtn").click(function () {
+                $("#productForm").submit(); // Trigger form validation
+            });
+
+
+
+            // Delete Product - Handle delete button click with SweetAlert
+            $(document).on("click", ".delete-btn", function () {
+                let productId = $(this).data("id");
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "product_api.php",
+                            method: "DELETE",
+                            contentType: "application/json",
+                            data: JSON.stringify({ id: productId }),
+                            success: function (response) {
+                                if (response.status === "success") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Deleted!',
+                                        text: 'The product has been deleted.',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                    fetchProducts(); // Refresh table
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error!',
+                                        text: response.message
+                                    });
+                                }
+                            }
                         });
                     }
-                },
-                error: function () {
+                });
+            });
+
+
+            // Open Edit Modal & Load Product Data
+            $(document).on("click", ".edit-btn", function () {
+                let productId = $(this).data("id");
+
+                if (!productId) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops!',
-                        text: 'Error saving product. Please try again.'
+                        title: 'Error!',
+                        text: 'Invalid product ID.'
                     });
+                    return;
                 }
-            });
-        });
 
-        // Delete Product - Handle delete button click with SweetAlert
-        $(document).on("click", ".delete-btn", function () {
-            let productId = $(this).data("id");
+                $.ajax({
+                    url: `product_api.php?id=${productId}`,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response && response.id) {
+                            // Populate the form fields
+                            $("#editProductId").val(response.id);
+                            $("#editProductName").val(response.name);
+                            $("#editProductType").val(response.type);
+                            $("#editProductPrice").val(response.price);
+                            $("#editProductDescription").val(response.description);
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "product_api.php",
-                        method: "DELETE",
-                        contentType: "application/json",
-                        data: JSON.stringify({ id: productId }),
-                        success: function (response) {
-                            if (response.status === "success") {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Deleted!',
-                                    text: 'The product has been deleted.',
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                });
-                                fetchProducts(); // Refresh table
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error!',
-                                    text: response.message
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        });
-
-        // Update Product - Placeholder for future enhancement with SweetAlert
-        $(document).on("click", ".edit-btn", function () {
-            let productId = $(this).data("id");
-
-            // Fetch product details via AJAX
-            $.ajax({
-                url: `product_api.php?id=${productId}`,
-                method: "GET",
-                success: function (response) {
-                    if (response.status === "success") {
-                        $("#productName").val(response.data.name);
-                        $("#productType").val(response.data.type);
-                        $("#productPrice").val(response.data.price);
-                        $("#productDescription").val(response.data.description);
-
-                        $("#addProductBtn").text("Update Product").off("click").on("click", function () {
-                            let updatedData = {
-                                id: productId,
-                                name: $("#productName").val(),
-                                type: $("#productType").val(),
-                                price: $("#productPrice").val(),
-                                description: $("#productDescription").val()
-                            };
-
-                            $.ajax({
-                                url: "product_api.php",
-                                method: "PUT",
-                                contentType: "application/json",
-                                data: JSON.stringify(updatedData),
-                                success: function (response) {
-                                    if (response.status === "success") {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Updated!',
-                                            text: 'The product has been updated.',
-                                            showConfirmButton: false,
-                                            timer: 2000
-                                        });
-                                        $("#productModal").modal("hide");
-                                        fetchProducts();
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error!',
-                                            text: response.message
-                                        });
-                                    }
-                                }
+                            // Show modal
+                            $("#editProductModal").modal("show");
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Product not found or invalid response from server.'
                             });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error: ", status, error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: 'Error fetching product details. Please try again later.'
                         });
-
-                        $("#productModal").modal("show");
                     }
-                }
+                });
             });
+
+            // Update Product
+            $("#saveEditProductBtn").click(function () {
+                let updatedData = {
+                    id: $("#editProductId").val(),
+                    name: $("#editProductName").val().trim(),
+                    type: $("#editProductType").val(),
+                    price: $("#editProductPrice").val(),
+                    description: $("#editProductDescription").val().trim()
+                };
+
+                // Validate fields
+                if (!updatedData.name || !updatedData.type || !updatedData.price || !updatedData.description) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Validation Error!',
+                        text: 'All fields are required.'
+                    });
+                    return;
+                }
+
+                // Disable button to prevent multiple clicks
+                $("#saveEditProductBtn").prop("disabled", true).text("Updating...");
+
+                $.ajax({
+                    url: `product_api.php?id=${updatedData.id}`,
+                    method: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(updatedData),
+                    success: function (response) {
+                        if (response.status === "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated!',
+                                text: 'The product has been successfully updated.',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(() => {
+                                $("#editProductModal").modal("hide");
+                                fetchProducts(); // Refresh product list
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: response.message || 'Could not update product.'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Update Error: ", status, error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: 'Error updating product. Please try again later.'
+                        });
+                    },
+                    complete: function () {
+                        // Re-enable button
+                        $("#saveEditProductBtn").prop("disabled", false).text("Update Product");
+                    }
+                });
+            });
+
+            // Ensure modal close button works
+            $("#editProductModal").on("hidden.bs.modal", function () {
+                $("#editProductForm")[0].reset(); // Reset form
+            });
+
+
+
+
+            $(document).on("click", ".view-btn", function () {
+              let productId = $(this).data("id");
+
+              if (!productId) {
+                  Swal.fire({
+                      icon: "error",
+                      title: "Error!",
+                      text: "Invalid product ID."
+                  });
+                  return;
+              }
+
+              $.ajax({
+                  url: `product_api.php?id=${productId}`,
+                  method: "GET",
+                  dataType: "json",
+                  success: function (response) {
+                      if (response && response.id) {
+                          // Populate the modal fields
+                          $("#viewProductName").text(response.name);
+                          $("#viewProductType").text(response.type);
+                          $("#viewProductPrice").text("$" + response.price);
+                          $("#viewProductDescription").text(response.description);
+
+                          // Show modal
+                          $("#viewProductModal").modal("show");
+                      } else {
+                          Swal.fire({
+                              icon: "error",
+                              title: "Error!",
+                              text: "Product not found or invalid response from server."
+                          });
+                      }
+                  },
+                  error: function (xhr, status, error) {
+                      console.error("AJAX Error: ", status, error);
+                      Swal.fire({
+                          icon: "error",
+                          title: "Oops!",
+                          text: "Error fetching product details. Please try again later."
+                      });
+                  }
+              });
+            });
+
+
+
+
+            
+
         });
+    </script>
 
-    });
-</script>
-
-
+ 
 
   </body>
 </html>

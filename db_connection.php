@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";  // Change if needed
-    private $db_name = "products_db";  // Change to your actual database name
+    private $db_name = "sec2pay_leads";  // Change to your actual database name
     private $username = "root";  // Change if needed
     private $password = "";  // Change if needed
     public $conn;
